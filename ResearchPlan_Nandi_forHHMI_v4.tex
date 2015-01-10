@@ -1,0 +1,136 @@
+\documentclass[12pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{bbold}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+%\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{fullpage}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+%\newcommand{\infint}{\int_{-\infty}^{\infty}}
+%\usepackage{Sweave}
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=1in, right=1in, top=1.4in, bottom=1in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+\bibliographystyle{plain}  %Choose a bibliograhpic style
+
+\title{Statistical and supervised machine learning methods for single molecule Nanocoding data to advance personalized genomics}
+\author{Subhrangshu Nandi\\
+%  Department of Statistics\\
+%  nandi@stat.wisc.edu}
+%\date{September 18, 2014}
+\date{}
+}
+%\maketitle
+\begin{center} 
+{\Large{Statistical and supervised machine learning methods for single molecule Nanocoding data to advance personalized genomics}} \\
+Student: Subhrangshu Nandi \\
+Advisor: Professor David C. Schwartz\footnote{Deptartment of Chemistry; Deptartment of Genetics}\\
+Advisor: Professor Michael A. Newton\footnote{Department of Statistics; Department of Biostatistics and Medical Informatics}
+\end{center}
+\noindent
+{\underline{\bf{Introduction \& Background}}}\\
+%\subsubsection*{Introduction and Background}
+The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion \cite{10002010map}. Structural gaps of length kilobase (kb) to megabase (Mb) range, remain unmapped. Sequencing of individual genomes has also revealed that chromosome-scale amounts of sequence do not align to the human reference genome. One reason could be that substantial levels of sequence insertions are specific to individuals \cite{Marie_etal_2013_PNAS}. Structural variations (SV) in the genome, such as rearrangement, insertion, or deletion of sequences, is increasingly linked to phenotype and diseases \cite{Hurles_etal_2008_TrendsInGenetics}. In cancer genomes, SV can be extreme \cite{Stephens_etal_2011_Cell} and difficult to delineate. 
+
+Developed in the mid nineties, Optical Mapping (\cite{Schwartz_etal_1993_Science}, \cite{Valouev_2006_PhDThesis}, \cite{Valouev_etal_2006_JCB}, \cite{Valouev_etal_2006_PNAS}, \cite{Valouev_etal_2006_BioInfo}, \cite{Teague_2012_PhDThesis}) is a novel system for physical mapping of genomes, using measurements of single molecules of DNA to infer a high-resolution genome-wide restriction map, whose representation of genome structure complements genome sequences to yield biological insight. Optical mapping is rapid, simple and cost-effective and an extremely useful system for genome analysis, \cite{Teague_etal_2010_PNAS}, \cite{Sarkar_etal_2012_JCB}. ``Nanocoding systems'' (\cite{Jo_etal_2007_PNAS}) which were developed by Laboratory of Molecular and Computational Genomics (LMCG), UW Madison, is the next generation technology of optical mapping. Nanocoding systems are single-molecule platforms designed to create genome-wide ordered restriction maps from the assembly of massive datasets comprising genomic DNA molecules (~500 kb). Nanocoding is scalable, robust, reliable technology that can be used for {\it{de novo}} sequence assembly of complex genomes (\cite{Zhou_etal_2009_PLOS-Genetics}, \cite{Reisner_etal_2010_PNAS}). 
+
+In addition to the genome-wide restriction maps Nanocoding systems also produces signals\footnote{We cannot be more specific about the type of signal until our work it published} (Nmaps signals) from each genomic interval which carry more information about the sequences in them. Upon decoding and quantifying this relationship between these signals and sequence features, Nanocoding systems would become an essential technology along with next generation sequencing to better using the 1000 genomes data. As a PhD student in statistics I work as a graduate research assistant at LMCG, under the guidance of its director, Professor David C. Schwartz. Professor Michael A. Newton is my thesis advisor. After my doctoral studies I want to be an independent researcher dedicated to development and applications of statistical methods for biomedical sciences. For my doctoral and post-doctoral training, my focus has been, and will remain, on decoding the relationship between Nmap signals and sequence features, using appropriate statistical and machine learning tools. 
+
+\noindent
+{\underline{\bf{Hypothesis}}}\\
+%\subsubsection*{Hypothesis}
+%\begin{enumerate}
+%\item
+{\bf{1.}} Shapes of the Nmaps signals are related to some features of genomic sequences. In other words, the shapes of the Nmap signals can be expressed as linear (or nonlinear) functions of some genomic sequence features. \\
+%\item
+{\bf{2.}}Each interval can be represented by a characteristic signal and signal from a new Nmap aligned to that same location can be aligned to this characteristic signal. Unsuccessful alignment would be a result genomic aberrations of the molecule associated producing that Nmap.\\
+%\item
+{\bf{3.}}The relationship between Nmap signals and genomic sequence features is strong enough to distinguish genomic intervals just based on the signals produced by Nmaps aligned to those intervals. \\
+%\end{enumerate}
+\noindent
+{\underline{\bf{Data description}}}\\
+%\subsubsection*{Data description}
+LMCG has Nanocoding data (or Nmap signals) of a {\it{M. florum}} genome and a human genome, of both normal and cancer cells. Millions of DNA molecules are processed through the Nanocoding systems and aligned to the reference. A molecule consists of several Nmaps. The {\it{M. florum}} genome is divided into 39 intervals and each interval could have more than 1,000 Nmaps aligned to them. The human genome has more than 200,000 intervals, with an average of 40 Nmaps aligned to each interval. It is believed that sequences, up to 7 bp long, could influence the signals. Genomic features are the counts (or proportions) of singleton nucleotides, 2-mers, 3-mers, etc, in an interval. With 4 nucleotides A, C, T, G, there could be $4^2\ (=16)$ different 2-mers, $4^3 \ (= 64)$ different 3-mers, up to $4^7\ (=16,384)$ different 7-mers. Hence, the space of features could span as many as 22,000 columns. The high dimensionality of the datasets poses big data related challenges and we have already built adequate infrastructure to leverage UW Madison's Condor High Throughput Computing (CHTC) environment when fitting our models. Different stages of laboratory prodecures introduce noise (statistical) in the observations, some of which are correlated with each other. We have spent considerable time and effort understanding the structures these noises, and have successfully extracted signals from the convolved data. 
+
+\noindent
+{\underline{\bf{Methodology}}}\\
+Preliminary work on {\it{M. florum}} genome and human genome has yielded a statistically significant (p-value less than 0.01) positive correlation between GC content (proportion of G and C in an interval) and signal fluctuation. To quantify the relationship between other genomic features, more sophisticated analysis is required. \\
+\noindent
+{\emph{\bf{Functional data analysis to establish unique signatures of genomic intervals}}}\\
+%\subsubsection*{Functional data analysis to establish unique signatures of genomic intervals}
+Ideally, all Nmaps  aligned to one interval on the reference genome should exhibit similar signals. However, due to differences in mechanical and electrostatic forces acting on each DNA molecule in the Nanocoding system, each Nmap signal exhibit slight shifts in phases and amplitudes. In addition, there are possibilities of slight differences in sequences between the molecules producing the Nmaps. To establish a consensus signal for each genomic interval, we need to align the signals of all Nmaps aligned to that interval. We are using curve registration techniques in functional data analysis (FDA) \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_Silverman_2002_Applied}, \cite{Ramsay_2006_Functional}, \cite{Wang_etal_1997_AOS}. This is a nonparametric approach (\cite{Muller_1987_JASA}), with minimal distributional assumptions on the structure of the error. Since these signals were observed to be intrinsically smooth, we want to use slopes, curvatures, and other characteristics to establish a consensus signature of each genomic intevals. FDA allows us to use information on the higher order derivatives of the curves. Preliminary analysis of some intervals of the mflorum genome has yielded promising results. 
+
+Next, we want to construct a nonparametric statistical test (\cite{Wang_etal_1997_AOS}, \cite{Hall_etal_2007_StatSinica}) to identify the presence of genomic aberration. For example, we want to test if the a new Nmap signal, aligned to an interval with known signal profile, is within statistically acceptable bounds or not. If not, then that could be evidence of some genomic aberration in that interval.\\
+\noindent
+{\emph{\bf{Regularized regression methods to quantify the relationship between Nmap signal patterns and genomic sequence features}}}\\
+%\subsubsection*{Regularized regression methods to quantify the relationship between typical signal patterns and genomic sequence features}
+Regularized versions of least square estimation procedures, such as least absolute shrinkage and selection operator \cite{Tibshirani_1996_JRSSB} (LASSO) have become quite popular in their abilities to analyze high dimensional datasets. We want to use similar techniques to quantify the relationship between typical signal patterns and genomic sequence features. The responses are the Nmaps signals. The genomic features are explained above. Regularized regression is necessary because of the high dimensionality of the feature space. Preliminary application of lasso feature selection to the mflorum data has highlighted some interesting aspects of the problem. We realized that presence of sparsity and multicollinearity in the feature space could pose additional challenges. For example, in an interval where there is a high concentration of the 3-mer ``AAA'', will probably also have a high concentration of ``AA''. This will introduce multicollinearity. The counts of some unique 6 or 7 bases long oligonucleotides could be very sparse. In order to address these complexities, we will need to explore more sophisticaed techniques such as ``Adaptive Lasso'' and ``Sparse-Group Lasso'' \cite{Wang_etal_1997_AOS}, \cite{Simon_etal_2013_JCGS}. After reducing the feature space to a tractable number, we will fit additive models to the Nmaps signals. It is possible that the established relationship, although interesting and significant, but might not have much predictive power. In that case, we will use these results to design subsequent experiments for more usable results.\\
+\noindent
+{\emph{\bf{Supervised machine learning methods to classify Nmaps to different locations on the genome}}}\\
+%\subsubsection*{Supervised machine learning methods to classify Nmaps to different locations on the genome}
+Next, we want to use supervised machine learning techniques and develop a classification algorithm, (\cite{Muller_2005_ScandJoS}) to classify a new Nmap signal to a particular location on the genome. This would leverage the results of both the above analyses. For example, preliminary work with mflorum genome has yielded 7 intervals, each approximately 0.8 kb long, exhibiting distinguishingly different signals from the rest of the intervals. We want to leverage some very recent work in the supervised machine learning areas \cite{Casado_2010_PhDThesis}, \cite{Alonso_etal_2012_CSDA} and apply them in the context of whole genome analysis. It is possible that not all intervals on the genome will exhibit discernible signal. We are still sanguine that the locations most impacted by cancer and other diseases will exhibit signal patterns.\\
+\noindent
+{\underline{\bf{Conclusion}}}\\
+%\subsubsection*{Computational, big data and statistical challenges}
+The Nanocoding data provides a unique and novel opportunity to quickly perform high-resolution genotyping that include profound structural variants across the entire genome.
+Using some smart statistical, supervised machine learning and bioinformatics tools I am confident of contributing to the establishing Nanocoding systems as an essential technology that complements next generation sequencing to answer more questions about human diseases.
+
+\newpage
+\bibliography{bibTex_Reference}
+%\bibliography{research}
+
+\end{document}
