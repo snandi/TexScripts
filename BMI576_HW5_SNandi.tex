@@ -1,0 +1,277 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=1in, right=1in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+\bibliographystyle{plain}  %Choose a bibliograhpic style
+
+\title{HW 5, BMI 576}
+\author{Subhrangshu Nandi\\
+  nandi@stat.wisc.edu}
+\date{December 11, 2014}
+%\date{}
+
+\maketitle
+
+\subsection*{Problem 1}
+\noindent {\bf{HMM}}: In Hidden Markov model, the hidden information is the sequence of states from which the symbols are being emitted. In the {\underline{Expectation}} step, the transition counts between states are estimated. In the {\underline{Maximization}} step, the emission probabilities are estimated. These emission probabilities are the maximum likelihood estimates. The convergence criterion is the value of the likelihood of the training sequence(s). When the change in this likelihood is marginal, it can be considered to have converged.\\
+\noindent {\bf{GMM}}: In Gaussian Mixture model, the hidden variables are the parameters of the gaussian distributions that are believed to have generated the data and the mixing weights. In the {\underline{Expectation}} step, probabilities of the datapoints being generated from each gaussian distribution are estimated. In the {\underline{Maximization}} step, the parameters of the gaussian distributions, along with the mixing weights are estimated. The convergence criterion is the value of the joint likelihood of the datapoints. When the increase in the likelihood function is marginal, the algorithm is considered to have converged.
+\subsection*{Problem 2}
+\begin{enumerate}[(a)]
+\item Expectation Step (emission counts) \\
+\begin{table}[H]
+\centering
+\begin{tabular}{r|c|cl}
+  \hline
+ & TCG & AGAT & \\ 
+  \hline
+  $n_{1,A}$ & $0$ 					& $\frac{f_1^2(1)b_1^2(1) + f_1^2(3)b_1^2(3)}{f_3^2(4)}$ 	& $ +1$  \\ 
+  $n_{1,T}$ & $\frac{f_1^1(1)b_1^1(1)}{f_3^1(3)}$ 	& $0$ 								& $ +1$  \\ 
+  $n_{1,G}$ & $0$ 					& $\frac{f_1^2(2)b_1^2(2)}{f_3^2(4)}$ 				& $ +1$  \\ 
+  $n_{1,C}$ & $\frac{f_1^1(2)b_1^1(2)}{f_3^1(3)}$ 	& $0$ 								& $ +1$  \\ 
+  $n_{2,A}$ & $0$ 					& $\frac{f_2^2(1)b_2^2(1) + + f_2^2(3)b_2^2(3)}{f_3^2(4)}$ 	& $ +1$  \\ 
+  $n_{2,T}$ & $\frac{f_2^1(1)b_2^1(1)}{f_3^1(3)}$ 	& $0$		 						& $ +1$  \\ 
+  $n_{2,G}$ & $0$ 					& $\frac{f_2^2(2)b_2^2(2)}{f_3^2(4)}$ 				& $ +1$  \\ 
+  $n_{2,C}$ & $\frac{f_2^1(1)b_2^1(1)}{f_3^1(3)}$ 	& $0$		 						& $ +1$  \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Tue Dec 09 22:26:08 2014
+\begin{table}[H]
+\centering
+\begin{tabular}{r|r|r|r}
+  \hline
+ & TCG & AGAT & Total \\ 
+  \hline
+  $n_{1,A}$ & 0.0000 & 0.4237 & 1.4237 \\ 
+  $n_{1,T}$ & 0.2507 & 0.0000 & 1.2507 \\ 
+  $n_{1,G}$ & 0.0000 & 0.2205 & 1.2205 \\ 
+  $n_{1,C}$ & 0.1078 & 0.0000 & 1.1078 \\ 
+  $n_{1,A}$ & 0.0000 & 1.5763 & 2.5763 \\ 
+  $n_{1,T}$ & 0.7493 & 0.0000 & 1.7493 \\ 
+  $n_{1,G}$ & 0.0000 & 0.7795 & 1.7795 \\ 
+  $n_{1,C}$ & 0.8922 & 0.0000 & 1.8922 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\item Expectation Step (transition counts)
+\begin{table}[H]
+\centering
+\begin{tabular}{r|c|c}
+  \hline
+ & TCG & AGAT \\ 
+  \hline
+$n_{1 -> 1}$ & $\frac{f_1^1(1)a_{11}e_1(C)b_1^1(2) + f_1^1(2)a_{11}e_1(G)b_1^1(3)}{f_3^1(3)}$ & 
+$\frac{f_1^2(1)a_{11}e_1(G)b_1^2(2) + f_1^2(2)a_{11}e_1(A)b_1^2(3) + f_1^2(3)a_{11}e_1(T)b_1^2(4)}{f_3^2(4)}$ \\
+$n_{1 -> 2}$ & $\frac{f_1^1(2)a_{12}e_2(C)b_2^1(2) + f_1^1(2)a_{12}e_2(G)b_2^1(3)}{f_3^1(3)}$ & 
+$\frac{f_1^2(1)a_{12}e_2(G)b_2^2(2) + f_1^2(2)a_{11}e_1(A)b_1^2(3) + f_1^2(3)a_{11}e_1(T)b_1^2(4)}{f_3^2(4)}$ \\
+  \hline
+  \hline
+$n_{2 -> 1}$ & $\frac{f_2^1(1)a_{21}e_1(C)b_1^1(2) + f_2^1(2)a_{21}e_1(G)b_1^1(3)}{f_3^1(3)}$ & 
+$\frac{f_2^2(1)a_{21}e_1(G)b_1^2(2) + f_2^2(2)a_{21}e_1(A)b_1^2(3) + f_2^2(3)a_{21}e_1(T)b_1^2(4)}{f_3^2(4)}$ \\
+$n_{2 -> 2}$ & $\frac{f_2^2(1)a_{22}e_2(C)b_2^1(2) + f_2^1(2)a_{22}e_2(G)b_2^1(3)}{f_3^1(3)}$ & 
+$\frac{f_2^2(1)a_{22}e_2(G)b_2^2(2) + f_2^2(2)a_{22}e_2(A)b_2^2(3) + f_2^2(3)a_{22}e_2(T)b_2^2(4)}{f_3^2(4)}$ \\
+  \hline
+
+\end{tabular}
+\end{table}
+
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Tue Dec 09 22:28:59 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & TCG & AGAT & Total \\ 
+  \hline
+$n_{1 -> 1}$ & 0.0694 & 0.1477 & 0.2171 \\ 
+$n_{1 -> 2}$ & 0.2447 & 0.2380 & 0.4826 \\ 
+  \hline
+  \hline
+$n_{2 -> 1}$ & 0.0798 & 0.4751 & 0.5549 \\ 
+$n_{2 -> 2}$ & 0.7934 & 1.6247 & 2.4181 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\item Maximization Step: \\
+New emission probabilities:
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Tue Dec 09 23:42:02 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & A & T & G & C \\ 
+  \hline
+  1 & 0.28 & 0.25 & 0.24 & 0.23 \\  % Changed last column from 0.22 to 0.23, to add up to 1
+  2 & 0.32 & 0.22 & 0.22 & 0.24 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\\
+New transition parameters: \\
+$n_{1 -> 1} = 0.3103$ \\
+$n_{1 -> 2} = 0.6897$ \\
+$n_{2 -> 1} = 0.1867$ \\
+$n_{2 -> 2} = 0.8133$ \\
+ 
+\end{enumerate}
+\subsection*{Problem 3}
+\noindent {\bf{Expectation step}}: \\
+Assume: $\alpha_1 = \alpha_2 = 0.5$, $\mu_1=1, \mu_2=2, \sigma_1=1, \sigma_2=1$. Below is the table for $\gamma_{ij}$: the probability of sample $i$ to be generated by gaussian $j$.
+\begin{table}[H]
+\centering
+\begin{tabular}{r||rr||rr}
+\hline
+Sample ID & $f_1$ & $\gamma_1$ & $f_2$ & $\gamma_2$ \\ 
+\hline
+1 & 0.0540 & 0.1824 & 0.2420 & 0.8176 \\
+2 & 0.2420 & 0.3775 & 0.3989 & 0.6225 \\
+3 & 0.0044 & 0.9707 & 0.0001 & 0.0293 \\
+4 & 0.0001 & 0.9801 & 0.0000 & 0.0199 \\
+5 & 0.2420 & 0.3775 & 0.3989 & 0.6225 \\
+\hline
+\end{tabular}
+\caption{Problem 3: Expectation Step}
+\end{table}
+\noindent {\bf{Maximization step}}: \\
+The new values of the parameters are below:
+\begin{table}[H]
+\centering
+\begin{tabular}{c||r}
+\hline
+Parameter & Value \\ 
+\hline
+$\mu_1$ & -0.9840 \\
+$\mu_2$ & 2.3069 \\
+$\alpha_1$ & 0.5794 \\
+$\alpha_2$ & 0.4206 \\
+\hline
+\end{tabular}
+\caption{Problem 3: Maximization Step}
+\end{table}
+
+\subsection*{Problem 4}
+\begin{enumerate}[(a)]
+\item {\bf{Sparse candidate}}
+\begin{itemize}
+\item Input: Dataset $D = \{X^1, \dots, X^m \}$; An initial network $B_0$; A parameter $k$, the maximum number of parents
+\item Output: Network $B$
+\item Strength: Fast learning by restricting search space to ``candidates''.
+\item Weakness: Early choices might exclude other good parents.
+\end{itemize}
+\item Module networks
+\begin{itemize}
+\item Input: Dataset $D = \{X^1, \dots, X^m \}$; The number of modules $K$.
+\item Output: A module network $M$.
+\item Strength: Easier to interpret and analyze, since this groups similar variables into groups.
+\item Weakness: The assumption that the number of modules is determined in advance.assumption that the number of
+modules is determined in advance.
+\end{itemize}
+\item GENIE3
+\begin{itemize}
+\item Input: Dataset $D = \{X^1, \dots, X^m \}$
+\item Output: Global ranking of edges, based on each $w_{ij}$; Directed cyclic graph with a confidence of each edge.
+\item Strength: The algorithm, based on feature selection with tree-based ensemble methods, is simple and generic, making it adaptable to other types of genomic data and interactions.
+\item Weakness: Computationally intensive.
+\end{itemize}
+\item Use a module network algorithm 
+\item Use a sparse candidate algorithm
+\end{enumerate}
+
+\subsection*{Problem 5}
+\begin{enumerate}[(a)]
+\item
+$P(C = 1|B = 1) = \frac{P(C=1, B=1)}{P(B=1)} = \frac{3/10}{4/10} = \frac{3}{4}$ \\
+$P(C = 1|B = 0) = \frac{P(C=1, B=0)}{P(B=0)} = \frac{2/10}{6/10} = \frac{1}{3}$ \\
+$P(C = 0|B = 1) = \frac{P(C=0, B=1)}{P(B=1)} = \frac{1/10}{4/10} = \frac{1}{4}$ \\
+$P(C = 0|B = 0) = \frac{P(C=0, B=0)}{P(B=0)} = \frac{4/10}{6/10} = \frac{2}{3}$ \\
+\item Use sparse-candidate algorithm 
+\item Score of a graph $G$ decomposes over individual variables:
+\[ Score(\mathcal{G};\mathcal{D}) = \sum\limits_{d=1}^{m}\left(\sum\limits_{i=1}^{N} \log\ P(X_i = x_i^d | Pa(X_i) = \text{pa}_{X_i}^d) \right)\]
+which can be re-arranged to be written as the outer sum over variables:
+\[ Score(\mathcal{G};\mathcal{D}) = \sum\limits_{i=1}^{N}\left(\sum\limits_{d=1}^{m} \log\ P(X_i = x_i^d | Pa(X_i) = \text{pa}_{X_i}^d) \right)\] 
+This enables efficient computation of the score effect of local changes, by changing the parent set of individual random variables.
+
+\end{enumerate}
+
+\end{document}
