@@ -5,6 +5,8 @@
 ## of the edges of the frame. Then, we would need to redo the conversion from 5 to
 ## 1 or 3 pixels around the backbone
 
+## This script runs in the folder /aspen/nandi/mm52_all7341/Groups_Redo/
+
 GroupsFilename='/aspen/nandi/mm52-all7341/Groups_Redo/Groups_mm52'
 for Group in $(cat $GroupsFilename)
 do

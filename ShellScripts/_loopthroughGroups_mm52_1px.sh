@@ -1,4 +1,7 @@
 #!/bin/sh
+## This file takes input a file with Group numbers, in the same folder as the group folders.
+## This script will run in the folder /home/nandi/PythonProgramming/
+
 Filename=$1
 FolderPath=/aspen/nandi/mm52-all7341/maps_inca34_1pixel/$Filename
 # for line in $(cat /aspen/nandi/mm52-all7341/Groups_mm52) THIS WAS THE ORIGINAL LINE.

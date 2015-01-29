@@ -1,3 +1,6 @@
+## This script runs in the folder /aspen/nandi/mm52_all7341/Groups_Redo/
+## This script was created by _createSplitGroup.sh
+
 sed -n "1,100 p" Groups_mm52_redo > Groups_mm52_redo1To100
 sed -n "101,200 p" Groups_mm52_redo > Groups_mm52_redo101To200
 sed -n "201,300 p" Groups_mm52_redo > Groups_mm52_redo201To300

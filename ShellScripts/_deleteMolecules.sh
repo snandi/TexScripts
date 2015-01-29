@@ -3,6 +3,8 @@
 ## to the folders of those groups and deletes the molecule.txt files, to repopulate
 ## with correct intensity values
 
+## This script runs in the folder /aspen/nandi/mm52_all7341/Groups_Redo/
+
 GroupsFile=$1
 ParentFolder=$2
 

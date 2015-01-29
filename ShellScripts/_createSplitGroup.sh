@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## This file splits the Groups_mm52 file into smaller files of 100 groups each
+## This script runs in the folder /aspen/nandi/mm52_all7341/Groups_Redo/
 
 InputFile=$1
 LINE_Start=1
