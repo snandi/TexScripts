@@ -1,0 +1,13 @@
+#!/bin/sh
+Filename=$1
+FolderPath=/aspen/nandi/mm52-all7341/maps_inca34_1pixel/$Filename
+# for line in $(cat /aspen/nandi/mm52-all7341/Groups_mm52) THIS WAS THE ORIGINAL LINE.
+for line in $(cat $FolderPath) 
+do 
+    /home/nandi/anaconda/bin/python P05_convertTo_1_pixel.py "$line" 
+done
+
+########################################################
+## Usage
+## ./_loopthroughGroups_mm52_1px.sh Groups_mm52_2393795
+########################################################
