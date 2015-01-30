@@ -144,6 +144,13 @@ fluorIntensityFor_nMaps.byPixel_forMFlorum.pl >
 The above script looks into the molecule.txt files and extracts the intensity numbers.
 Use appropriate directory in line 31 of this perl script to extract data from asp or cap mount, inca 34 or 36.
 \item
+The ``alignmentChunks'' file is produced by the following command:
+\begin{verbatim}
+alignmentLocations.pl 5 MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.xml > 
+		MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.alignmentChunks
+\end{verbatim}
+The first argument is the minimum number of fragments and the second argument is a list of xml files of the alignment. 
+\item
 Below is an example to produce the final dataset for each fragment, to be read in by the R script:
 \begin{verbatim}
 intensityForAlignedFrags.pl -ch 1 -f 11 -a 
@@ -230,13 +237,42 @@ and created the file
 ~/human_nMaps/GC_Content/mm52_all7431.goldOnly.bploc
 \end{verbatim} 
 by keeping only the unique rows. This file will be read in by RScripts to give the beginning and ending base pair locations for any chromosome and any fragment.
-\begin{itemize}
 \item \emph{Creating data for 1 or 3 pixels around backbone} \\
+There are a total $7,341$ groups. Extracted the list of groups into the file ``Groups\_mm52''. Then divided this file into smaller files with 200 groups in each file. This division was done by the scripts 
+\begin{verbatim}
+_createSplitGroup.sh,  _splitGroups.sh
+\end{verbatim}
+in the folder 
+\begin{verbatim}
+/aspen/nandi/mm52-all7341/maps_inca34_3pixel/
+\end{verbatim}
+Parallel instances of the python program 
+\begin{verbatim}
+~/PythonProgramming/P05_readMoleculetxt.py
+\end{verbatim}
+were run on different servers, by the following shell script, to convert the 5 pixel data to 3 and 1 pixel data, using the following command:
+\begin{verbatim}
+cd ~/PythonProgramming
+$nohup ./_loopthroughGroups_mm52_3px.sh Groups_mm52_1To200 &
+\end{verbatim}
+\item \emph{Alignmentchunks file} \\
+The alignment chunks file has nothing to do with the number of pixels around the backbone. Hence, the same file can be used for 1, 3 and 5 pixels around the backbone. The symbolic link 
+\begin{verbatim}
+alignmentChunks.withLength.all7134Groups.goldOnly
+\end{verbatim}
+links to the right file in Steve's folder on /aspen.
+\item \emph{pixelintensities file} \\
+Change the folder path in the ``fluorIntensityFor\_nMaps.byPixel.pl'' script and run it to produce the pixelIntensities file:
+\begin{verbatim}
+./fluorIntensityFor_nMaps.byPixel_1pixel.pl > pixelIntensities.all7134Groups_1pixel
+\end{verbatim}
+Do this for 1 and 3 pixel around the backbone separately. 
+\item \emph{Molecules towards the edges of frames} \\
+Molecules that are close to the edge of the frames do not have intensity numbers in the files produced by INCA3.4. A check was added in the python scripts to discard these molecules. There were a series of shell scripts written to identify the groups that have molecules with this problem and their conversion was done again. The scripts can be found in:
+\begin{verbatim}
+/aspen/nandi/mm52-all7341/Groups_Redo/
+\end{verbatim}
 
 \end{itemize}
-
-
-
-
 \end{enumerate}
 \end{document}
