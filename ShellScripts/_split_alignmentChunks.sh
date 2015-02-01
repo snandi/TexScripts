@@ -23,7 +23,6 @@ awk '$1 == "chr19" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly
 awk '$1 == "chr20" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chr20
 awk '$1 == "chr21" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chr21
 awk '$1 == "chr22" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chr22
-awk '$1 == "chr23" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chr23
 awk '$1 == "chrX" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chrX
 awk '$1 == "chrY" {print $0}' alignmentChunks.withLength.all7134Groups.goldOnly > alignmentChunks.withLength.all7134Groups.goldOnly_chrY
 
