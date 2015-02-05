@@ -164,7 +164,18 @@ Variance of the KM estimate is
 \noindent
 Justification of the "Redistribution-to-the-right" algorithm for the KM estimator:\\
 Let $t_j^*$ and $t_{j+1}^*$ be two consecutive failure time points. Then, from the KM formula, we must have $\hat{F}(t^*_{j+1}+) = \hat{F}(t^*_{j}+)\left(1 - \frac{d_{j+1}}{n_{j+1}}\right)$. \\
-Now, let there be $m_j$ censoring between $t^*_j$ and $t^*_{j+1}$. For each censoring time point, starting from $t_{j,1},\ t_{j,2},\ \dots, t_{j,m_j}$, the weights are redistributed equally to all points to their right. The contribution from the censoring time point $t_{j,1}$ will be $\frac{1}{n_{j+1} + m_j - 1}$, to each point to its right. Hence, after each redistribution, the mass of all the time points to the right of that point, contributing to the survival function, is the same. Notice that after redistribution, the censored points do not contribute to any probability mass of the survivor function. Hence, the difference between $F(t^*_j +)$ and $F(t^*_{j+1} +)$ is contributed from the redistributing the mass of the last censoring point. The redistributed mass is $\frac{F(t^*_{j} +)}{n_{j+1}}\cdot d_{j+1}$, because there are $n_{j+1}$ points to the right of the last censoring point between $t^*_j$ and $t^*_{j+1}$.
+
+\noindent
+Now, let there be $m_j$ censoring between $t^*_j$ and $t^*_{j+1}$. For each censoring time point, starting from $t_{j,1},\ t_{j,2},\ \dots, t_{j,m_j}$, the weights are redistributed equally to all points to their right. \\
+
+\noindent
+The contribution from the censoring time point $t_{j,1}$ will be $\frac{1}{n_{j+1} + m_j - 1}$, to each point to its right. Hence, after each redistribution, the mass of all the time points to the right of that point, contributing to the survival function, is the same. \\
+
+\noindent
+Notice that after redistribution, the censored points do not contribute to any probability mass of the survivor function. Hence, the difference between $F(t^*_j +)$ and $F(t^*_{j+1} +)$ is contributed from the redistributing the mass of the last censoring point. \\
+
+\noindent
+The redistributed mass is $\frac{F(t^*_{j} +)}{n_{j+1}}\cdot d_{j+1}$, because there are $n_{j+1}$ points to the right of the last censoring point between $t^*_j$ and $t^*_{j+1}$.
 \begin{align*}
 \hat{F}(t^*_{j+1}+)\ &{=}\ \hat{F}(t^*_{j}+) - \frac{F(t^*_{j} +)}{n_{j+1}}\cdot d_{j+1}  \\
 \ &{=}\ \hat{F}(t^*_{j}+)\left(1 - \frac{d_{j+1}}{n_{j+1}}\right)
