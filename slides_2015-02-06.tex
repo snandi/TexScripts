@@ -1,0 +1,195 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%% For explanatory bubbles, use the following code %%%%%%%%%%%%%
+%% \usepackage{tikz} %% For explanatory bubbles
+%% \usepackage{xparse}
+%% \usetikzlibrary{shapes.callouts,ocgx}
+
+%% \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline=0.5ex] \node (#1) {};}
+
+%% % \explainword: #1= identifier to mark the word, #2 text
+%% \NewDocumentCommand{\explainword}{r[] m}{
+%%     \switchocg{#1}{#2}\tikzmark{#1}
+%% }
+
+%% \tikzset{my callout style/.style={
+%%         draw,rectangle callout,anchor=pointer,callout relative pointer={(230:1cm)},
+%%         rounded corners,align=center,text width=2cm,fill=cyan!20, 
+%%     }
+%% }
+
+%% % \mycallout: #1 opacity style, #2 pointer base position, #3= text
+%% \NewDocumentCommand{\mycallout}{O{opacity=0.8,text opacity=1} m m}{%
+%% \begin{tikzpicture}[remember picture, overlay]
+%%  \begin{scope}[ocg={ref=#2,status=invisible,name={#3}}]
+%% \node[my callout style,#1]at (#2) {#3};
+%% \end{scope}
+%% \end{tikzpicture}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Status Update Jan, 2015]{Status Update Meeting}
+\author{S. Nandi}
+\institute[LMCG]{LMCG \\
+ University of Wisconsin-Madison}
+\date{February 6, 2014}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}
+\item Discussion with Adi
+\item LINE segments of Chr 13 vs Chr 3
+\item Multidimensional scaling (for clustering)
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Update on data download/extraction}
+\begin{itemize}
+\item Resolved download speed using shell scripts and Steve's help
+\item Initial estimate of 2 months - eventually took 3 days
+\item Data ready for the whole genome (with at least 10 Nmaps aligned) \\
+  (with 1, 3, or 5 pixels around the backbone)
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Discussions with Adi}
+\begin{itemize}
+\pause \item Went through most structural variations in Pre \& Post samples
+\pause \item Chr 13 copy number 1, Chr 3 copy number 2
+\pause \item Look at intact LINE sequences in Chr 13 and Chr 3
+\pause \item Identify locations of insertions/deletions in LINEs of Chr 3
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%% Chr 13 LINE segments %%%%%%%%%%
+%\begin{columns}[t]
+%\column{.5\textwidth}
+%\centering
+%\includegraphics[width=5cm,height=3.5cm]{lab1}\\
+%\includegraphics[width=5cm,height=4cm]{lab2}
+%\column{.5\textwidth}
+%\centering
+%\includegraphics[width=5cm,height=4cm]{lab3}\\
+%\includegraphics[width=5cm,height=4cm]{lab4}
+%\end{columns}
+\begin{frame}
+\frametitle{L1 LINE segments of Chr 13, at least 6 KB long}
+\begin{figure}
+\centering
+\includegraphics[page=137, scale=0.45]{L1_Chr13_Sequences.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{L1 LINE segments of Chr 13, at least 6 KB long}
+\begin{figure}
+\centering
+\includegraphics[page=1, scale=0.2]{L1_Chr13_Sequences.pdf}
+\includegraphics[page=7, scale=0.2]{L1_Chr13_Sequences.pdf} 
+\includegraphics[page=25, scale=0.2]{L1_Chr13_Sequences.pdf} 
+\end{figure}
+\begin{figure}
+\includegraphics[page=8, scale=0.2]{L1_Chr13_Sequences.pdf} 
+\includegraphics[page=20, scale=0.2]{L1_Chr13_Sequences.pdf}
+\includegraphics[page=28, scale=0.2]{L1_Chr13_Sequences.pdf} 
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% Next Steps %%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Next Steps}
+\begin{itemize}
+\pause \item Multi dimensional scaling, to identify clusters in graphs
+\pause \item Use simulated data to study and improve ``Iterated registration''
+\pause \item Simultaneous registration and clustering into two populations
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
