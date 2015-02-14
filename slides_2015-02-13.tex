@@ -1,0 +1,258 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%% For explanatory bubbles, use the following code %%%%%%%%%%%%%
+%% \usepackage{tikz} %% For explanatory bubbles
+%% \usepackage{xparse}
+%% \usetikzlibrary{shapes.callouts,ocgx}
+
+%% \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline=0.5ex] \node (#1) {};}
+
+%% % \explainword: #1= identifier to mark the word, #2 text
+%% \NewDocumentCommand{\explainword}{r[] m}{
+%%     \switchocg{#1}{#2}\tikzmark{#1}
+%% }
+
+%% \tikzset{my callout style/.style={
+%%         draw,rectangle callout,anchor=pointer,callout relative pointer={(230:1cm)},
+%%         rounded corners,align=center,text width=2cm,fill=cyan!20, 
+%%     }
+%% }
+
+%% % \mycallout: #1 opacity style, #2 pointer base position, #3= text
+%% \NewDocumentCommand{\mycallout}{O{opacity=0.8,text opacity=1} m m}{%
+%% \begin{tikzpicture}[remember picture, overlay]
+%%  \begin{scope}[ocg={ref=#2,status=invisible,name={#3}}]
+%% \node[my callout style,#1]at (#2) {#3};
+%% \end{scope}
+%% \end{tikzpicture}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Status Update Feb, 2015]{Status Update Meeting}
+\author{S. Nandi}
+\institute[LMCG]{LMCG \\
+ University of Wisconsin-Madison}
+\date{February 13, 2014}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, LINE segments}
+% latex table generated in R 2.15.0 by xtable 1.7-4 package
+% Fri Feb 13 14:58:58 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrr}
+  \hline
+ & BP\_Start & BP\_End & BP\_Length & numPixels & Frag\_Start & Frag\_End \\ 
+  \hline
+31 & 37824477 & 37830518 & 6041 & 30 & 2085 & 2086 \\ 
+  32 & 38639509 & 38645655 & 6146 & 30 & 2168 & 2169 \\ 
+  35 & 38686273 & 38692322 & 6049 & 30 & 2175 & 2176 \\ 
+  36 & 38804764 & 38811007 & 6243 & 31 & 2183 & 2184 \\ 
+  37 & 39647643 & 39653684 & 6041 & 30 & 2278 & 2279 \\ 
+  41 & 40930427 & 40936458 & 6031 & 30 & 2431 & 2432 \\ 
+  42 & 41309055 & 41315081 & 6026 & 30 & 2473 & 2474 \\ 
+  44 & 41402955 & 41408962 & 6007 & 30 & 2485 & 0 \\ 
+  48 & 43090111 & 43096571 & 6460 & 32 & 2668 & 2670 \\ 
+  50 & 46219165 & 46225202 & 6037 & 30 & 2996 & 2997 \\ 
+  57 & 48037441 & 48043793 & 6352 & 31 & 3178 & 3179 \\ 
+  58 & 48137748 & 48144156 & 6408 & 32 & 3189 & 3190 \\ 
+  61 & 48286273 & 48292443 & 6170 & 30 & 3210 & 3211 \\ 
+  62 & 48308928 & 48315025 & 6097 & 30 & 3214 & 3215 \\ 
+  63 & 48356023 & 48362047 & 6024 & 30 & 3218 & 3219 \\ 
+  64 & 48482101 & 48488245 & 6144 & 30 & 3235 & 3236 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3176}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3176_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3176_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3177}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3177_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3177_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3178}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3178_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3178_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3179}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3179_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3179_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3180}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3180_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3180_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3183}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3183_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3183_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 8 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3184}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3184_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3184_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3186}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3186_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3186_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 10 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3189}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3189_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3189_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 11 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3190}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3190_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3190_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3197}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3197_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3197_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 13 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 13, Frag 3199}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{chr13_Frag3199_Registered_BB_1pixels_2015-02-13.pdf} 
+\includegraphics[page=1, scale=0.35]{chr13_Frag3199_Registered_BB_5pixels_2015-02-13.pdf} 
+\end{center}
+\end{frame}
+
+\end{document}
