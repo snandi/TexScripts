@@ -1,0 +1,314 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%% For explanatory bubbles, use the following code %%%%%%%%%%%%%
+%% \usepackage{tikz} %% For explanatory bubbles
+%% \usepackage{xparse}
+%% \usetikzlibrary{shapes.callouts,ocgx}
+
+%% \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline=0.5ex] \node (#1) {};}
+
+%% % \explainword: #1= identifier to mark the word, #2 text
+%% \NewDocumentCommand{\explainword}{r[] m}{
+%%     \switchocg{#1}{#2}\tikzmark{#1}
+%% }
+
+%% \tikzset{my callout style/.style={
+%%         draw,rectangle callout,anchor=pointer,callout relative pointer={(230:1cm)},
+%%         rounded corners,align=center,text width=2cm,fill=cyan!20, 
+%%     }
+%% }
+
+%% % \mycallout: #1 opacity style, #2 pointer base position, #3= text
+%% \NewDocumentCommand{\mycallout}{O{opacity=0.8,text opacity=1} m m}{%
+%% \begin{tikzpicture}[remember picture, overlay]
+%%  \begin{scope}[ocg={ref=#2,status=invisible,name={#3}}]
+%% \node[my callout style,#1]at (#2) {#3};
+%% \end{scope}
+%% \end{tikzpicture}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Status Update Mar '15]{Status Update Meeting}
+\author{S. Nandi}
+\institute[LMCG]{LMCG \\
+ University of Wisconsin-Madison}
+\date{March 5, 2014}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}
+\item Simulation example
+\item Iterated Registration
+\item Amplitude and phase variability
+\item Distance between two curves
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{True Curves}
+\begin{itemize}
+\item Generated curves over the interval $[-3,3]$ of the form
+\[ x_i(t) = z_{i_1} e^{\frac{-(t - 1.5)^2}{2}} + z_{i_2} e^{\frac{-(t + 1.5)^2}{2}}, \text{\ \ where \ } z_{i_1}, z_{i_2} \sim \mathcal{N}(1, 0.25^2) \]
+\end{itemize}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{Simulation/Plot1_OriginalCurves.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Warped Curves}
+The associated warping functions $h_i$:
+\[ h_i(t) = 6 \frac{e^{[a_i(t+3)/6]} - 1}{e^{a_i} - 1} - 3 ,\ \ a_i \in [-1,1]\]
+\begin{center}
+\includegraphics[page=1, scale=0.35]{Simulation/Plot2_WarpedCurves.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+\includegraphics[page=1, scale=0.35]{Simulation/Plot1_OriginalCurves_6.pdf} 
+\includegraphics[page=1, scale=0.35]{Simulation/Plot2_WarpedCurves_6.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Registered: 6 curves, seed 20}
+\begin{center}
+\includegraphics[page=1, scale=0.48]{Simulation/Plot3_Registered_6_Seed20.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Registered: 6 curves, seed 20}
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Fri Mar  6 02:32:40 2015
+
+\begin{table}[ht]
+\footnotesize
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & MS.Amp & MS.Phase & RSq \\ 
+  \hline
+1 & 0.2150 & 0.1707 & 0.4426 \\ 
+  2 & 0.2038 & 0.1761 & 0.4636 \\ 
+  3 & 0.1965 & 0.1408 & 0.4174 \\ 
+  4 & 0.1896 & 0.0997 & 0.3446 \\ 
+  5 & 0.1859 & 0.0604 & 0.2451 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+\includegraphics[page=1, scale=0.3]{Simulation/Plot4_MeanReg_6_Seed20.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Quantification of the {\emph{effectiveness}} of registration}
+\begin{itemize}
+\item Kneip and Ramsay (2008) - Quantifying the amounts of ``Phase'' and ``Amplitude'' variations
+\item Define: $\text{MSE}_{total} = \text{MSE}_{amp} + \text{MSE}_{phase}$
+\item Idea: ``Registration'' (or alignment) will result in higher and sharper peaks and valleys
+\item $x_i$ be original curves, and $y_i$ be registered versions. $\text{MSE}_{total} = \frac{1}{N}\sum\limits_{i=1}^{N}\int[x_i(t) - \bar{x}(t)]^2dt$ \ \ {\footnotesize{($t:$ pixel position; $i: i^{th}$ Nmap.)}}; 
+$\text{MSE}_{amp} = C_R\frac{1}{N}\sum\limits_{i=1}^{N}\int[y_i(t) - \bar{y}(t)]^2dt$ \\
+$\text{MSE}_{phase} = C_R\int \bar{y}(t)^2 dt - \int \bar{x}(t)^2 dt$, \ \ where, $C_R = 1 + \propto $ (cov of warping fn and registered fn)
+
+\item AmpPhase $R^2 = \frac{\text{MSE}_{phase}}{\text{MSE}_{total}}$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+\includegraphics[page=1, scale=0.2]{Simulation/Plot1_OriginalCurves_6_Seed17.pdf} 
+\includegraphics[page=1, scale=0.2]{Simulation/Plot2_WarpedCurves_6_Seed17.pdf} 
+\newline
+\includegraphics[page=1, scale=0.33]{Simulation/Plot3_Registered_6_Seed17.pdf} 
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Registered: 6 curves, seed 17}
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Fri Mar  6 03:26:04 2015
+\begin{table}[ht]
+\footnotesize
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & MS.Amp & MS.Phase & RSq \\ 
+  \hline
+1 & 0.1431 & 0.1215 & 0.4592 \\ 
+  2 & 0.1387 & 0.1152 & 0.4538 \\ 
+  3 & 0.1387 & 0.1147 & 0.4527 \\ 
+  4 & 0.1388 & 0.1154 & 0.4540 \\ 
+  5 & 0.1388 & 0.1161 & 0.4555 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+\includegraphics[page=1, scale=0.3]{Simulation/Plot4_MeanReg_6_Seed17.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+\includegraphics[page=1, scale=0.2]{Simulation/Plot1_OriginalCurves_6_Seed12.pdf} 
+\includegraphics[page=1, scale=0.2]{Simulation/Plot2_WarpedCurves_6_Seed12.pdf} 
+\newline
+\includegraphics[page=1, scale=0.33]{Simulation/Plot3_Registered_6_Seed12.pdf} 
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Registered: 6 curves, seed 12}
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Fri Mar  6 03:35:16 2015
+\begin{table}[ht]
+\footnotesize
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & MS.Amp & MS.Phase & RSq \\ 
+  \hline
+1 & 0.1676 & -0.0424 & -0.3384 \\ 
+  2 & 0.1458 & -0.0945 & -1.8427 \\ 
+  3 & 0.1434 & -0.1170 & -4.4372 \\ 
+  4 & 0.1426 & -0.1264 & -7.8282 \\ 
+  5 & 0.1418 & -0.1334 & -15.9766 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+\includegraphics[page=1, scale=0.3]{Simulation/Plot4_MeanReg_6_Seed12.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 8 %%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+\includegraphics[page=1, scale=0.2]{Simulation/Plot1_OriginalCurves_20_Seed12.pdf} 
+\includegraphics[page=1, scale=0.2]{Simulation/Plot2_WarpedCurves_20_Seed12.pdf} 
+\newline
+\includegraphics[page=1, scale=0.33]{Simulation/Plot3_Registered_20_Seed12.pdf} 
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Registered: 6 curves, seed 12}
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Fri Mar  6 03:39:04 2015
+\begin{table}[ht]
+\footnotesize
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & MS.Amp & MS.Phase & RSq \\ 
+  \hline
+1 & 0.1776 & 0.0221 & 0.1107 \\ 
+  2 & 0.1699 & -0.0038 & -0.0231 \\ 
+  3 & 0.1696 & -0.0092 & -0.0572 \\ 
+  4 & 0.1695 & -0.0101 & -0.0633 \\ 
+  5 & 0.1694 & -0.0103 & -0.0645 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\begin{center}
+\includegraphics[page=1, scale=0.3]{Simulation/Plot4_MeanReg_6_Seed12.pdf} 
+\end{center}
+\end{frame}
+
+\end{document}
