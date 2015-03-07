@@ -200,7 +200,7 @@ The associated warping functions $h_i$:
 \item Idea: ``Registration'' (or alignment) will result in higher and sharper peaks and valleys
 \item $x_i$ be original curves, and $y_i$ be registered versions. $\text{MSE}_{total} = \frac{1}{N}\sum\limits_{i=1}^{N}\int[x_i(t) - \bar{x}(t)]^2dt$ \ \ {\footnotesize{($t:$ pixel position; $i: i^{th}$ Nmap.)}}; 
 $\text{MSE}_{amp} = C_R\frac{1}{N}\sum\limits_{i=1}^{N}\int[y_i(t) - \bar{y}(t)]^2dt$ \\
-$\text{MSE}_{phase} = C_R\int \bar{y}(t)^2 dt - \int \bar{x}(t)^2 dt$, \ \ where, $C_R = 1 + \propto $ (cov of warping fn and registered fn)
+$\text{MSE}_{phase} = C_R\int \bar{y}(t)^2 dt - \int \bar{x}(t)^2 dt$, \\ where, $C_R = 1 + \propto $ (cov of warping fn and registered fn)
 
 \item AmpPhase $R^2 = \frac{\text{MSE}_{phase}}{\text{MSE}_{total}}$
 \end{itemize}
@@ -309,6 +309,59 @@ $\text{MSE}_{phase} = C_R\int \bar{y}(t)^2 dt - \int \bar{x}(t)^2 dt$, \ \ where
 \begin{center}
 \includegraphics[page=1, scale=0.3]{Simulation/Plot4_MeanReg_6_Seed12.pdf} 
 \end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Lessons from Simulation}
+\begin{itemize}
+\pause \item Registration works
+\pause \item Iterated registration makes the consensus signal more precise \\
+\textcolor{orange}{\bf{But NOT necessarily accurate}}
+\pause \item Kneip-Ramsay's amplitude-phase decomposition quantification has obvious limitations. \\
+\textcolor{orange}{\bf{NEED new metric to establish convergence criteria}}
+\pause \item Propose new metric to estimate distance between two curves
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 10 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Distance between two curves}
+Fr\'echet distance is a measure of similarity between curves that takes into account the location and ordering of the points along the curves.\\
+Let $A$ and $B$ be two given curves in $S$ (metric space). Then, the Fr\'echet distance between $A$ and $B$ is defined as the infimum over all reparameterizations $\alpha$ and $\beta$ of $[0,1]$ of the maximum over all $t \in [0,1]$ of the distance in $S$ between $A(\alpha(t))$ and $B(\beta(t))$. 
+\[ F(A,B) = \inf\limits_{\alpha, \beta} \max\limits_{t \in [0,1]} \left\{ d(A(\alpha(t)), B(\beta(t))) \right\}   \]
+
+\begin{center}
+\includegraphics[scale=0.18]{Frechet_Image01.jpg} 
+\includegraphics[scale=0.23]{Frechet_Image03.jpg} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 11 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Curvature weighted Fr\'echet Distance}
+{\underline{Proposing: Curvature weighted Fr\'echet Distance between two curves}}
+\begin{itemize} 
+\item Sample more points in the curve with higher curvature
+\item Contribution from the whole curve (sum)
+\item Compare curves of different lengths
+\end{itemize} 
+
+\begin{center}
+\includegraphics[scale=0.18]{Frechet_Image02.png} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Questions/Comments/Suggestions}
+\begin{itemize} 
+\item Consider constrained optimization for registration, to limit the phase shifts that are allowed to register
+\item Local warping of signals due to non-uniform coupling of dye molecules with the DNA molecules, not because of local stretch difference
+\item Discard the fragments from the ends of the NMaps, as their stretches could be different from that of the inner fragments
+\item Continue building on Fr\'echet distance to quantify distance between curves, and use it to establish convergence (of iterated registration process)
+\item Explore the Bayesian approach for joint clustering and registration
+\end{itemize}
 \end{frame}
 
 \end{document}
