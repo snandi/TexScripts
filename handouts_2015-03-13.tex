@@ -1,10 +1,10 @@
-%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
-\documentclass[10pt,dvipsnames,table]{beamer} 
+\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+%\documentclass[10pt,dvipsnames,table]{beamer} 
 %\usetheme{Luebeck} 
 \usetheme{Madrid} 
 %\usetheme{Marburg} 
 \setbeamercolor{structure}{fg=cyan!90!white}
-\setbeamercolor{normal text}{fg=white, bg=black}
+%\setbeamercolor{normal text}{fg=white, bg=black}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amscd}
@@ -134,7 +134,7 @@
 \item Objective: Minimize the penalized squared error criterion
 \[ F_{\lambda}(y, x|h) = \int \| y(t) - x\{h(t)\} \| ^2 dt + \lambda \int w^2 (t)dt \]
 where, $w(t) = \frac{D^2(h)}{D(h)}$. Penalizing $w$ ensures monotinicity and smoothness of the warping function
-\item \textcolor{yellow}{Working on: Registering $x'(t)$ and $x''(t)$ and reconstructing the signals back.}
+\item \textcolor{red}{Working on: Registering $x'(t)$ and $x''(t)$ and reconstructing the signals back.}
 \end{enumerate}
 \end{frame}
 
@@ -152,7 +152,7 @@ where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the
 \end{enumerate}
 %\pause
 \begin{center}
-\textcolor{yellow}{Holy grail!!}
+\textcolor{red}{Holy grail!!}
 \end{center}
 \end{frame}
 
