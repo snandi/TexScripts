@@ -1,0 +1,165 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+
+%%%%%%%%%%%%% For explanatory bubbles, use the following code %%%%%%%%%%%%%
+%% \usepackage{tikz} %% For explanatory bubbles
+%% \usepackage{xparse}
+%% \usetikzlibrary{shapes.callouts,ocgx}
+
+%% \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline=0.5ex] \node (#1) {};}
+
+%% % \explainword: #1= identifier to mark the word, #2 text
+%% \NewDocumentCommand{\explainword}{r[] m}{
+%%     \switchocg{#1}{#2}\tikzmark{#1}
+%% }
+
+%% \tikzset{my callout style/.style={
+%%         draw,rectangle callout,anchor=pointer,callout relative pointer={(230:1cm)},
+%%         rounded corners,align=center,text width=2cm,fill=cyan!20, 
+%%     }
+%% }
+
+%% % \mycallout: #1 opacity style, #2 pointer base position, #3= text
+%% \NewDocumentCommand{\mycallout}{O{opacity=0.8,text opacity=1} m m}{%
+%% \begin{tikzpicture}[remember picture, overlay]
+%%  \begin{scope}[ocg={ref=#2,status=invisible,name={#3}}]
+%% \node[my callout style,#1]at (#2) {#3};
+%% \end{scope}
+%% \end{tikzpicture}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Joint Modeling of Functional and Survival Data]{Functional Principal Component Analysis for Longitudinal and Survival Data \\ Fang Yao\\ Statistica Sinica, 2007}
+\author{Subhrangshu Nandi}
+\institute[Stat 741]{Stat 741, Spring 2015 \\
+  Department of Statistics \\
+ University of Wisconsin-Madison}
+\date{April 21, 2015}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+%\begin{frame}
+%\frametitle{Outline}
+%\begin{itemize}
+%\pause \item Introduction to functional data
+%\pause \item Motivation of potential problem
+%\pause \item Objective: Minimize effets of smoothing in two sample tests
+%\pause \item Problem definition and two sample test
+%\pause \item Some theoretical results
+%\pause \item Computational results
+%\pause \item Summary
+%\end{itemize}
+%\end{frame}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Objective}
+\begin{enumerate}
+\pause \item Learn different clustering techniques
+\begin{itemize}
+\item K-means
+%\item K-mediods (or Partitioning around \explainword[mediods]{mediods} - PAM)
+\item K-mediods (or Partitioning around mediods - PAM)
+\item Agglomerative Hierarchical
+\item Self-organizing tree algorithm (SOTA) 
+\item Gaussian mixture 
+\end{itemize}
+\pause \item Learn different metrics to compare clusters
+\begin{itemize}
+\item Connectivity index
+\item Dunn index
+\item Silhouette width
+\end{itemize}
+\pause \item Apply to gene-expression data and evaluate different clusters using these indices
+\end{enumerate}
+
+%% \mycallout{mediods}{Always members of the dataset}
+%% \tikzset{my callout style/.append style={fill=orange!20}}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\end{document}
+
