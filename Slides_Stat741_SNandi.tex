@@ -131,35 +131,60 @@
 %\end{itemize}
 %\end{frame}
 
+%The presentation must follow this template.
+%1. Background 
+%2. Problem identification
+%3. Data examples for the Problem
+%4. Innovation and significance of the solution
+%5. The solution: both theoretical and computational
+%6. Results (both simulation and real data analysis)
+%7. Limitation of the solution (conditions of the theorem, computational limitation, model assumption, etc)
+
 %%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{Objective}
-\begin{enumerate}
-\pause \item Learn different clustering techniques
+\frametitle{Background}
+\begin{block}{Cox Proportional Hazard Model}
+\[ \lambda_i(t|{\mathbf{Z}}) = \lambda_0(t) \exp\{ {\bf{Z_i}}^T {\mathbf{\beta}}\}, \ \ i = 1, \dots n,\ p \text{ covariates} \]
+\end{block}
+\pause
+\begin{block}{Cox Model, with Time-varying covariate}
+\[ \lambda_i(t|{\mathbf{Z_i(s)}}; 0 \leq s \leq t) = \lambda_0(t) \exp\{ {\bf{Z_i(t)}}^T {\mathbf{\beta}}\} \]
+\end{block}
+\pause
+\begin{block}{Cox Model, with Functional covariate}
 \begin{itemize}
-\item K-means
-%\item K-mediods (or Partitioning around \explainword[mediods]{mediods} - PAM)
-\item K-mediods (or Partitioning around mediods - PAM)
-\item Agglomerative Hierarchical
-\item Self-organizing tree algorithm (SOTA) 
-\item Gaussian mixture 
+\item One of the covariates functional variable
+\item Measurement error in the functional covariate
+\item Need evolution history of functional covariate 
+\item \textcolor{green}{Joint modeling} of functional covariate and hazard 
 \end{itemize}
-\pause \item Learn different metrics to compare clusters
-\begin{itemize}
-\item Connectivity index
-\item Dunn index
-\item Silhouette width
-\end{itemize}
-\pause \item Apply to gene-expression data and evaluate different clusters using these indices
-\end{enumerate}
-
-%% \mycallout{mediods}{Always members of the dataset}
-%% \tikzset{my callout style/.append style={fill=orange!20}}
-
+\end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example}
+Functional covariate of two types of patients:
+\begin{center}
+\includegraphics[scale=0.17, page=1]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=7]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=11]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=15]{SimPlots.pdf} \\
+
+\includegraphics[scale=0.17, page=6]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=10]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=12]{SimPlots.pdf} 
+\includegraphics[scale=0.17, page=18]{SimPlots.pdf} 
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Problem identification}
+This paper proposes a nonparametric approach for {\underline{jointly}} modelling longitudinal and survival data using {\underline{functional principal components}}.
 
 
+\end{frame}
 \end{document}
 
