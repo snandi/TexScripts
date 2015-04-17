@@ -224,5 +224,66 @@
 \includegraphics[page=5, scale=0.35]{chr22_Frag3209_BB_1pixels_Registered_2015-04-17.pdf}
 \end{center}
 \end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Multivariate Median}
+
+"Robustness and Complex Data Structures" by Claudia Becker, Roland Freit, Sonja Kuhnt \\
+
+Chapter 1: Multivariate Median by Hannu Oja \\
+Chapter 2: Depth Statistics by Karl Mosler \\
+
+R implementation: Multivariate Median is the minimizer of 
+\[ \sum\limits_{i=1}^n \|x_i - m\|, \ \ \|u\| = \sqrt{\sum\limits_{j=1}^p u_j^2 }  \]
+
+In our problem, n = Number of Nmaps, p = Number of pixels
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Reg to Multivariate Median - Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=5, scale=0.45]{chr3_Frag9906_BB_1pixels_Regd_Median_2015-04-17.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparing reg to Mean vs Median - Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=5, scale=0.35]{chr3_Frag9906_BB_1pixels_Registered_2015-04-16.pdf}
+\includegraphics[page=7, scale=0.35]{chr3_Frag9906_BB_1pixels_Regd_Median_2015-04-17.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Reg to Multivariate Median - Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=3, scale=0.35]{chr3_Frag9907_BB_1pixels_Registered_2015-04-16.pdf}
+\includegraphics[page=4, scale=0.35]{chr3_Frag9907_BB_1pixels_Regd_Median_2015-04-17.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparing reg to Mean vs Median - Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=5, scale=0.35]{chr3_Frag9907_BB_1pixels_Registered_2015-04-16.pdf}
+\includegraphics[page=7, scale=0.35]{chr3_Frag9907_BB_1pixels_Regd_Median_2015-04-17.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Steps ?}
+\begin{itemize}
+\item Simulate similar curves \\
+- Need to use condor (meeting with BCG support on Wed)
+\item Constrained registration
+\item Estimate good threshold for Nmap selection
+\item Ongoing - Ribosomal DNA data
+\item Spend more time on multivariate median
+\end{itemize}
+\end{frame}
+
 \end{document}
 
