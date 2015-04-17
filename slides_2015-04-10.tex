@@ -1,0 +1,315 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%% For explanatory bubbles, use the following code %%%%%%%%%%%%%
+%% \usepackage{tikz} %% For explanatory bubbles
+%% \usepackage{xparse}
+%% \usetikzlibrary{shapes.callouts,ocgx}
+
+%% \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture,baseline=0.5ex] \node (#1) {};}
+
+%% % \explainword: #1= identifier to mark the word, #2 text
+%% \NewDocumentCommand{\explainword}{r[] m}{
+%%     \switchocg{#1}{#2}\tikzmark{#1}
+%% }
+
+%% \tikzset{my callout style/.style={
+%%         draw,rectangle callout,anchor=pointer,callout relative pointer={(230:1cm)},
+%%         rounded corners,align=center,text width=2cm,fill=cyan!20, 
+%%     }
+%% }
+
+%% % \mycallout: #1 opacity style, #2 pointer base position, #3= text
+%% \NewDocumentCommand{\mycallout}{O{opacity=0.8,text opacity=1} m m}{%
+%% \begin{tikzpicture}[remember picture, overlay]
+%%  \begin{scope}[ocg={ref=#2,status=invisible,name={#3}}]
+%% \node[my callout style,#1]at (#2) {#3};
+%% \end{scope}
+%% \end{tikzpicture}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Status Update Apr '15]{Status Update Meeting}
+\author{S. Nandi}
+\institute[LMCG]{LMCG \\
+ University of Wisconsin-Madison}
+\date{April 10, 2015}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outline}
+\begin{itemize}       
+\item Simulation results ready 
+\item Some regions on the genome
+\end{itemize}
+\end{frame}
+
+%% \[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \] \\
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation, with one true signal, Seed 196}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed196_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation, with one true signal, Seed 66}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed66_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation, with one true signal, Seed 62}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed62_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation, with one true signal, Seed 58}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed58_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation, with one true signal, Seed 125}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed125_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation - Some bias problems, Seed 59}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed59_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation - Some bias problems, Seed 173}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{AllPlots_10_Seed173_2015-04-09.pdf}
+\end{center}
+\end{frame}
+
+%% Seeds to use
+%% 196, 66, 62, 58, 53, 125, 119, 112, 215
+%% Problem: 59, 173
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{chr3_Frag9906_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=2, scale=0.45]{chr3_Frag9906_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=3, scale=0.45]{chr3_Frag9906_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9906}
+\begin{center}
+\includegraphics[page=4, scale=0.45]{chr3_Frag9906_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{chr3_Frag9907_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=2, scale=0.45]{chr3_Frag9907_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=3, scale=0.45]{chr3_Frag9907_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9907}
+\begin{center}
+\includegraphics[page=4, scale=0.45]{chr3_Frag9907_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Chr 3, Frag 9905}
+\begin{center}
+\includegraphics[page=1, scale=0.45]{chr3_Frag9905_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9905}
+\begin{center}
+\includegraphics[page=2, scale=0.45]{chr3_Frag9905_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9905}
+\begin{center}
+\includegraphics[page=3, scale=0.45]{chr3_Frag9905_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chr 3, Frag 9905}
+\begin{center}
+\includegraphics[page=4, scale=0.45]{chr3_Frag9905_BB_1pixels_Registered_2015-04-10.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Discarded NMaps}
+\begin{itemize}
+\item Frag 9905 \\
+"2392375\_734\_2060455", "2386300\_734\_2060091", "2391308\_734\_2060001", "2391924\_734\_2060714"
+\item Frag 9906 \\
+"2333972\_734\_2060098" "2387766\_734\_2060536" "2392003\_734\_2060768" "2392375\_734\_2060455"
+"2400543\_734\_2060366" "2391308\_734\_2060001" "2398683\_734\_2060236"
+\item Frag 9907 \\
+"2391308\_734\_2060001" "2392375\_734\_2060455" "2400543\_734\_2060366" "2390591\_734\_2060187"
+"2392544\_734\_2060428"
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Discarded NMaps}
+\begin{itemize}
+\item Frag 9905 \\
+\textcolor{red}{"2392375\_734\_2060455"}, "2386300\_734\_2060091", 
+\textcolor{red}{"2391308\_734\_2060001"}, "2391924\_734\_2060714"
+\item Frag 9906 \\
+"2333972\_734\_2060098" "2387766\_734\_2060536" "2392003\_734\_2060768" 
+\textcolor{red}{"2392375\_734\_2060455"}
+\textcolor{red}{"2400543\_734\_2060366"} \textcolor{red}{"2391308\_734\_2060001"} "2398683\_734\_2060236"
+\item Frag 9907 \\
+\textcolor{red}{"2391308\_734\_2060001"} \textcolor{red}{"2392375\_734\_2060455"} \textcolor{red}{"2400543\_734\_2060366"} "2390591\_734\_2060187"
+"2392544\_734\_2060428"
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Next Steps}
+Ribosomal DNA intensity profiles\\
+Continue refining iterated registration procedure\\
+
+\end{frame}
+\end{document}
+
