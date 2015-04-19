@@ -30,6 +30,7 @@
 \usepackage{lscape}
 \usepackage{mathtools}
 \usepackage{microtype}
+\usepackage{multirow}
 \usepackage{natbib}
 \usepackage{pdfpages}
 \usepackage{verbatim}
@@ -48,6 +49,8 @@
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\G}{\mathcal{G}}
 \newcommand{\I}{\mathcal{I}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Real}{\mathbb{R}}
 \newcommand{\be}{\begin{equation}}
 \newcommand{\ee}{\end{equation}}
 \newcommand{\bes}{\begin{equation*}}
@@ -117,20 +120,6 @@
 \setlength{\baselineskip}{16truept}
 \frame{\maketitle}
 
-%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
-%\begin{frame}
-%\frametitle{Outline}
-%\begin{itemize}
-%\pause \item Introduction to functional data
-%\pause \item Motivation of potential problem
-%\pause \item Objective: Minimize effets of smoothing in two sample tests
-%\pause \item Problem definition and two sample test
-%\pause \item Some theoretical results
-%\pause \item Computational results
-%\pause \item Summary
-%\end{itemize}
-%\end{frame}
-
 %The presentation must follow this template.
 %1. Background 
 %2. Problem identification
@@ -179,12 +168,166 @@ Functional covariate of two types of patients:
 \end{center}
 \end{frame}
 
-%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{Problem identification}
-This paper proposes a nonparametric approach for {\underline{jointly}} modelling longitudinal and survival data using {\underline{functional principal components}}.
+\frametitle{Background - Functional PCA}
+%\begin{columns}
+%\column{.5\textwidth} 
+\begin{table}[H]
+\centering
+\begin{tabular}{l|l|l}
+\hline
+Element & In PCA & in FPCA (Functional PCA) \\ 
+\hline
+Data & $X \in \Real ^p $ & $X \in \mathcal{H} = L^2(\I)$ \\
+Dimension & $p < \infty$ & $\infty$ \\
+Mean & $\mu = \Exp (X) $ & $\mu(t) = \Exp(X(t))$ \\
+Covariance & $\text{Cov}(X) = \Sigma_{p x p}$ &  $\text{Cov}(X(s), X(t)) = G(s, t)$  \\
+Eigenvalues &  $\lambda_1, \lambda_2, \dots, \lambda_p$  & $ \lambda_1, \lambda_2, \dots $\\
+Eigen- vectors/functions & $ \mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_p $ & $ \varphi_1(t), \varphi_2(t), \dots $\\
+Inner Products & $ \langle \mathbf{X}, \mathbf{Y} \rangle = \sum_{k=1}^p X_k Y_k $ & $ \langle X, Y \rangle = \int_\mathcal{I} X(t) Y(t) dt $\\
+\multirow{2}*{PCAs} & $ z_k = \langle X - \mu, \mathbf{v_k} \rangle,$ & $ \xi_k = \langle X - \mu, \varphi_k\rangle, $ \\ 
+& ${ k = 1, 2, \dots, p }$ & $ k = 1, 2, \dots $ \\ 
+\hline
+\end{tabular}
+\caption{Comparing PCA and fPCA}
+\end{table}
+%\column{.5\textwidth} 
+%\end{columns}
+\end{frame}
 
+\begin{frame}
+\frametitle{FPCA: Precipitation of 35 Canadian cities, over 365 days}
+%\begin{columns}
+%\column{.4\textwidth} 
+\begin{center}
+\includegraphics[scale=0.2, page=1]{PCAPlot_1.pdf} \\
+\pause
+%\column{.6\textwidth} 
+\includegraphics[scale=0.23, page=1]{PCAPlot_3fpca.pdf}
+\includegraphics[scale=0.23, page=2]{PCAPlot_3fpca.pdf}
+\includegraphics[scale=0.23, page=3]{PCAPlot_3fpca.pdf} 
+\end{center}
+%\end{columns}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Background - B-Spline fitting}
+% Formula and plots with different knots
+Any spline function of order $k$ on a given set of {\textcolor{red}{knots}} can be expressed as a linear combination of B-splines. 
+\[ S_{k,t}(x) =\sum_i \alpha_i B_{i,k}(x),\ \ t_0 \leq x \leq t_m \]
+\pause
+\begin{columns}
+\column{.5\textwidth} 
+\begin{center}
+More knots - Overfitting?
+%\includegraphics[scale=0.25, page=1]{BSplinePlot.pdf} \\
+\includegraphics[scale=0.25, page=2]{BSplinePlot.pdf}
+\end{center}
+
+\column{.5\textwidth} 
+\begin{center}
+Fewer knots - Underfitting?
+%\includegraphics[scale=0.25, page=3]{BSplinePlot.pdf} \\
+\includegraphics[scale=0.25, page=4]{BSplinePlot.pdf}
+\end{center}
+\end{columns}
+\end{frame}
+
+%% Notes
+%% number of basis functions = order + number of interior knots
+%% The usefulness of B-splines lies in the fact that any spline function of order k on a given set of knots can be expressed as a linear combination of B-splines.
+%%  a spline is a numeric function that is piecewise-defined by polynomial functions, and which possesses a sufficiently high degree of smoothness at the places where the polynomial pieces connect (which are known as knots)
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Problem: ``Joint modeling of longitudinal and survival data''}
+Previous work: {\bf{Brown, E. R.}}, Ibrahim, J. G. and DeGruttola, V. (2005). A flexible B-spline model for multiple
+longitudinal biomarkers and survival. {\emph{Biometrics}} {\bf{61}}, 64-73. \\
+\pause
+
+{\underline{Contribution of this paper:}} \\
+Proposes a nonparametric approach for {\underline{jointly}} modelling longitudinal and survival data using {\underline{functional principal components}}. Some key aspects:\\
+\begin{itemize}
+\item Fast and efficient implementation, by choosing few FPC's
+\item No known structure of underlying longitudinal process
+\item Iterative selection procedure for choosing tuning parameters (\# of eigen functions, \# of knots of spline models), using AIC 
+\item EM algorithm used for joint estimation of parameters
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Longitudinal Process}
+% Breakdown of the likelihood by the different variables
+\begin{itemize}
+\pause \item Let $\mu(t):$ the overall mean function \\
+$Z_i(t):$ vector of covariates (example, treatment indicator), Then
+\[ \mu_i(t) = \mu(t|Z_i) = \mu(t) + \beta^T Z_i(t), \ \ t \in [0, \tau] \]
+\pause \item $X_i(t):$ the realization of the latent longitudinal process for the $i^{th}$ individual \\
+$G(s, t) = \Cov{X_i(s)}{X_i(t)}$ covariance structure of $Z_i (t)$
+\[ X_i (t) = \mu_i (t) + \sum_{k=1}^{K} \xi_{ik} \phi_k (t) \]
+\pause \item $\epsilon _{ij} \sim  \mathcal{N}(0, \sigma^2): $ Uncorrelated measurement errors, then the sub-model for the longitudinal covariate $Y_{ij}$ is 
+\[ Y_{ij} =  X_i(t_{ij}) + \epsilon _{ij} = \mu(t_{ij}) + Z_i(t_{ij})^T\beta + \sum_{k=1}^{K} \xi_{ik} \phi_k (t_{ij})+ \epsilon_{ij}\]
+\end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Longitudinal Process and Hazard}
+\begin{itemize}
+\pause \item Fitting overall mean function, with B-Splines \\
+\begin{center}
+$ \mu(t) =  \mathbf{B}_p(t)^T \mathbf{\alpha},\ \ \alpha = (\alpha_1, \dots, \alpha_p)^T $
+\end{center}
+\pause \item Fitting each eigen function, with another set of B-Splines \\
+\begin{center}
+$ \sum_{k=1}^{K} \xi_{ik} \phi_k (t_{ij}) =  \sum_{k=1}^{K} \xi_{ik} \widetilde{\mathbf{B}}_q(t)^T \mathbf{\theta _k},\ \ \theta_{k} = (\theta_{1k}, \dots, \theta_{qk})^T $
+\end{center}
+\pause \item Cox Model, with some more covariates $V(t)$
+\begin{center}
+$ h_i(t) = h_0(t)\exp\{\gamma X_i(t) + V_i(t)^T \zeta \}$
+\end{center}
+\pause \item Final parameter vector of interest:
+\begin{center}
+$ \Omega = \left\{ \gamma, \zeta, h_0(\cdot), \alpha, \beta, \Theta, \Lambda, \sigma^2 \right\} $
+\end{center}
+\item Tuning parameters: $p, q, K$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%% Slide 8 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Solution/Estimation}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Simulation results}
+
+\end{frame}
+
+%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Application to CD4 count data}
+% Results for CD4 count
+
+\end{frame}
+
+%%%%%%%%%%%% Slide 10 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Solution}
+% Different stages of estimating the model
+
+\end{frame}
+
+%%%%%%%%%%%% Slide 11 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Critical appreciation}
+
+\end{frame}
+
 \end{document}
 
