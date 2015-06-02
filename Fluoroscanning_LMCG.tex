@@ -30,7 +30,7 @@
 \usepackage{verbatim}
 \usepackage{wrapfig}
 \usepackage{xargs}
-\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg, .bmp}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\Sup}{\textsuperscript}
@@ -100,12 +100,58 @@
 %% November 25, 2014
 %% \end{center}
 
-\subsection*{Aim}
+\section*{Long term (big picture) goal}
 To leverage ``Nanocoding'' and ``Fluoroscanning'' to quickly and economically analyze polymorphisms and mutations in human genomes. 
 
-\subsection*{Fluoroscanning}
-A critical step in producing nanocoded maps (Nmaps) is adding the dye Oxazole Yellow (YOYO) to the DNA molecules and then capturing the images of the molecules stretched on the positively charged surfaces, once they fluoresce. The dye molecules intercalates between the bases of the DNA molecules. Fluorescence properties of YOYO depends strongly on DNA sequence. In fact, quantum yield of YOYO bound to “GC” rich sequences is almost twice as large as those bound to “AT” rich sequences; binding constants also vary with sequence composition. 
+\section*{Fluoroscanning}
+A critical step in producing nanocoded maps (Nmaps) is adding the dye Oxazole Yellow (YOYO) to the DNA molecules and then capturing the images of the molecules stretched on the positively charged surfaces, once they fluoresce. The dye molecules intercalates between the bases of the DNA molecules. Fluorescence properties of YOYO depends strongly on DNA sequence. In fact, quantum yield of YOYO bound to “GC” rich sequences is almost twice as large as those bound to “AT” rich sequences; binding constants also vary with sequence composition. Hence, parts of Nmaps that have been aligned to the same location on the genome should exhibit similar fluorescence intensity profiles. In fact, this is one of the first questions of our research. 
 
+\subsection*{Aim 1: How reproducible are the fluorescence intensity profiles?}
+To comprehend this aim, please refer to fig \ref{fig:Fig1}. Each panel is a curvilinear representation of the intensity of the DNA molecule images. This image is of Nmaps of {\emph{M.florum}} DNA molecules. The peaks of the curves correspond to high fluorescence intensity and vice-versa. One point on a curve corresponds to one pixel on the image which in turn corresponds to approximately 200 base pairs (bp) of the DNA molecule. As is evident from the figure, this fragment is approximately 33.4 kb long, which produces images of approximately 158 pixels. The first aim is to quantify and establish this reproducibility (or consistency) of fluorescence intensity profiles of Nmaps aligned to the same location on the genomes. 
+
+Before the microscopic photography these molecules are stretched on glass surfaces. Upon stretching more dye molecules might intercalate between the bases. Conversely, when more dye molecules intercalate between the bases, the DNA molecules could get more stretched. Hence, the observed intensity profiles are not free from errors. It is important to observe, quantify and statistically control for these scenarios.
+
+%% \begin{figure}[H]
+%%     \centering
+%%     \begin{minipage}{.5\textwidth}
+%%         \centering
+%%         %\includegraphics[width=1.1\linewidth, height=0.4\textheight]{MF_chr1_frag24_Pixels156-1}
+%%         \includegraphics[scale=0.5]{MF_chr1_frag24_Pixels156-1}
+%%         %\caption{$dt=0.1$}
+%%         \label{fig:prob1_6_2}
+%%     \end{minipage}%
+%%     \begin{minipage}{0.5\textwidth}
+%%         \centering
+%%         \includegraphics[scale=0.5]{MF_chr1_frag24_Pixels156-5}
+%%         %\caption{$dt =$}
+%%         \label{fig:prob1_6_1}
+%%     \end{minipage}
+%% \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{MF_chr1_frag24_Pixels156-1}
+	\caption{Intervals from 5 Nmaps that align to reference fragment 24 of {\emph{M.florum}}}
+	\label{fig:Fig1}
+\end{figure}
+
+\subsection*{Aim 2: How unique are the fluorescence intensity profiles?}
+If Aim 1 can be established, then the next question to investigate is whether regions of distinctive genomic sequence composition have unique signature intensity profiles. If yes, then the intensity profile produced by a DNA molecule with structural variation would not align with the expected intensity profile. 
+
+\subsection*{Curve registration and intensity profiles}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{MF_Frag30_46-85_Registered}
+	\caption{Comparing sequence composition and intensity profiles}
+	\label{fig:Fig2}
+\end{figure}
+
+\subsection*{Application: Identify heterozygosity}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{Page11}
+	\caption{Two distinct sets of Nmaps aligned to the same location on the genome}
+	\label{fig:Fig3}
+\end{figure}
 
 
 %\newpage
