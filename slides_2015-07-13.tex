@@ -1,0 +1,229 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsxtra}
+\usepackage{animate}
+\usepackage{bbold}
+%\usepackage{bigints}
+\usepackage{color, colortbl}
+\usepackage{dsfont}
+\usepackage{enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{fancyhdr}
+\usepackage{float}
+%\usepackage{fullpage} %% Dont use this for beamer presentations
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{pdfpages}
+\usepackage{verbatim}
+\usepackage{wrapfig}
+\usepackage{xargs}
+\usepackage{xcolor}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sup}{\textsuperscript}
+\newcommand{\Exp}{\mathds{E}}
+\newcommand{\Prob}{\mathds{P}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Ind}{\mathds{1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\R}{\mathcal{R}}
+\newcommand{\Real}{\mathbb{R}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bes}{\begin{equation*}}
+\newcommand{\ees}{\end{equation*}}
+\newcommand{\union}{\bigcup}
+\newcommand{\intersect}{\bigcap}
+\newcommand{\Ybar}{\overline{Y}}
+\newcommand{\ybar}{\bar{y}}
+\newcommand{\Xbar}{\overline{X}}
+\newcommand{\xbar}{\bar{x}}
+\newcommand{\betahat}{\hat{\beta}}
+\newcommand{\Yhat}{\widehat{Y}}
+\newcommand{\yhat}{\hat{y}}
+\newcommand{\Xhat}{\widehat{X}}
+\newcommand{\xhat}{\hat{x}}
+\newcommand{\E}[1]{\operatorname{E}\left[ #1 \right]}
+%\newcommand{\Var}[1]{\operatorname{Var}\left( #1 \right)}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}[2]{\operatorname{Cov}\left( #1,#2 \right)}
+\newcommand{\N}[2][1=\mu, 2=\sigma^2]{\operatorname{N}\left( #1,#2 \right)}
+\newcommand{\bp}[1]{\left( #1 \right)}
+\newcommand{\bsb}[1]{\left[ #1 \right]}
+\newcommand{\bcb}[1]{\left\{ #1 \right\}}
+\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
+\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
+\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
+
+%%%%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Curve Registration (constrained warping)]{Iterated Curve Registration with Constrained Warping}
+\author{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+%  Department of Statistics \\
+% University of Wisconsin-Madison}
+%\date{April 21, 2015}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%The presentation must follow this outline.
+%1. Registration details 
+%2. Constrained warping
+%3. Illustration of simulation example
+%4. Iteration procedure
+%5. 
+%6. 
+%7. 
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Registration details}
+\begin{enumerate}
+\item Let $x(t)$ be the true curve; $y(t)$ be the curve to register. 
+\item Let $h(t)$ be the warping function; $y[h(t)]$ be the registered curve.
+\item $y[h(t)]$ and and $x(t)$ differ only in terms of amplitude variation, i.e., their values are proportional to one another across the range of $t$
+\item Then, PCA of the following order two matrix should reveal essentially one component (smallest eigen value $\approx 0$) \\
+\[C(h) = 
+\begin{bmatrix}
+\int \{x(t) \}^2dt & \int x(t) y[h(t)]dt \vspace{0.5cm} \\ 
+\int x(t) y[h(t)]dt & \int \{y[h(t)]\}^2dt
+\end{bmatrix}
+\]
+\item Choose $h(t)$ that minimizes the eigen value
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation of the warping function}
+\begin{enumerate}
+\item $h(t)$ is a strictly {\emph{monotone increasing}} function; Hence {\emph{invertible}}.
+\item Let $w(t) = \frac{h''(t)}{h'(t)}$ be the relative acceleration of the warping function. \\
+This will be used to {\emph{constrain}} the warping
+\item The objective function is:
+\[ F_{\lambda}(y,x|h) = \int \|y(t) - x\{h(t)\} \|^2 dt + \lambda \int w^2(t) dt \]
+Penalizing $w(t)$ ensures smoothness and monotonicity
+\item Express $w(t)$ in terms of B-Spline expansion: 
+\[w(t) = \sum \limits_{k=0}^{K} c_k B_k(t)\]
+Solve for the coefficients $c_k$
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Constrained warping, $\lambda = 1$}
+\begin{center}
+\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Constrained warping, $\lambda = 0.1$}
+\begin{center}
+\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1e-01.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Constrained warping, $\lambda = 0.01$}
+\begin{center}
+\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1e-02.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated Clustering \& Registration outline}
+\begin{enumerate}
+\item Based on ``pairwise distance'' between curves, form two initial clusters. 
+\item Estimate mean/median of two clusters
+\item Do constrained registration of each curve, to the mean that is closest to them
+\item Use MDS to observe the results of the new cluster
+\item Iterate, with a smaller $\lambda$, until no further improvement in the cluster distinction
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Illustration}
+\begin{center}
+\includegraphics[scale=0.32, page=21]{Warpings_Seed58_Lambda_1e-02.pdf}
+\includegraphics[scale=0.32, page=23]{Warpings_Seed58_Lambda_1e-02.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Illustration}
+\begin{center}
+\includegraphics[scale=0.32, page=22]{Warpings_Seed58_Lambda_1e-02.pdf}
+\includegraphics[scale=0.32, page=24]{Warpings_Seed58_Lambda_1e-02.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Work with Vikas Singh, Sathya, Deepti}
+\begin{enumerate}
+\item Permutation Diffusion Maps
+\begin{itemize}
+\item Consistently matching landmarks across multiple images of the same object
+\item Finding clusters of nearby images
+\item Uses group structure of image to image relationships
+\item Uses eigen vectors of smallest eigenvalues of graph Laplacian 
+\item Loss function is a weighted Frobenius norm of pairwise permutation (or distance) matrix
+\end{itemize}
+\item Multiway matching by permutation synchronization
+\begin{itemize}
+\item Jointly find all matchings between two images
+\item Uses pairwise warping information (noisy warping functions)
+\item Computationally efficient algorithm - might obviate iterated registration (?)
+\item Need difference distance metric for Nmaps (or any smooth curves)
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Next Steps}
+\begin{itemize}
+\item Work with Vikas and Sathya with simulation and real data
+\item Finish JSM poster by 07/22
+\item Simulate data, similar to what is observed in Nmaps (Bayesian?)
+\item Complete iterative registration/clustering methodology on simulated data
+\item Incorporate error structure from adjacent intervals, of same Nmap
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+
