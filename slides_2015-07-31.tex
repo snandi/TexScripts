@@ -48,19 +48,83 @@
 \begin{enumerate}
 \item Select the theoretical number of pixels for any length on the genome. Allow for $\pm 5\%$ stretch. 
 \item Make all Nmaps (inside $\pm 5\%$ stretch) of the same length, {\textcolor{blue}{by fitting B-Splines}}
-\item Preprocess the Nmaps to select the ones somewhat ``similar'' to each other, {\textcolor{blue}{by pairwise distance measures}}
+\item Pre-process the Nmaps to select the ones somewhat ``similar'' to each other, {\textcolor{blue}{by pairwise distance measures}}
 \item Choose Nmaps that are not completely flat, {\textcolor{blue}{by choosing top 25\% or 30\% of most variable Nmaps, per interval/ fragment}}
 \item Test for uniqueness, by comparing Nmaps from two intervals of same length, {\textcolor{blue}{by permutation test}}
-\item Align the intensity profiles of Nmaps from the same inteval, {\textcolor{blue}{by iterated penalized registration}}
+\item Align the intensity profiles of Nmaps from the same interval, {\textcolor{blue}{by iterated penalized registration}}
 \item Test for uniqueness again, {\textcolor{blue}{by permutation test}}
 \end{enumerate}
 \end{frame}
 
 %%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{}
+\frametitle{Base pair to pixel conversion}
+$\text{PixelLength} = \frac{\text{BasePairLength}}{\text{ConversionFactor} (209)} $
+\begin{table}[ht]
+\footnotesize
+\centering
+\begin{tabular}{r|r|r|r|r}
+  \hline
+ Frag & CoordStart & CoordEnd & BasePairLength & PixelLength \\
+  \hline
+  \hline
+  0 &            0 &        81621 &        81621 &            391 \\
+  1 &        81622 &       100297 &        18675 &             89 \\
+  2 &       100298 &       159702 &        59404 &            284 \\
+  3 &       159703 &       173646 &        13943 &             67 \\ 
+  4 &       173647 &       182672 &         9025 &             43 \\
+  5 &       182673 &       187715 &         5042 &             24 \\
+  . &            . &            . &            . &              . \\
+  . &            . &            . &            . &              . \\
+\rowcolor{Gray}
+ 30 &       582668 &       619168 &        36500 &            175 \\
+  . &            . &            . &            . &              . \\
+  . &            . &            . &            . &              . \\
+ 38 &       775344 &       793223 &        17879 &             86 \\
+ \hline
+ \hline
+\end{tabular}
+\end{table}
+\pause
+So, for fragment 30, $175 \pm 5\% =(166, 184)$, Nmaps from 166 pixels to 184 pixels will be considered. \\
+\pause
+Take off 5 pixels from each end (punctates). Left with Nmaps between 156 and 174 pixels. 
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.52, page=1]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.52, page=2]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{B-Spline fitting}
 
 \end{frame}
+
+%%%%%%%%%%%% Slide  %%%%%%%%%%%%
+\begin{frame}
+\frametitle{All Nmaps aligned to fragment 30, within acceptable stretch limits}
+\begin{figure}
+\includegraphics[scale=0.43, page=3]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide  %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pre-processing distance metric}
+
+\end{frame}
+
 
 \end{document}
 
