@@ -1,0 +1,66 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Uniqueness and Reproducibility of Nmaps]{Iterated Curve Registration with Constrained (Penalized) Warping}
+\author{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+%  Department of Statistics \\
+% University of Wisconsin-Madison}
+%\date{April 21, 2015}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is for 2015-07-31 meeting, with Prof. Schwartz & Prof. Newton
+%% Updating them on statistical evidence that iterated registration 
+%% works better than one-time registration, which is much better than
+%% no registration
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Outline for this presentation:
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Goal}
+{\bf{GOAL: Establish uniqueness and reproducibility of intensity profiles of Nmaps aligned to any locations on the genome}}
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation Steps ({\emph{M.florum}} data)}
+\begin{enumerate}
+\item Select the theoretical number of pixels for any length on the genome. Allow for $\pm 5\%$ stretch. 
+\item Make all Nmaps (inside $\pm 5\%$ stretch) of the same length, {\textcolor{blue}{by fitting B-Splines}}
+\item Preprocess the Nmaps to select the ones somewhat ``similar'' to each other, {\textcolor{blue}{by pairwise distance measures}}
+\item Choose Nmaps that are not completely flat, {\textcolor{blue}{by choosing top 25\% or 30\% of most variable Nmaps, per interval/ fragment}}
+\item Test for uniqueness, by comparing Nmaps from two intervals of same length, {\textcolor{blue}{by permutation test}}
+\item Align the intensity profiles of Nmaps from the same inteval, {\textcolor{blue}{by iterated penalized registration}}
+\item Test for uniqueness again, {\textcolor{blue}{by permutation test}}
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{}
+
+\end{frame}
+
+\end{document}
+
