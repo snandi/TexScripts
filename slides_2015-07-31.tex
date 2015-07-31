@@ -111,7 +111,7 @@ Take off 5 pixels from each end (punctates). Left with Nmaps between 156 and 174
 
 \end{frame}
 
-%%%%%%%%%%%% Slide  %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{All Nmaps aligned to fragment 30, within acceptable stretch limits}
 \begin{figure}
@@ -119,12 +119,168 @@ Take off 5 pixels from each end (punctates). Left with Nmaps between 156 and 174
 \end{figure}
 \end{frame}
 
-%%%%%%%%%%%% Slide  %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{Pre-processing distance metric}
+\frametitle{Pre-processing - Minimum variability}
+Discarding Nmaps that are flat. Taking top $25\%$ of most variable Nmaps.
+\begin{figure}
+\includegraphics[scale=0.42, page=4]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pre-processing - Similarity between Nmaps }
+\[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$
+
+%%% Add more materials here
 
 \end{frame}
 
+%%%%%%%%%%%% Slide 8 %%%%%%%%%%%%
+\begin{frame}
+\begin{center}
+\includegraphics[page=1, scale=0.25]{2curves_Sim_0_4994.pdf}
+\includegraphics[page=1, scale=0.25]{2curves_Sim_0_6732.pdf} \\
+\includegraphics[page=1, scale=0.25]{2curves_Sim_0_9569.pdf}
+\includegraphics[page=1, scale=0.25]{2curves_Sim_1.pdf}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pairwise Similarity between Nmaps}
+\begin{figure}
+\includegraphics[scale=0.47, page=5]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 10 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pairwise Similarity between Nmaps, after cutoff}
+\begin{figure}
+\includegraphics[scale=0.47, page=6]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 11 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Ready to register, establish uniqueness}
+\begin{figure}
+\includegraphics[scale=0.47, page=7]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Compare two sets of Nmaps}
+\begin{center}
+\begin{figure}
+\includegraphics[scale=0.33, page=1]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\pause
+\includegraphics[scale=0.33, page=1]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf}
+\end{figure}
+\end{center}
+{\bf{Question: How do you statistically determine if the two sets of Nmaps are unique to the group?}}
+\end{frame}
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Permutation test - T-type test statistic}
+\begin{enumerate}
+\item $\bar{X}_1(t): $ Pointwise mean of Nmaps of interval $1$
+\item $\bar{X}_2(t): $ Pointwise mean of Nmaps of interval $2$
+\item $n_1, n_2$: Number of Nmaps in intervals 1 and 2
+\item $\Var[x_1(t)]: $ Variance of Nmaps of interval 1 at each point $t$ 
+\item $\Var[x_2(t)]: $ Variance of Nmaps of interval 2 at each point $t$ 
+\item $T(t) = \frac{|\bar{X}_1(t) - \bar{X}_2(t)|}{\sqrt{\frac{1}{n_1}\Var[x_1(t)] + 
+\frac{1}{n_2}\Var[x_2(t)]}}$: Absolute value of t-statistic at each point
+\item $\bar{T}(t):$ Avg of absolute t-statistic is our Test statistic (measure of difference of two sets of Nmaps)
+\item To get a null distribution, permute the Nmaps, and repeat steps 1 through 7
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%% Slide 13 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.52, page=9]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 14 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.52, page=8]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 15 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.25, page=1]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.25, page=1]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\includegraphics[scale=0.25, page=8]{Plots_forMeeting.pdf}
+\includegraphics[scale=0.25, page=9]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 16 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{After 1 iteration}
+\begin{figure}
+\includegraphics[scale=0.33, page=2]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.33, page=2]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 17 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.25, page=2]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.25, page=2]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\includegraphics[scale=0.25, page=10]{Plots_forMeeting.pdf}
+\includegraphics[scale=0.25, page=11]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 18 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.25, page=8]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.25, page=8]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\includegraphics[scale=0.25, page=14]{Plots_forMeeting.pdf}
+\includegraphics[scale=0.25, page=15]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 19 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{After 7 iterations}
+\begin{figure}
+\includegraphics[scale=0.33, page=20]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.33, page=20]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 20 %%%%%%%%%%%%
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.25, page=20]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.25, page=20]{Regist_MF_Frag_30_Pixels46To85_2015-07-30.pdf} \\
+\includegraphics[scale=0.25, page=20]{Plots_forMeeting.pdf}
+\includegraphics[scale=0.25, page=21]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%% Slide 21 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{After 7 iterations}
+\begin{figure}
+\includegraphics[scale=0.33, page=20]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\includegraphics[scale=0.33, page=21]{Regist_MF_Frag_30_Pixels6To45_2015-07-30.pdf}
+\end{figure}
+\end{frame}
 
 \end{document}
 
