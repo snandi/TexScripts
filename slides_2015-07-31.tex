@@ -100,15 +100,24 @@ Take off 5 pixels from each end (punctates). Left with Nmaps between 156 and 174
 
 %%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
 \begin{frame}
-\begin{figure}
-\includegraphics[scale=0.52, page=2]{Plots_forMeeting.pdf}
-\end{figure}
+\frametitle{B-Spline fitting, with minimum GCV criteria}
+Goal: Fit $y_i, i = 1, \dots, n$, by a smooth function $x(t_i)$; \\
+B-Spline (or any basis expansion of $x(t_i)$ is: $x(t_i) = \sum\limits_{k = 0}^K c_k \phi_k(t_i)$\\
+Model: $y_i = x(t_i) + \epsilon _i = \mathbf{\phi'}(t_i)\mathbf{c} + \epsilon _i$ \\
+Estimate: $\hat{c} = (\Phi'\Phi)^{-1}\Phi' y$ \\
+SSE: $\sum \limits_{i = 1}^N [y_i - x(t_i)]^2$ \\
+\pause 
+Pen SSE: $$\sum \limits_{i = 1}^N [y_i - x(t_i)]^2 + \lambda \int[D^mx(t)]^2dt$$
+$$ \text{GCV}(\lambda) = \frac{n}{n - df(\lambda)}\frac{SSE}{n - df(\lambda)}$$
+Minimize $\lambda_c = \arg \min _{\lambda} \text{GCV}(\lambda)$ \\
+\textcolor{blue}{For each N-map, the best lambda is chosen, before fitting with B-spline}
 \end{frame}
 
 %%%%%%%%%%%% Slide 4 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{B-Spline fitting}
-
+\begin{figure}
+\includegraphics[scale=0.52, page=2]{Plots_forMeeting.pdf}
+\end{figure}
 \end{frame}
 
 %%%%%%%%%%%% Slide 5 %%%%%%%%%%%%
@@ -132,10 +141,15 @@ Discarding Nmaps that are flat. Taking top $25\%$ of most variable Nmaps.
 \begin{frame}
 \frametitle{Pre-processing - Similarity between Nmaps }
 \[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
-where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$
-
-%%% Add more materials here
-
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
+Properties of $\rho(f_i, f_j)$:
+\begin{itemize}
+\item $|\rho(f_i, f_j)| \leq 1$
+\item $|\rho(f_i, f_j)| = 1 \Leftrightarrow \exists \ \ A \in \Real ^+, B \in \Real, \ni f_i = Af_j + B$
+\item Absolute value preserved under affine transformations of functions \\
+$\rho(f_i, f_j) = \text{sign}(A_i\cdot A_j) \rho(A_if_i + B_i, A_jf_j + B_j)$
+\item Also preserved under affine transformations of the abscissa (x-axis or time axis)
+\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%% Slide 8 %%%%%%%%%%%%
@@ -282,5 +296,30 @@ where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the
 \end{figure}
 \end{frame}
 
+%% %%%%%%%%%%%% Slide 22 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Single Iteration Results}
+\begin{figure}
+\includegraphics[scale=0.33, page=2]{Regist_MF_Frag_30_Pixels6To45_OneIteration_2015-07-31.pdf}
+\includegraphics[scale=0.33, page=2]{Regist_MF_Frag_30_Pixels46To85_OneIteration_2015-07-31.pdf}
+\end{figure}
+\end{frame}
+
+%% %%%%%%%%%%%% Slide 23 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Single Iteration Uniqueness Comparison}
+\begin{figure}
+\includegraphics[scale=0.33, page=22]{Plots_forMeeting.pdf}
+\includegraphics[scale=0.33, page=23]{Plots_forMeeting.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 24 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Questions? Comments? Next Steps?}
+
+
+
+\end{frame}
 \end{document}
 
