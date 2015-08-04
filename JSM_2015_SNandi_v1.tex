@@ -1,29 +1,16 @@
 \documentclass[final]{beamer}
-  \mode<presentation>
-  {
+\mode<presentation>
+{
 % you can chose your theme here:
 \usetheme{confposter}
 % further beamerposter themes are available at
 % http://www-i6.informatik.rwth-aachen.de/~dreuw/latexbeamerposter.php
 }
 
-  \usepackage{type1cm}
-  \usepackage{calc}
-  \usepackage{times}
-  \usepackage{amsmath, amssymb, bbm}
-  \boldmath
-  \usepackage{array, color, xcolor}
-  \usepackage[english]{babel}
-  \usepackage[latin1]{inputenc}
-  \usepackage[orientation=landscape,size=a0,scale=1.4,debug]{beamerposter}
-\usepackage{graphics, graphicx, tikz}
-  \usepackage{epstopdf}
-  \usepackage{subfigure}
-  \usepackage{wrapfig}
-  \usepackage[labelformat=empty]{caption} %no figure in caption
-\usepackage[round]{natbib}
-\usepackage{fancyvrb, listings, verbatim} %verbatim color, verbatim alternatives
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexPoster}
 
 \lstdefinestyle{base}{
   language=C,
@@ -32,32 +19,32 @@
   basicstyle=\ttfamily\color{black},
   moredelim=**[is][\color{red}]{@}{@},
 }
-%  \usepackage{colortbl} %added for \usetheme{TUGraz}
+%-----------------------------------------------------------
+% Define the column width and poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and 
+% how much separation you want between columns
+% The separation I chose is 0.024 and I want 4 columns
+% Then set onecolwid to be (1-(3+1)*0.024)/3 = 0.3
+% Set twocolwid to be 2*onecolwid + sepwid = 0.624
+%-----------------------------------------------------------
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\setlength{\paperwidth}{48in}
+\setlength{\paperheight}{36in}
+\setlength{\sepwid}{0.024\paperwidth}
+\setlength{\onecolwid}{0.3\paperwidth}
+\setlength{\twocolwid}{0.624\paperwidth}
+\setlength{\topmargin}{-0.5in}
 
 %-----------------------------------------------------------
 % Define colours (see beamerthemeconfposter.sty to change these colour definitions)
 %-----------------------------------------------------------
-
-\setbeamercolor{block title}{fg=ngreen,bg=white}
+\setbeamercolor{block title}{fg=white,bg=red}
 \setbeamercolor{block body}{fg=black,bg=white}
-\setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
-\setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
-
-\newcommand{\bi}{\begin{itemize}}
-\newcommand{\ei}{\end{itemize}}
-
-\newcommand{\be}{\begin{equation}}
-\newcommand{\ee}{\end{equation}}
-
-\newcommand{\ben}{\begin{equation*}}
-\newcommand{\een}{\end{equation*}}
-
-\newcommand{\beq}{\begin{eqnarray*}}
-\newcommand{\eeq}{\end{eqnarray*}}
-\newcommand{\dis}{\displaystyle}
-
-\newcommand{\bx}{\mathbbm{x}}
-\newcommand{\R}{\mathbb{R}}
+\setbeamercolor{block alerted title}{fg=white,bg=red}
+\setbeamercolor{block alerted body}{fg=black,bg=red}
 
 \definecolor{darkgreen}{rgb}{0.05,0.45,0.15}
 \lstset{escapeinside={<@}{@>}} %for coloring lstlisting
@@ -123,9 +110,9 @@
 
 \end{block}
 
-        \begin{block}{Psychiatric Genomics Consortium (PGC) Data} %p.3
-                           {\color{orange!100} \textbf{Mega-analyses of genome-wide genetic data for psychiatric disorders}} %p.4
-                            \centering
+\begin{block}{Psychiatric Genomics Consortium (PGC) Data} %p.3
+{\color{orange!100} \textbf{Mega-analyses of genome-wide genetic data for psychiatric disorders}} %p.4
+\centering
 \bi
 \item Attention deficit disorder, autism, bipolar disorder, major depressive disorder, schizophrenia (Smoller et al, 2013)
 \begin{table}
@@ -232,17 +219,8 @@ SCZ & 9379 & 7736& 1,237,958&9\\
 \begin{center}
       \begin{columns}
             \begin{column}{.47\textwidth}
-\begin{figure}
-\includegraphics[width=0.113\textwidth]{RibosomalDNA_2015-03-19.pdf}%
-\includegraphics[width=0.29\textwidth]{RibosomalDNA_2015-03-19.pdf}
-\caption{{\footnotesize SNPs are clustered into three groups based on their annotations and associations measures.}}
-  \end{figure}
   \end{column}
             \begin{column}{.41\textwidth}
-\begin{figure}  
-\includegraphics[width=.64\textwidth]{RibosomalDNA_2015-03-19.pdf}
-  \caption{{\footnotesize Only a few annotations matter. Rows correspond to SNPs and columns correspond to annotations.}}
-  \end{figure}
     \end{column}
 \end{columns}
 \end{center}
@@ -345,7 +323,7 @@ SD & 0.0222 & 0.1139 & 0.0325 &0.0083\\
 {\color{orange!100} \textbf{Results}}  
 \begin{figure}[p]
   \centering
-  \includegraphics[width=0.3\linewidth]{RibosomalDNA_2015-03-19.pdf}
+  \includegraphics[width=0.2\linewidth]{RibosomalDNA_2015-03-19.pdf}
   \caption{Comparison of our method with ordinary least squares, refit Lasso, FMRLasso}
 \end{figure}
 \end{block}
@@ -354,12 +332,7 @@ SD & 0.0222 & 0.1139 & 0.0325 &0.0083\\
 {\color{orange!100} \textbf{Observed vs. fitted log ORs}}                                                 
 \centering
 
-\begin{figure}[p]
-  \centering
-  \includegraphics[width=0.3\linewidth]{RibosomalDNA_2015-03-19.pdf}
-  \caption{Left: ordinary least squares; Middle: refit Lasso; Right: our method. Triangles represent SNPs known to affect SCZ significantly from database of Genotypes and Phenotypes (dbGaP).}
-\end{figure}
- 
+
 {\color{orange!100} \textbf{Effect sizes of selected TFs for each cluster}}
  \begin{table}
 {\small
@@ -393,7 +366,7 @@ Coefficients & -0.0044 & -0.006 & -0.0631 & 0.0621 & 0.036 & -0.0103 & 0.0011 & 
 \end{figure}
 \end{column}
 
- \begin{column}{.32\textwidth}                                                      
+\begin{column}{.32\textwidth}                                                      
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.7\linewidth]{RibosomalDNA_2015-03-19.pdf}
