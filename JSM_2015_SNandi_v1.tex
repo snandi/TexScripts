@@ -38,7 +38,7 @@
 %% \title{\parbox[l]{40in}{Iterated curve registration for noisy functional data with phase variability} 
 %% \parbox[r]{4in}{\includegraphics[width=.12\textwidth]{UWlogo_ctr_4c.jpg}}}
 \title{Iterated, penalized registration for noisy curves with phase variability}
-\author{Subhrangshu Nandi, Michael Newton}
+\author{Subhrangshu Nandi, Michael A. Newton}
 \institute{Department of Statistics, Department of Biostatistics and Medical Informatics, University of Wisconsin, Madison \\snandi@wisc.edu }
 
 \begin{document}
@@ -48,7 +48,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% First Column
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{column}{\onecolwid}\vspace{-2in}
+    \begin{column}{\onecolwid}\vspace{-1in}
       \begin{alertblock}{Goal}
         To align features of noisy functional data with phase variability, and discern multiple clusters from a sample of curves
       \end{alertblock}
@@ -97,7 +97,8 @@
           \item {\bf{Using Fisher-Rao Metric}} - Proposed by Srivastava, et. al. \\
             For any $f \in \F$, where $\F$ is the space of absolutely continuous functions on $[0,1]$, and $v_1, v_2 \in T_f(\F)$, where $T_f(\F)$ is the tangent space to $\F$ at $f$, the F.R. metric is defined as $$\langle \langle v_1, v_2 \rangle \rangle_f = \frac{1}{4}\int_0^1\dot{v_1}(t) \dot{v_2}(t)\frac{1}{|\dot{f}(t)|}dt$$
             Robust, but warping function difficult to interpret; Not suitable for samples that are mixtures of realizations from multiple parent templates.
-          \item {\bf{Bayesian hierarchical joint model for registration and clustering}} - Proposed by Zhang \& Telesca - Integrates reproducing representations of functions in the framework on Dirichlet process mixtures.          
+          \item {\bf{Bayesian hierarchical joint model for registration and clustering}} - Proposed by Zhang \& Telesca - Integrates reproducing representations of functions in the framework on Dirichlet process mixtures.
+            
         \end{itemize}
       \end{block}
     \end{column}
@@ -105,7 +106,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% Second Column
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{column}{\onecolwid}\vspace{-2in}
+    \begin{column}{\onecolwid}\vspace{-1in}
       \begin{block}{Iterated, penalized registration scheme}
         \begin{itemize}
         \item Warping function, $h(t)$ is a strictly {\emph{monotone increasing}} function; Hence {\emph{invertible}}.
@@ -115,6 +116,43 @@
           Penalizing $w(t)$ ensures smoothness and monotonicity
         \item Express $w(t)$ in terms of B-Spline expansion: 
           $w(t) = \sum \limits_{k=0}^{K} c_k B_k(t)$
+        \item Effect of changing the penalty $\lambda$; Below, $\lambda = 10, 1, 0.1$ respectively. Higher the penalty, smaller is the 
+        \end{itemize}
+        \begin{figure}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda20_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda1_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda0_1_2015-08-06.pdf} \\
+
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda20_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda1_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda0_1_2015-08-06.pdf} \\
+        \end{figure}
+        \begin{itemize}
+        \item {\bf{Step 1}} Estimate the multivariate $L_1$-median of the original curves, which is the minimizer of $\sum \limits_{i = 1}^n \|f_i - m \|$, where $\|g \| = \sqrt{\sum\limits_{j=1}^p g_j^2}$
+          \begin{columns}
+            \begin{column}{0.01\paperwidth}\end{column}			% empty spacer column
+            \begin{column}{0.6\textwidth}
+            \item {\bf{Step 2}} Register the sample curves to this median, using a higher penalty $\lambda$. This would register the least warped curves to register perfectly. The rest will still remain significantly warped away from the median.
+            \item {\bf{Step 3}} Re-estimate the $L_1$-median of the registered curves.
+            \item {\bf{Step 4}} Lower the penalty, and register the curves to the new median.
+            \end{column}
+            \begin{column}{0.4\textwidth}
+              \includegraphics[scale=0.7, page=1]{Set1andSet2.pdf}
+            \end{column}
+          \end{columns}
+        \item {\bf{Step 5}} Estimate the similarity index $\rho(M_{j}, M_{j-1})$ between the median of iteration $(j - 1)$, with that of iteration $(j)$, and 
+        \item {\bf{Stop}} if $|\rho(M_{j}, M_{j-1}) - \rho(M_{j-1}, M_{j-2})| < \delta_{\text{thresh}}$
+        \end{itemize}
+      \end{block}
+      \begin{block}{Validation of iterated scheme - Permutation test}
+        To determine if two sets of curves, with unique templates, register to their respective template, we conduct the following permutation test:
+        \begin{itemize}
+        \item $n_1, n_2$: Number of curves sets 1 and 2
+        \item $\bar{X}_1(t): $ Pointwise mean of curves of set $1$; $\bar{X}_2(t): $ Pointwise mean of curves of set $2$
+        \item $\Var[x_1(t)]: $ Variance of set 1 at each point $t$; $\Var[x_2(t)]: $ Variance of set 2 at each point $t$ 
+        \item Absolute value of t-statistic at each point 
+          $$T(t) = \frac{|\bar{X}_1(t) - \bar{X}_2(t)|}{\sqrt{\frac{1}{n_1}\Var[x_1(t)] + 
+            \frac{1}{n_2}\Var[x_2(t)]}}$$ 
         \end{itemize}
       \end{block}
     \end{column}
@@ -122,9 +160,35 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %% Third Column
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{column}{\onecolwid}\vspace{-2in}
+    \begin{column}{\onecolwid}\vspace{-1in}
+      \begin{block}{Permutation Test}
+      \begin{columns}
+        \begin{column}{0.65\textwidth}
+        \begin{itemize}
+        \item $\sup{T}(t):$ Supremum of absolute t-statistic is our Test statistic (measure of difference of two sets of curves)
+        \item To get a null distribution, permute the curves between the two sets, and pass through the iterated, penalized registration process
+        \end{itemize}
+        \end{column}
+        \begin{column}{0.35\textwidth}
+          \includegraphics[scale=0.6, page=9]{Permute_Iter_Register_Frag30P6-45_AND_Frag30P46-85_2015-08-03.pdf}
+        \end{column}
+      \end{columns}
+      \end{block}
       \begin{block}{Ongoing and future work}
-        \vspace{12in}
+        \begin{enumerate}
+        \item Conduct hypothesis under multiple testing framework
+        \item Extend the iterated, penalized registration scheme to simultaneously register and cluster curves
+        \item Mathematically justify why iterated scheme is more consistent than one-time registration
+        \item Compare with bayesian hierarchical approach and review relative strengths and weaknesses
+        \end{enumerate}
+        Applications of curve registration are wide:
+        \begin{itemize}
+        \item Study weather phenomena, or other environmental processes
+        \item Longitudinal processes, like multiple patient visitations
+        \item Time series data, such as financial applications, or medical data, such as EKG data
+        \item Handwriting analysis
+        \end{itemize}
+        
       \end{block}
       \begin{block}{References}
         %% {\footnotesize
