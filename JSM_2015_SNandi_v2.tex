@@ -1,0 +1,211 @@
+\documentclass[final]{beamer}
+\mode<presentation>
+{
+% you can chose your theme here:
+\usetheme{confposter}
+% further beamerposter themes are available at
+% http://www-i6.informatik.rwth-aachen.de/~dreuw/latexbeamerposter.php
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexPoster}
+
+%-----------------------------------------------------------
+% Define the column width and poster size
+% To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and 
+% how much separation you want between columns
+% The separation I chose is 0.024 and I want 4 columns
+% Then set onecolwid to be (1-(3+1)*0.024)/3 = 0.3
+% Set twocolwid to be 2*onecolwid + sepwid = 0.624
+%-----------------------------------------------------------
+
+\newlength{\sepwid}
+\newlength{\onecolwid}
+\newlength{\twocolwid}
+\setlength{\paperwidth}{48in}
+\setlength{\paperheight}{36in}
+\setlength{\sepwid}{0.024\paperwidth}
+\setlength{\onecolwid}{0.3\paperwidth}
+\setlength{\twocolwid}{0.624\paperwidth}
+\setlength{\topmargin}{-0.5in}
+
+%-----------------------------------------------------------
+% Name and authors of poster/paper/research ------------\usetheme{confposter}
+%-----------------------------------------------------------
+% \titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{UWlogo_ctr_4c.jpg}}
+%% %% \title{\parbox[l]{40in}{Iterated curve registration for noisy functional data with phase variability} 
+%% %% \parbox[r]{4in}{\includegraphics[width=.12\textwidth]{UWlogo_ctr_4c.jpg}}}
+%% \title{
+%%   \parbox{.2\textwidth}{\includegraphics[scale=0.25]{UWlogo_ctr_4c.jpg}}%
+%%   \parbox{.8\textwidth}{\Huge Iterated, penalized registration for noisy curves with phase variability}%
+%% }
+\title{Iterated, penalized registration for noisy curves with phase variability}
+\author{Subhrangshu Nandi, Michael A. Newton}
+\institute{Department of Statistics, Department of Biostatistics and Medical Informatics, University of Wisconsin, Madison \\snandi@wisc.edu }
+
+\begin{document}
+%\bibliographystyle{plain}  %Choose a bibliograhpic style
+\begin{frame}{}
+  \begin{columns}[t]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% First Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-1in}
+      \begin{alertblock}{Goal}
+        To align features of noisy functional data with phase variability, and discern multiple clusters from a sample of curves
+      \end{alertblock}
+      \begin{block}{Some real data examples}
+        In functional data analysis, where both amplitude and phase variability affect individual trajectories, it is often desirable to eliminate (or reduce) the phase variability in order to study a cross-sectional mean function. %\cite{Ramsay_Silverman_2002_Applied} 
+        An example from the Berkeley growth data \cite{Tuddenham_Snyder_1954-UCPCD} with phase variability is shown below:
+        \begin{figure}
+          \includegraphics[scale=0.6, page=40]{Regist_Male_fda_ggplot_2015-08-06.pdf}
+          \raisebox{1.8in}{\includegraphics[scale=0.2]{Arrow.jpg}}
+          \includegraphics[scale=0.6, page=41]{Regist_Male_fda_ggplot_2015-08-06.pdf}
+        \end{figure}
+        \begin{columns}
+          \begin{column}{0.35\textwidth}
+            \begin{figure}
+              \centering
+              \includegraphics[scale=0.6, page=3]{Set1andSet2.pdf}
+            \end{figure}
+          \end{column}
+          \begin{column}{0.65\textwidth}
+            But, what if the data has more noise, almost of similar magnitude of that of the features of the curves? \\
+            Or, what if the sample curves are noisy realizations of multiple templates? \\
+            Could we {\emph{simultaneously}} identify the templates and cluster the curves?
+          \end{column}
+        \end{columns}
+    \end{block}
+      \begin{block}{Existing registration methods}
+        \begin{itemize}
+          \item {\bf{Minimum Second Eigenvalue value method}} - Proposed by Ramsay \& Li \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_Silverman_2002_Applied}, \cite{Ramsay_2006_Functional}, \cite{R-fda}  \\
+            Let $x(t)$ be the true curve; $y(t)$ be the curve to register; Let $h(t)$ be the warping function; $y[h(t)]$ be the registered curve; \\
+          If $y[h(t)]$ and and $x(t)$ differ only in terms of amplitude, then, PCA of the following order two matrix should reveal essentially one component (smallest eigenvalue value $\approx 0$). Choose $h(t)$ that minimizes the eigenvalue value of $C(h)$, where
+          \begin{columns}
+            \begin{column}{\sepwid}\end{column}			% empty spacer column
+            \begin{column}{0.55\textwidth}
+              $C(h) = 
+              \begin{bmatrix}
+                \int \{x(t) \}^2dt & \int x(t) y[h(t)]dt \vspace{0.5cm} \\ 
+                \int x(t) y[h(t)]dt & \int \{y[h(t)]\}^2dt
+              \end{bmatrix}$
+            \end{column}
+            \begin{column}{0.45\textwidth}
+              The warping function is $h(t) = C_0 + C_1\int\limits_0^t w(t)dt$, the \\solution to $w(t) = \frac{h''(t)}{h'(t)}$
+            \end{column}
+          \end{columns}
+          \item {\bf{k-means clustering}} - Proposed by Sangalli, et. al, \cite{Sangalli_etal_2009_JASA}, \cite{Sangalli_etal_2010_CSDA}, \cite{Sangalli_etal_2014_EJS}, \cite{R-fdakma}\\
+            Jointly clusters and aligns curves; Only enables affine transformations of the abscissa; Uses distance metric: $ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} $, where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$. Properties of $\rho(f_i, f_j)$: (1) $|\rho(f_i, f_j)| \leq 1$; (2) $|\rho(f_i, f_j)| = 1 \Leftrightarrow \exists \ \ A \in \Real ^+, B \in \Real, \ni f_i = Af_j + B$; (3) $\rho(f_i, f_j) = \text{sign}(A_i\cdot A_j) \rho(A_if_i + B_i, A_jf_j + B_j)$
+          \item {\bf{Using Fisher-Rao Metric}} - Proposed by Srivastava, et. al. \cite{Srivastava_etal_2011_v2_arXiv}, \cite{Wu_Srivastava_2014_EJS}, \cite{R-fdasrvf} \\
+            For any $f \in \F$, where $\F$ is the space of absolutely continuous functions on $[0,1]$, and $v_1, v_2 \in T_f(\F)$, where $T_f(\F)$ is the tangent space to $\F$ at $f$, the F.R. metric is defined as $$\langle \langle v_1, v_2 \rangle \rangle_f = \frac{1}{4}\int_0^1\dot{v_1}(t) \dot{v_2}(t)\frac{1}{|\dot{f}(t)|}dt$$
+            Robust, but warping function difficult to interpret; Not suitable for samples that are mixtures of realizations from multiple parent templates.
+          \item {\bf{Bayesian hierarchical joint model for registration and clustering}} - Proposed by Zhang \& Telesca \cite{Zhang_Telesca_2014_arXiv}, \cite{Zhang_2014_PhDThesis} - Integrates reproducing representations of functions in the framework on Dirichlet process mixtures.
+            
+        \end{itemize}
+      \end{block}
+    \end{column}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Second Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-1in}
+      \begin{block}{Iterated, penalized registration scheme}
+        \begin{itemize}
+        \item Warping function, $h(t)$ is a strictly {\emph{monotone increasing}} function; Hence {\emph{invertible}}.
+        \item $w(t) = \frac{h''(t)}{h'(t)}$ is the relative acceleration of the warping function. 
+        \item The objective function is:
+          \[ F_{\lambda}(y,x|h) = \int \|y(t) - x\{h(t)\} \|^2 dt + \lambda \int w^2(t) dt \]
+          Penalizing $w(t)$ ensures smoothness and monotonicity
+        \item Express $w(t)$ in terms of B-Spline expansion: 
+          $w(t) = \sum \limits_{k=0}^{K} c_k B_k(t)$
+        \item Effect of changing the penalty $\lambda$; Below, $\lambda = 10, 1, 0.1$ respectively. Higher the penalty, smaller is the 
+        \end{itemize}
+        \begin{figure}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda20_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda1_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=11]{Regist_Female_fda_lambda0_1_2015-08-06.pdf} \\
+
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda20_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda1_2015-08-06.pdf}
+          \includegraphics[scale=0.68, page=26]{Regist_Male_fda_lambda0_1_2015-08-06.pdf} \\
+        \end{figure}
+        \begin{itemize}
+        \item {\bf{Step 1}} Estimate the multivariate $L_1$-median of the original curves, which is the minimizer of $\sum \limits_{i = 1}^n \|f_i - m \|$, where $\|g \| = \sqrt{\sum\limits_{j=1}^p g_j^2}$
+          \begin{columns}
+            \begin{column}{0.01\paperwidth}\end{column}			% empty spacer column
+            \begin{column}{0.6\textwidth}
+            \item {\bf{Step 2}} Register the sample curves to this median, using a higher penalty $\lambda$. This would register the least warped curves to register perfectly. The rest will still remain significantly warped away from the median.
+            \item {\bf{Step 3}} Re-estimate the $L_1$-median of the registered curves.
+            \item {\bf{Step 4}} Lower the penalty, and register the curves to the new median.
+            \end{column}
+            \begin{column}{0.4\textwidth}
+              \includegraphics[scale=0.7, page=1]{Set1andSet2.pdf}
+            \end{column}
+          \end{columns}
+        \item {\bf{Step 5}} Estimate the similarity index $\rho(M_{j}, M_{j-1})$ between the median of iteration $(j - 1)$, with that of iteration $(j)$, and 
+        \item {\bf{Stop}} if $|\rho(M_{j}, M_{j-1}) - \rho(M_{j-1}, M_{j-2})| < \delta_{\text{thresh}}$
+        \end{itemize}
+      \end{block}
+      \begin{block}{Validation of iterated scheme - Permutation test}
+        To determine if two sets of curves, with unique templates, register to their respective template, we conduct the following permutation test:
+        \begin{itemize}
+        \item $n_1, n_2$: Number of curves sets 1 and 2
+        \item $\bar{X}_1(t): $ Point-wise mean of curves of set $1$; $\bar{X}_2(t): $ Point-wise mean of curves of set $2$
+        \item $\Var[x_1(t)]: $ Variance of set 1 at each point $t$; $\Var[x_2(t)]: $ Variance of set 2 at each point $t$ 
+        \item Absolute value of t-statistic at each point 
+          $$T(t) = \frac{|\bar{X}_1(t) - \bar{X}_2(t)|}{\sqrt{\frac{1}{n_1}\Var[x_1(t)] + 
+            \frac{1}{n_2}\Var[x_2(t)]}}$$ 
+        \end{itemize}
+      \end{block}
+    \end{column}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Third Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-1in}
+      \begin{block}{Permutation Test}
+        \begin{itemize}
+        \item $\sup{T}(t):$ Supremum of absolute t-statistic is our Test statistic (measure of difference of two sets of curves)
+        \item To get a null distribution, permute the curves between the two sets, and pass through the iterated, penalized registration process
+        \end{itemize}
+        \begin{figure}
+          \includegraphics[scale=0.3]{Image1.png}
+          \hspace{1in}
+          \includegraphics[scale=0.3]{Image3.png}
+        \end{figure}
+        \begin{figure}
+        \includegraphics[scale=0.7]{Image6.pdf}
+        \hspace{1in}
+        \includegraphics[scale=0.7]{Image9.pdf}
+        \end{figure}
+      
+      \end{block}
+      \begin{block}{Ongoing and future work}
+        \begin{enumerate}
+        \item Conduct hypothesis under multiple testing framework
+        \item Extend the iterated, penalized registration scheme to simultaneously register and cluster curves
+        \item Mathematically justify why iterated scheme is more consistent than one-time registration
+        \item Compare with Bayesian hierarchical approach and review relative strengths and weaknesses
+        \end{enumerate}
+        
+      \end{block}
+      \begin{block}{References}
+        {\footnotesize
+          \bibliographystyle{plain} 
+          \bibliography{bibTex_Reference}
+        }
+      \end{block}
+      \begin{columns}
+        \begin{column}{0.65\textwidth}\end{column}
+        \begin{column}{0.35\textwidth}
+          \begin{figure}[!b]
+            \includegraphics[scale=0.25]{UWlogo_ctr_4c.jpg}
+          \end{figure}
+        \end{column}
+      \end{columns}
+    \end{column}
+  \end{columns}
+\end{frame}
+\end{document}
