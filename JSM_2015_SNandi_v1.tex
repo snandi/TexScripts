@@ -12,13 +12,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \input{HeaderfileTexPoster}
 
-\lstdefinestyle{base}{
-  language=C,
-  emptylines=1,
-  breaklines=true,
-  basicstyle=\ttfamily\color{black},
-  moredelim=**[is][\color{red}]{@}{@},
-}
 %-----------------------------------------------------------
 % Define the column width and poster size
 % To set effective sepwid, onecolwid and twocolwid values, first choose how many columns you want and 
@@ -39,365 +32,112 @@
 \setlength{\topmargin}{-0.5in}
 
 %-----------------------------------------------------------
-% Define colours (see beamerthemeconfposter.sty to change these colour definitions)
-%-----------------------------------------------------------
-\setbeamercolor{block title}{fg=white,bg=red}
-\setbeamercolor{block body}{fg=black,bg=white}
-\setbeamercolor{block alerted title}{fg=white,bg=red}
-\setbeamercolor{block alerted body}{fg=black,bg=red}
-
-\definecolor{darkgreen}{rgb}{0.05,0.45,0.15}
-\lstset{escapeinside={<@}{@>}} %for coloring lstlisting
-
-%-----------------------------------------------------------
 % Name and authors of poster/paper/research ------------\usetheme{confposter}
 %-----------------------------------------------------------
-%\titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{OldWell0}}
-\title{\parbox[c]{40in}{Application of iterated curve registration to single molecule genomics} \parbox[c]{4in}{\includegraphics[width=.08\textwidth]{UWlogo_ctr_4c.jpg}}}
-\author{Subhrangshu Nandi, Michael Newton, David Schwartz}
-\institute{Department of Statistics, Department of Biostatistics and Medical Informatics, University of Wisconsin Madison \vspace{0.5cm} \\snandi@wisc.edu }
+\titlegraphic{\includegraphics[width=\textwidth,height=.5\textheight]{UWlogo_ctr_4c.jpg}}
+%% \title{\parbox[l]{40in}{Iterated curve registration for noisy functional data with phase variability} 
+%% \parbox[r]{4in}{\includegraphics[width=.12\textwidth]{UWlogo_ctr_4c.jpg}}}
+\title{Iterated, penalized registration for noisy curves with phase variability}
+\author{Subhrangshu Nandi, Michael Newton}
+\institute{Department of Statistics, Department of Biostatistics and Medical Informatics, University of Wisconsin, Madison \\snandi@wisc.edu }
+
 \begin{document}
+%\bibliographystyle{plain}  %Choose a bibliograhpic style
 \begin{frame}{}
-%\vfill
-\begin{columns}[t]
-%\hfill
-\begin{column}{1\linewidth}
-\begin{columns}     
-
-%\hfill
-%\begin{column}{\linewidth} %.35
-\begin{column}{.38\textwidth}
-
-\begin{block}{ARoG: Integration of GWAS and Functional Genomic Data} %p.3
-\begin{columns}
-\begin{column}{.6\textwidth}    
-\begin{center}
-\begin{figure}
-\includegraphics[width=0.3\textwidth]{RibosomalDNA_2015-03-19.pdf}
-\caption{{\footnotesize \copyright Paltra et al., Front. Genet., 2012}}
-\end{figure}
-\end{center}
-\end{column}
-\begin{column}{.36\textwidth}
-\bi
-\item SNPs can affect disease risk through transcription factors (TF) regulation.
-\ei
-\end{column}
-\end{columns}
-
-\begin{columns}
- \begin{column}{.5\textwidth}                            
-%\begin{center}
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{RibosomalDNA_2015-03-19.pdf}
-\caption{{\footnotesize GWAS\\ \copyright Pasieka, Science Photo Library}}
-\end{figure}
-%\end{center}
-\end{column}
-\begin{column}{.4\textwidth}
-%\begin{center}
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{RibosomalDNA_2015-03-19.pdf}
-\caption{{\footnotesize SNPs can disrupt TF binding. \\ \textit{atSNP} (Zuo et al., 2015)}}
-\end{figure}
-%\end{center}
-\end{column}
-\end{columns}
-
-\bi
-\item GWAS provide associations measures of SNPs and atSNP calculates TF binding change scores for SNPs.
-\ei
-
-\end{block}
-
-\begin{block}{Psychiatric Genomics Consortium (PGC) Data} %p.3
-{\color{orange!100} \textbf{Mega-analyses of genome-wide genetic data for psychiatric disorders}} %p.4
-\centering
-\bi
-\item Attention deficit disorder, autism, bipolar disorder, major depressive disorder, schizophrenia (Smoller et al, 2013)
-\begin{table}
-{\small
- \begin{tabular}{l|rr|rr}
- \hline
- &  \multicolumn{2}{c|}{No. of samples} & \multicolumn{2}{c}{No. of SNPs}\\
- \hline
- &Cases &  Controls & Total & {\color{red} Genome-wide significance*}\\
- \hline
-SCZ & 9379 & 7736& 1,237,958&9\\
- \hline
-\end{tabular}
-}
-\end{table}
-\ei
- 
- {\color{orange!100} \textbf{ {\color{orange!100} \textbf{Input data for ARoG}}}}
-\centering
-\bi
-\item Preliminary SNPs: 1,219,805 SNPs from intersection of PGC data of the five disorders
-\item SNPs of interest: 1447 SNPs with Benjamini-Hochberg (BH) adjusted p-values $<$ 0.1 for at least one disorder
-\begin{table}
-\centering
-{\small
- \begin{tabular}{rrrrrr}
- \hline
- ADD &  AUT & BIP & MDD &SCZ & Total \\
- \hline
- 0 & 10& 77* & 0 &1367* & 1447\\
- \hline
-\end{tabular}
-\caption{No. of SNPs for each disease. Seven SNPs are duplicated in both BIP and SCZ.}
-}
-\end{table}
-\item JASPAR motifs: 205 motifs from JASPAR core libraries (Mathelier et al., 2014)
-\ei
-
-%\begin{figure}[p]
-%  \centering
-%  \includegraphics[width=0.5\linewidth]{BoxplotsAdjustedPvalsAll.png}
-% %\caption{\textcopyright Pasieka, Science Photo Library}
-% \end{figure}
- 
-
-\begin{columns}
-\begin{column}{.34\textwidth}
-{\footnotesize
-\begin{table}
-  \caption{{\small $Y_{n \times 1}$: GWAS-association measure based response}}
- \begin{tabular}{l|r}
-      SNPs & log ORs \\ \hline
-       \textit{rs4948418} &\textcolor{red}{0.3365}\\
-       $\vdots$ & \vdots\\
-  \end{tabular}
-\end{table}
-}
-\end{column}
-
-                  \begin{column}{.6\textwidth}   
-                  {\footnotesize
-                   \begin{table}
-                     \caption{{\small $X_{n \times p}$: predictors based on binding affinity score changes.}}
- \begin{tabular}{l|rr}
-              & TFs &    \\ \hline
-      SNPs & MYBL2 &  $\cdots$  \\ \hline
-      \textit{rs4948418} & $\log{\textcolor{red}{0.004}}-\log{\textcolor{red}{0.607}}$ & $\cdots$ \\
-       $\vdots$ & $\vdots$ & $\ddots$ \\
-  \end{tabular}
-\end{table}
-}
-\end{column}
-
-\end{columns}
-%\begin{verbatim}
-%motif                snpid     log_lik_ref log_lik_snp log_lik_ratio  
-%MYBL2_jolma_DBD_M183 rs4948418 -9.967      -19.722     9.754
-%ref_str snp_str pval_ref pval_snp pval_diff pval_rank
-%-       -      \textcolor{red}{ 0.004    0.607}    0.004     0.001
-%\end{verbatim}
-%      \bibliographystyle{plainnat}
-%\def\newblock{}
-%\item Sklar, P., et al. "Large-scale genome-wide association analysis of bipolar disorder identifies a new susceptibility locus near ODZ4." \textit{Nature genetics} 43.10 (2011): 977.
-
-{\textbf{References}}
-\centering
-\bi
-{\footnotesize
-%\item Mailman, M.D., et al. The NCBI dbGaP database of genotypes and phenotypes. \textit{Nature genetics} 39.10 (2007): 1181-1186.
-\item Mathelier, A., et al. JASPAR 2014: an extensively expanded and updated open-access database of transcription factor binding profiles. \textit{Nucleic Acids Research}, 42(D1) (2014): D142-D147.
-\item Smoller, J.W., et al. Identification of risk loci with shared effects on five major psychiatric disorders: a genome-wide analysis. \textit{The Lancet} 381.9875 (2013): 1371-1379.}
-\ei
-
-
-
-\end{block}
- \end{column}
-
-            \begin{column}{.26\textwidth}
-        \begin{block}{Sparse Mixture ARoG}
-                                  {\color{orange!100} \textbf{Heterogeneity and sparsity of gene regulation}}
-			\centering
-%\vspace{-0.65cm}
-\begin{center}
-      \begin{columns}
-            \begin{column}{.47\textwidth}
-  \end{column}
-            \begin{column}{.41\textwidth}
+  \begin{columns}[t]
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% First Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-2in}
+      \begin{alertblock}{Goal}
+        To align features of noisy functional data with phase variability, and discern multiple clusters from a sample of curves
+      \end{alertblock}
+      \begin{block}{Some real data examples}
+        In functional data analysis, where both amplitude and phase variability affect individual trajectories, it is often desirable to eliminate (or reduce) the phase variability in order to study a cross-sectional mean function. %\cite{Ramsay_Silverman_2002_Applied} 
+        An example of growth data with phase variability is shown below:
+        \begin{figure}
+          \includegraphics[scale=0.6, page=40]{Regist_Male_fda_ggplot_2015-08-06.pdf}
+          \raisebox{1.8in}{\includegraphics[scale=0.2]{Arrow.jpg}}
+          \includegraphics[scale=0.6, page=41]{Regist_Male_fda_ggplot_2015-08-06.pdf}
+        \end{figure}
+        \begin{columns}
+          \begin{column}{0.35\textwidth}
+            \begin{figure}
+              \centering
+              \includegraphics[scale=0.6, page=3]{Set1andSet2.pdf}
+            \end{figure}
+          \end{column}
+          \begin{column}{0.65\textwidth}
+            But, what if the data has more noise, almost of similar magnitude of that of the features of the curves? \\
+            Or, what if the sample curves are noisy realizations of multiple templates? \\
+            Could we {\emph{simultaneously}} identify the templates and cluster the curves?
+          \end{column}
+        \end{columns}
+    \end{block}
+      \begin{block}{Existing registration methods}
+        \begin{itemize}
+          \item {\bf{Minimum Second Eigen value method}} - Proposed by Ramsay \& Li \\
+            Let $x(t)$ be the true curve; $y(t)$ be the curve to register; Let $h(t)$ be the warping function; $y[h(t)]$ be the registered curve; \\
+          If $y[h(t)]$ and and $x(t)$ differ only in terms of amplitude, then, PCA of the following order two matrix should reveal essentially one component (smallest eigen value $\approx 0$). Choose $h(t)$ that minimizes the eigen value of $C(h)$, where
+          \begin{columns}
+            \begin{column}{\sepwid}\end{column}			% empty spacer column
+            \begin{column}{0.55\textwidth}
+              $C(h) = 
+              \begin{bmatrix}
+                \int \{x(t) \}^2dt & \int x(t) y[h(t)]dt \vspace{0.5cm} \\ 
+                \int x(t) y[h(t)]dt & \int \{y[h(t)]\}^2dt
+              \end{bmatrix}$
+            \end{column}
+            \begin{column}{0.45\textwidth}
+              The warping function is $h(t) = C_0 + C_1\int\limits_0^t w(t)dt$, the \\solution to $w(t) = \frac{h''(t)}{h'(t)}$
+            \end{column}
+          \end{columns}
+          \item {\bf{k-means clustering}} - Proposed by Sangalli, et. al\\
+            Jointly clusters and aligns curves; Only enables affine transformations of the abscissa; Uses distance metric: $ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} $, where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$. Properties of $\rho(f_i, f_j)$: (1) $|\rho(f_i, f_j)| \leq 1$; (2) $|\rho(f_i, f_j)| = 1 \Leftrightarrow \exists \ \ A \in \Real ^+, B \in \Real, \ni f_i = Af_j + B$; (3) $\rho(f_i, f_j) = \text{sign}(A_i\cdot A_j) \rho(A_if_i + B_i, A_jf_j + B_j)$
+          \item {\bf{Using Fisher-Rao Metric}} - Proposed by Srivastava, et. al. \\
+            For any $f \in \F$, where $\F$ is the space of absolutely continuous functions on $[0,1]$, and $v_1, v_2 \in T_f(\F)$, where $T_f(\F)$ is the tangent space to $\F$ at $f$, the F.R. metric is defined as $$\langle \langle v_1, v_2 \rangle \rangle_f = \frac{1}{4}\int_0^1\dot{v_1}(t) \dot{v_2}(t)\frac{1}{|\dot{f}(t)|}dt$$
+            Robust, but warping function difficult to interpret; Not suitable for samples that are mixtures of realizations from multiple parent templates.
+          \item {\bf{Bayesian hierarchical joint model for registration and clustering}} - Proposed by Zhang \& Telesca - Integrates reproducing representations of functions in the framework on Dirichlet process mixtures.          
+        \end{itemize}
+      \end{block}
     \end{column}
-\end{columns}
-\end{center}
 
-{\color{orange!100} \textbf{Aim of ARoG}}
-\begin{center}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Second Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-2in}
+      \begin{block}{Iterated, penalized registration scheme}
+        \begin{itemize}
+        \item Warping function, $h(t)$ is a strictly {\emph{monotone increasing}} function; Hence {\emph{invertible}}.
+        \item $w(t) = \frac{h''(t)}{h'(t)}$ is the relative acceleration of the warping function. 
+        \item The objective function is:
+          \[ F_{\lambda}(y,x|h) = \int \|y(t) - x\{h(t)\} \|^2 dt + \lambda \int w^2(t) dt \]
+          Penalizing $w(t)$ ensures smoothness and monotonicity
+        \item Express $w(t)$ in terms of B-Spline expansion: 
+          $w(t) = \sum \limits_{k=0}^{K} c_k B_k(t)$
+        \end{itemize}
+      \end{block}
+    \end{column}
 
-\bi
-\item[(i)] improvement of detection power of significant SNPs by utilizing both the GWAS association measures and information through functional data;
-\item[(ii)] elucidation of the functional information correlated with the association measures.
-\ei
-\end{center}
-
-{\color{orange!100} \textbf{Finite mixture of Gaussian regression models}}
-\centering
-\bi
-\item $n$ SNPs are partitioned into $K$ clusters.
-\ei
-{\small
-\begin{align*}
-&Y_i|X_i=x \sim f_{\xi}(y|x) \text{ independent for } i=1,\cdots, n\\
-&f_{\xi}(y|\bx)=\dis\sum_{k=1}^K\pi_k\dis\frac{1}{\sqrt{2\pi}\sigma_k}\mathrm{exp}\Bigg(-\dis\frac{(y-\bx^T\beta_k)^2}{2\sigma^2_k}\Bigg),   ~y \in \R, \bx\in \R^p\\%, \beta_k\in\R^p\\
-&\xi=(\beta_1,\cdots, \beta_K, \sigma_1,\cdots, \sigma_K, \pi_1,\cdots,\pi_{K-1})\in \R^{Kp}\times \R^K_{>0}\times \Pi,\\
-&\Pi=\{\pi: \pi_k>0 \text{ for } k=1,\cdots, K-1, \dis\sum_{k=1}^{K-1}\pi_k<1\}
-\end{align*}
-}
-
-{\color{orange!100} \textbf{Lasso to mixture of regressions (St\"{a}dler et al., 2010)}}
-\bi
-\item Reparameterization: {\small
-$\phi_k=\beta_k/\sigma_k,~\rho_k=\sigma^{-1}_k,~k=1, \cdots, K$
-}
-\item Parameters: {\small
-$\theta=(\pi_1, \cdots, \pi_K, \rho_1, \cdots, \rho_K, \phi_1, \cdots, \phi_{K-1})$
-}
-\item FMRLasso: penalized negative log-likelihood
-{\small
-\begin{align*}
-\hat{\theta}_{\lambda}&=\underset{\theta \in \Theta}{\mathrm{argmin}}-n^{-1}l_{pen,\lambda}(\theta),~\Theta=\R^{Kp}\times \R^K_{>0}\times \Pi\\
--l_{pen,\lambda}(\theta)&=-\dis\sum_{i=1}^n\mathrm{log}(\dis\sum_{k=1}^K\phi_k\dis\frac{\rho_k}{\sqrt{2\pi}}\mathrm{exp}(-\dis\frac{1}{2}(\rho_kY_i-X_i^T\phi_k)^2\\
-&+n\lambda\dis\sum_{k=1}^{K}\pi_k||\phi_k||_1\\
-\end{align*}
-}
-\ei
-
-{\color{orange!100} \textbf{Another clusterwise Lasso}}
-\bi
-\item Issue of FMRLasso: there are still too many false positive TFs.
-\item Proposal: add hard clustering-based Lasso.
-\bi
-\item Consider a model for each cluster with corresponding SNPs and selected TFs.
-\item Perform another level of Lasso to each model if available.
-%or refitting after Lasso model selection
-%or just refitting only if $p<n$ and refitting works, i.e. no singularity nor ill-posed problems.
-\ei
-\ei
-%{\color{orange!100} \textbf{Optimal number of components and tuning parameter selection}}
-%\bi
-%\item Motified BIC criterion: {\small
-%$-2l(\hat{\theta}_{\lambda,k})+\mathrm{log}(n)d_{\mathrm{e}},$
-%$d_{\mathrm{e}}$: effective no. of components
-%}
-%%d_{\mathrm{e}}&=k+(k-1)+\dis\sum_{j=1,\cdots, p; r=1, \cdots, k}1_{\{\hat{\pi}_{r, j}\neq 0\}}
-%%\end{align*}
-%\item Cross-validation: minimizing cross-validated negative log-likelihood
-%\ei
-{\textbf{Acknowledgements}}\\
-\centering       
-{\footnotesize
-\bi
-\item[] This work was supported by National Institutes of Health Grants (HG003747 and HG007019) to S. K.
-\ei
-}
-\end{block}
-\end{column}
-
-\begin{column}{.33\textwidth}
-
-\begin{block}{PGC Schizophrenia (SCZ) Data Driven Simulation Studies} %p.5
-{\color{orange!100} \textbf{Setting}}                                                 
-\centering
-\bi
-\item Four SNP clusters with a truncated binding affinity score matrix
- \begin{table}
-{\small
- \begin{tabular}{l|rrrr}
- \hline
- No. of SNPs & 326 & 74 & 677 & 370\\
- \hline
- Prior prob. & 0.2351 & 0.0963 & 0.4381 & 0.2305\\
- \hline
-SD & 0.0222 & 0.1139 & 0.0325 &0.0083\\
- \hline
-\end{tabular}
-}
-\end{table}
-
-\item Regression parameters: 10 times increased from real data analysis results
-\ei
-{\color{orange!100} \textbf{Results}}  
-\begin{figure}[p]
-  \centering
-  \includegraphics[width=0.2\linewidth]{RibosomalDNA_2015-03-19.pdf}
-  \caption{Comparison of our method with ordinary least squares, refit Lasso, FMRLasso}
-\end{figure}
-\end{block}
-
-\begin{block}{ARoG Analysis for PGC SCZ Data} %p.5
-{\color{orange!100} \textbf{Observed vs. fitted log ORs}}                                                 
-\centering
-
-
-{\color{orange!100} \textbf{Effect sizes of selected TFs for each cluster}}
- \begin{table}
-{\small
- \begin{tabular}{l|rr|rrrr|rr}
- \hline
-Cluster &  \multicolumn{2}{c|}{1} & \multicolumn{4}{c|}{2}& \multicolumn{2}{c}{4}\\
- \hline
-TFs &FOXL1 &  Hoxc9 & MAX & BATF::JUN & FLl1 & USF2 & Arnt & ELK4\\
- \hline
-Coefficients & -0.0044 & -0.006 & -0.0631 & 0.0621 & 0.036 & -0.0103 & 0.0011 & 0.0014\\
- \hline
-\end{tabular}
-}
-\end{table}
-
- {\color{orange!100} \textbf{TFs' binding affinity changes in each cluster}}
-\begin{columns}
-\begin{column}{.32\textwidth}                                                      
-\begin{figure}[p]
-\centering
- \includegraphics[width=0.7\linewidth]{RibosomalDNA_2015-03-19.pdf}
- \caption{{\small Cluster 1}}
-\end{figure}
-\end{column}
-
-\begin{column}{.32\textwidth}                                                      
-\begin{figure}[p]
-  \centering
-  \includegraphics[width=0.7\linewidth]{RibosomalDNA_2015-03-19.pdf}
- \caption{{\small Cluster 2}}
-\end{figure}
-\end{column}
-
-\begin{column}{.32\textwidth}                                                      
-\begin{figure}[p]
-  \centering
-  \includegraphics[width=0.7\linewidth]{RibosomalDNA_2015-03-19.pdf}
- \caption{{\small Cluster 4}}
-\end{figure}
-\end{column}
-\end{columns}
-\bi
-\item[] Hierarchical clustering of selected TFs and SNPs in each cluster was performed based on pairwise distances of truncated binding affinity scores.
-\ei
-
-{\textbf{References}}
-\centering
-\bi
-{\footnotesize
-\item St\"{a}dler, N., B\"{u}hlmannl, P., and Van De Geer, S. $l$1-penalization for mixture regression models. \textit{Test} 19.2 (2010): 209-256.
-\item Zuo, C., Shin, S., and Kele\c{s}, S. atSNP: Transcription factor binding affinity testing for regulatory SNP detection. \textit{Bioinformatics} (2015): to appear.}
-\ei
-
-\end{block}
-
-
-\end{column}
-\end{columns}
-
-
-         \end{column}
-
-%\end{column}
-
-     \hfill
-     \end{columns}
-  \end{frame}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% Third Column
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{column}{\onecolwid}\vspace{-2in}
+      \begin{block}{Ongoing and future work}
+        \vspace{12in}
+      \end{block}
+      \begin{block}{References}
+        %% {\footnotesize
+        %%   \bibliographystyle{plain} 
+        %%   \bibliography{bibTex_Reference}
+        %% }
+      \end{block}
+      \begin{block}{Acknowledgements}
+      \end{block}
+      \begin{figure}[!b]
+        \includegraphics[scale=0.3]{UWlogo_ctr_4c.jpg}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
 \end{document}
