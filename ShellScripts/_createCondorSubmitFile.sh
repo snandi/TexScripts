@@ -13,16 +13,21 @@ Seed=$1
 echo "Universe = vanilla"
 echo "Executable = /s/bin/R"
 echo "initialdir = /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/"
-echo "log =  /z/Proj/newtongroup/snandi/Simulation_Registration/Run01/Seed$Seed/Log_2015-09-30.log"
+echo "log =  /z/Proj/newtongroup/snandi/Simulation_Registration/Run01/Seed$Seed/CondorLog_2015-10-10.log"
 echo " "
-echo "Request_cpus    =       1"
+echo "request_cpus    =       1"
+echo "request_memory  =       500MB"
+echo "request_disk    =       1GB"
 echo "arguments       =       --no-save --args ProcessID=\$(Process) Seed=$Seed"
 echo "input           =       RScript10-02_permute_iterate_register.R"
 echo "output          =       /z/Proj/newtongroup/snandi/Simulation_Registration/Run01/Seed$Seed/Iter\$(Process)/TStats_Permute_\$(Process)"
 echo "error           =       /z/Proj/newtongroup/snandi/Simulation_Registration/Run01/Seed$Seed/Iter\$(Process)/err_\$(Process)"
-echo "request_memory  =       250"
-echo "request_disk    =       1000"
-echo "Queue 1000"
+echo " "
+
+echo "periodic_release = ( JobStatus == 5 ) && ( ( CurrentTime - EnteredCurrentStatus) > 600 ) && ( JobRunCount < 3 ) && ( HoldReasonCode != 1 ) && ( HoldReasonCode != 6 ) && (HoldReasonCode != 14 ) && ( HoldReasonCode != 22 )"
+echo " "
+
+echo "queue 1000"
 }
 
 for Seed in `seq $fromSeed $toSeed`;
