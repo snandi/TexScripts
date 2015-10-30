@@ -25,7 +25,7 @@ do
 
     for Iter in `seq $fromIter $toIter`;
       do
-	mv $folderLocal/*$Iter*.RData $folderLocal/Iter$Iter/.
+	mv $folderLocal/TStats_Permute_$Iter.RData $folderLocal/Iter$Iter/.
     done
 done < $FILE
 
