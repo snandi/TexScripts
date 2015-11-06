@@ -17,6 +17,11 @@ do
     if (( $i < 300 )) 
 	then
 	    rm $folder/Log*.log
+	    rm $folder/Iter*/*.out
+	    rm $folder/Iter*/*.err
+	    rm $folder/Iter*/*.log
+	    rm $folder/Iter*/CURLTIME*
+
 	    echo $folder
     fi
 
