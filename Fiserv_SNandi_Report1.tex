@@ -1,0 +1,269 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+\geometry{left=0.8in, right=0.8in, top=1in, bottom=0.8in}
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+\bibliographystyle{plain}  %Choose a bibliograhpic style
+
+\title{Report 1: Evaluate effectiveness of LDP}
+\author{Subhrangshu Nandi\\
+  Statistics PhD Student, \\
+%  Research Assistant,
+%  Laboratory of Molecular and Computational Genomics, \\
+  University of Wisconsin - Madison}
+%\date{May 31, 2015}
+\date{}
+
+\maketitle
+
+\newpage
+\section*{Introduction}
+Answers to the following fitness test questions were evaluated, to identify any pattern between leaders who completed {\bf{LDP}} and those who didn't. 
+\begin{table}[H]
+\centering
+\begin{tabular}{l|c|p{5in}}
+\hline
+Goals 		& Q1 & I have clear agreements with my manager about my identified goals. \\
+      		& Q2 & My manager holds me accountable to have SMART goals (specific, motivating, attainable, relevant and trackable). \\
+      		& Q3 & I understand how my goals are related to/ directly aligned to the overall organization’s goals. \\
+		& Q4 & My mutually agreed upon goals are motivating and appropriately challenging. \\
+\hline
+Diagnosing	& Q1 & My manager is able to fully assess my competence (knowledge and skill) for each one of my identified goals. \\
+		& Q2 & My manager’s leadership style depends on my needs on a specific goal/task. \\
+		& Q3 & My manager stays connected with what I am doing and gives me appropriate feedback. \\
+		& Q4 & My manager asks how he/ she can support me as a leader.\\
+\hline
+Matching	& Q1 & My manager is able to assess my commitment (motivation and confidence) on each of my goals. \\
+		& Q2 & My manager knows when to allow me to figure situations out and acts as a sounding board, not a provider of directives. \\
+		& Q3 & My manager is comfortable being directive. \\
+		& Q4 & My manager is comfortable being supportive. \\
+\hline
+Coaching	& Q1 & My manager is able to effectively coach me through potential challenges as I work towards my goals. \\
+		& Q2 & I meet regularly one on one with my manager so I can ask for the direction and support I need. \\
+		& Q3 & My manager invites feedback about how he or she could be more effective as a leader. \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{Model Fitting}
+As can be noticed in the boxplots in the end of the report, none of the answers to the 15 questions above illustrate any obvious difference between the leaders who completed {\bf{LDP}} and those who didn't. This observation was consistent when a logistic regression model was fit to the data. Below is a summary of the model fit. As can be seen in the table other than Goals-Q1, none of the answers have any significant association with LDP completion. The p-values are greater than 0.05, hence, the associations are not statistically significant. 
+
+Individual t-test results between the two groups yield similar results. For example, testing the hypothesis
+$$H_0: \mu_{G1_A} = \mu_{G1_B} \hspace{1cm} vs \hspace{1cm} H_a: \mu_{G1_A} < \mu_{G1_B}$$ where $\mu_{G1_A}:$ Mean of answers of Goals, Q1 for leaders who did not complete LDP and $\mu_{G1_B}:$ Mean of answers of Goals, Q1 for leaders who completed LDP, two sample t-test yields 
+$t = 0.207, \ df = 65.358, \ \text{p-value} = 0.5817$
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Nov 11 16:50:21 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  covariate	& estimate & std. error & z value & p-value \\ 
+  \hline
+  (Intercept) 	& 2.2582  & 4.2820 & 0.53  & 0.5979 \\ 
+  Goals.Q1 	& 2.3669  & 1.1568 & 2.05  & 0.0408 \\ 
+  Goals.Q2 	& -0.9224 & 1.2212 & -0.76 & 0.4501 \\ 
+  Goals.Q3 	& 0.4169  & 1.2487 & 0.33  & 0.7385 \\ 
+  Goals.Q4 	& -1.7714 & 0.9815 & -1.80 & 0.0711 \\ 
+  Diagnosing.Q1 & -0.6215 & 0.8610 & -0.72 & 0.4704 \\ 
+  Diagnosing.Q2 & -0.2532 & 0.7373 & -0.34 & 0.7313 \\ 
+  Diagnosing.Q3 & -1.0259 & 0.8871 & -1.16 & 0.2475 \\ 
+  Diagnosing.Q4 & -0.4572 & 0.8111 & -0.56 & 0.5730 \\ 
+  Matching.Q1 	& 0.4789  & 1.0533 & 0.45  & 0.6494 \\ 
+  Matching.Q2 	& -0.3249 & 0.9813 & -0.33 & 0.7406 \\ 
+  Matching.Q3 	& -0.4516 & 0.7969 & -0.57 & 0.5710 \\ 
+  Matching.Q4 	& 1.2323  & 1.0729 & 1.15  & 0.2507 \\ 
+  Coaching.Q1 	& -0.1621 & 0.8654 & -0.19 & 0.8514 \\ 
+  Coaching.Q2 	& 0.5628  & 0.6397 & 0.88  & 0.3789 \\ 
+  Coaching.Q3 	& 0.4592  & 0.5343 & 0.86  & 0.3901 \\ 
+  ResponsePct 	& 0.3030  & 0.7493 & 0.40  & 0.6859 \\ 
+  \hline
+\end{tabular}
+\caption{Fitting Fitness test questions with LDP completion as the response}
+\end{table}
+
+When individual questions didn't yield significant results, average of each category was tested. For example, a new covariate $Goals_{Avg}$ was created, that was the average of all the questions related to Goals. Similarly, $Diagnosing_{Avg}$, $Matching_{Avg}$ and $Coaching_{Avg}$. Below is the result of the model fit
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Nov 11 21:44:34 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & estimate & std. error & z value & p-value \\ 
+  \hline
+(Intercept) & 3.7351 & 3.4058 & 1.10 & 0.2728 \\ 
+  Goals.Avg & -0.5551 & 0.9138 & -0.61 & 0.5435 \\ 
+  Diagnosing.Avg & -1.8530 & 1.1394 & -1.63 & 0.1039 \\ 
+  Matching.Avg & 0.7192 & 1.2965 & 0.55 & 0.5791 \\ 
+  Coaching.Avg & 0.9661 & 0.7996 & 1.21 & 0.2269 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting Average of Fitness test questions with LDP completion as the response}
+\end{table}
+
+Even in this model none of the question categories seem to yield statistically significant associations with LDP completions. 
+
+Performance Rating of 2014 was then tested with LDP completion to detect any effect. Only three types of performance rating had big sample size to compare. 
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Nov 11 21:58:40 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+ \hline
+ & Exceeds Many & Meets Expectations & Meets Most & Total\\ 
+ \hline
+ LDP Yes &  18 &  32 &   6 & 56\\ 
+ LDP No &  14 &  50 &  13 & 77\\ 
+ \hline
+ Total & 32 & 82 & 19 & \\
+ \hline
+\end{tabular}
+\end{table}
+Pearson's Chi-squared test yields $\chi^2 = 3.8093, df = 2, \text{p-value} = 0.1489$. There is no statistically significant association between LDP completion and performance ratings. 
+
+
+
+\newpage
+
+\section*{Summary Plots}
+Below are the boxplots {\footnote{The interpretation of boxplots can be found here: https://en.wikipedia.org/wiki/Box\_plot\#/media/File:Boxplot\_vs\_PDF.svg}} for Goals-Q1
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=1]{../BoxPlots.pdf}
+\includegraphics[scale=0.45, page=2]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=3]{../BoxPlots.pdf}
+\end{figure}
+
+\newpage
+Below are the boxplots for Goals-Q2
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=4]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=5]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=6]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Goals-Q3
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=7]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=8]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=9]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Goals-Q4
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=10]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=11]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=12]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Diagnosing-Q1
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=13]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=14]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=15]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Diagnosing-Q2
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=16]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=17]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=18]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Diagnosing-Q3
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=19]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=20]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=21]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Diagnosing-Q4
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=22]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=23]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=24]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Matching-Q1
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=25]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=26]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=27]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Matching-Q2
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=28]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=29]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=30]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Matching-Q3
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=31]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=32]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=33]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Matching-Q4
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=34]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=35]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=36]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Coaching-Q1
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=37]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=38]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=39]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Coaching-Q2
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=40]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=41]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=42]{../BoxPlots.pdf} \\
+\end{figure}
+
+\newpage
+Below are the boxplots for Coaching-Q3
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=43]{../BoxPlots.pdf} 
+\includegraphics[scale=0.45, page=44]{../BoxPlots.pdf} \\
+\includegraphics[scale=0.65, page=45]{../BoxPlots.pdf} \\
+\end{figure}
+
+\end{document}
