@@ -16,7 +16,8 @@
   Statistics PhD Student, \\
 %  Research Assistant,
 %  Laboratory of Molecular and Computational Genomics, \\
-  University of Wisconsin - Madison}
+  University of Wisconsin - Madison \\
+  nands31@gmail.com}
 %\date{May 31, 2015}
 \date{}
 
@@ -52,7 +53,7 @@ Coaching	& Q1 & My manager is able to effectively coach me through potential cha
 \end{table}
 
 \section*{Model Fitting}
-As can be noticed in the boxplots in the end of the report, none of the answers to the 15 questions above illustrate any obvious difference between the leaders who completed {\bf{LDP}} and those who didn't. This observation was consistent when a logistic regression model was fit to the data. Below is a summary of the model fit. As can be seen in the table other than Goals-Q1, none of the answers have any significant association with LDP completion. The p-values are greater than 0.05, hence, the associations are not statistically significant. 
+As can be noticed in the boxplots in the end of the report, none of the answers to the 15 questions above illustrate any difference between the leaders who completed {\bf{LDP}} and those who didn't. This observation was consistent when a logistic regression model was fit to the data. Table 1 is a summary of the model fit. As can be seen in the table other than Goals-Q1, none of the answers have any significant association with LDP completion. The p-values are all greater than 0.05, hence, the associations are not statistically significant. 
 
 Individual t-test results between the two groups yield similar results. For example, testing the hypothesis
 $$H_0: \mu_{G1_A} = \mu_{G1_B} \hspace{1cm} vs \hspace{1cm} H_a: \mu_{G1_A} < \mu_{G1_B}$$ where $\mu_{G1_A}:$ Mean of answers of Goals, Q1 for leaders who did not complete LDP and $\mu_{G1_B}:$ Mean of answers of Goals, Q1 for leaders who completed LDP, two sample t-test yields 
@@ -88,7 +89,7 @@ $t = 0.207, \ df = 65.358, \ \text{p-value} = 0.5817$
 \caption{Fitting Fitness test questions with LDP completion as the response}
 \end{table}
 
-When individual questions didn't yield significant results, average of each category was tested. For example, a new covariate $Goals_{Avg}$ was created, that was the average of all the questions related to Goals. Similarly, $Diagnosing_{Avg}$, $Matching_{Avg}$ and $Coaching_{Avg}$. Below is the result of the model fit
+When individual questions didn't yield significant results, average of each category was tested. For example, new covariate $Goals_{Avg}$ was created, which was the average of all the answers related to $Goals$. Similarly, $Diagnosing_{Avg}$, $Matching_{Avg}$ and $Coaching_{Avg}$. Below is the result of the model fit
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
 % Wed Nov 11 21:44:34 2015
 \begin{table}[H]
@@ -114,20 +115,34 @@ Performance Rating of 2014 was then tested with LDP completion to detect any eff
 % Wed Nov 11 21:58:40 2015
 \begin{table}[H]
 \centering
-\begin{tabular}{rrrrr}
+\begin{tabular}{lcccc}
  \hline
  & Exceeds Many & Meets Expectations & Meets Most & Total\\ 
  \hline
  LDP Yes &  18 &  32 &   6 & 56\\ 
  LDP No &  14 &  50 &  13 & 77\\ 
  \hline
- Total & 32 & 82 & 19 & \\
+ Total & 32 & 82 & 19 & 133 \\
  \hline
 \end{tabular}
 \end{table}
-Pearson's Chi-squared test yields $\chi^2 = 3.8093, df = 2, \text{p-value} = 0.1489$. There is no statistically significant association between LDP completion and performance ratings. 
-
-
+Pearson's Chi-squared test yields $\chi^2 = 3.8093, df = 2, \text{p-value} = 0.1489$. There is no statistically significant association between LDP completion and performance ratings. In this test, leaders who completed their LDP in 2015 were allocated to the group of ``LDP No'', since their performance evaluation was before their LDP completion. If however, there was reason to believe that 2015 performance evaluations would be similar to that of 2014, then the analysis would be different. Below is the table illustrating this:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Nov 12 12:36:50 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+\hline
+& Exceeds Many & Meets Expectations & Meets Most & Total\\ 
+\hline
+LDP Yes &  21 &  55 &   6  & 82\\ 
+LDP No &  11 &  27 &  13 & 51\\ 
+\hline
+Total & 32 & 82 & 19 & 133 \\
+\hline
+\end{tabular}
+\end{table}
+A Chi-square goodness of fit test does reveal statistically significant association between leaders who completed the LDP training and their receiving superior performance evaluations. The $\chi^2 = 8.5012,\ df = 2,\  \text{p-value} = 0.01426$
 
 \newpage
 
