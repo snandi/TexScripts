@@ -4,7 +4,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
-\documentclass[10pt,dvipsnames,table]{beamer} 
+\documentclass[10pt,dvipsnames,table, notes]{beamer} 
+
+%\documentclass[notes]{beamer}       % print frame + notes
+%\documentclass[notes=only]{beamer}   % only notes
+%\documentclass{beamer}              % only frames
+
 %\usetheme{Luebeck} 
 \usetheme{Madrid} 
 %\usetheme{Marburg} 
@@ -21,12 +26,16 @@
 %% TITLE PAGE 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\title[Fluoroscanning: beyond nanocoding]{Fluoroscanning: beyond Nanocoding; \\ {\emph{Realistic path to personalized genomics}}}
-\author{Subhrangshu Nandi}
+\title[Curve Registration in Fluoroscanning]{Applications of Curve Registration to Fluoroscanning\\ {\emph{essential tool for precision genomics}}}
+\author{Subhrangshu Nandi \\
 %\institute[Stat 741]{Stat 741, Spring 2015 \\
-%  Department of Statistics \\
-% University of Wisconsin-Madison}
-%\date{April 21, 2015}
+Statistics PhD Student \\
+\vspace{1cm}
+\small{in collaboration with:} \\
+\textcolor{yellow}{Laboratory of Molecular and Computational Genomics}, \\
+University of Wisconsin-Madison \\
+Advisors: Prof. Michael Newton, Prof. David Schwartz}
+\date{November 20, 2015}
 
 \begin{document}
 \setlength{\baselineskip}{16truept}
@@ -40,10 +49,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Outline for this presentation:
+%% Motivation
+%% Background - Sequencing
+%% Background - Nanocoding
+%% 
+
 
 %%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{Nanocoding - brief background}
+\frametitle{Motivation - road to precision genomics}
+\begin{figure}[T]
+\includegraphics[scale=0.38]{Image_Motivation.pdf}
+\end{figure}
+
+\note{Problem was motivated by a cancer genome (Multiple Myeloma); \\ 
+LMCG biophysics, chemistry; \\ Data analysis; \\ with the goal to complement current sequencing efforts, \\ and enhance precision genomics}
+
+%Images from the following websites:
+%www.medimoon.com
+%www.medcitynews.com
+%jamia.oxfordjournals.org
+%www.geuvadis.org
+%www.sciencenutshell.com
+%www.imaging-git.com
+\end{frame}
+
+%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Background: Genome sequencing}
+Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out the order of DNA nucleotides, or bases that make up an organism's DNA. The human genome is made up of over 3 billion of these nucleic acids. A DNA sequence that has been translated from life's {\emph{chemical}} alphabet into our alphabet of written letters might look like this:
+\begin{figure}[H]
+\includegraphics[scale=0.6]{Image_Sequence_1.jpg}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Background}
 \begin{figure}[T]
 \includegraphics[scale=0.28]{molecule37_frame65.png}
 \end{figure}
@@ -80,6 +123,19 @@ Molecule $2064486\_0\_11$: NtBspQI N  31.24  \textcolor{SpringGreen}{16.80  15.7
 \begin{figure}[T]
 \includegraphics[scale=1]{NMaps_Aligned.png}
 \end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%% Slide 17 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Acknowledgements}
+Images in my slides were borrowed from: \\
+www.medimoon.com \\
+www.medcitynews.com \\
+jamia.oxfordjournals.org \\
+www.geuvadis.org \\
+www.sciencenutshell.com \\
+www.imaging-git.com \\
 
 \end{frame}
 
