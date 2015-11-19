@@ -1,0 +1,85 @@
+% Cover letter using letter.sty
+\documentclass{letter} % Uses 10pt
+% Use \documentstyle[newcent]{letter} for New Century Schoolbook postscript font
+% the following commands control the margins:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This cover letter is for the position
+% http://www.chegg.com/jobs/listings/?jvi=odX60fw0,Job
+% Staff Data Scientist - Personalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexLetter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\topmargin=-1in    % Make letterhead start about 1 inch from top of page 
+\textheight=8.5in  % text height can be bigger for a longer letter
+\oddsidemargin=0pt % leftmargin is 1 inch
+\textwidth=6.5in   % textwidth of 6.5in leaves 1 inch for right margin
+
+\begin{document}
+
+\signature{Subhrangshu Nandi}           % name for signature 
+\longindentation=0pt                    % needed to get closing flush left
+\let\raggedleft\raggedright            % needed to get date flush left
+ 
+ 
+\begin{letter}
+{Hiring Manager \\
+Analytics \\
+Chegg \\
+Santa Clara, CA 94105
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The Role:  The Staff Data Scientist focusing on Personalization will use data mining and 
+%% machine learning expertise to define, design and develop personalization pipeline at Chegg. 
+
+%% Responsibilities:
+%% Identify and prioritize personalization projects for the company use cases 
+%% Analyze structured and unstructured data sets to understand user behavior
+%% Research and implement algorithms for search personalization, query extension, knowledge 
+%% discovery, product ranking, content recommendation
+%% Identify key evaluation metrics; design, execute and analyze experiments
+%% Work closely with search, engineering and sales teams 
+%% Innovate, share and educate team members and community
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{flushleft}
+{\bf Subhrangshu Nandi}
+\end{flushleft}
+\medskip\hrule height 1pt
+\begin{flushright}
+\hfill 1300 University Ave, Suite 1250D, Madison, WI 53706 \\
+\hfill snandi@wisc.edu, nands31@gmail.com\\
+\hfill (413) 530-1400 or (608) 284-8308
+\end{flushright} 
+\vfill % forces letterhead to top of page
+
+\opening{Dear Hiring Manager:} 
+ 
+\noindent %PARAGRAPH ONE: State reason for letter, name the position or type of work you are applying for and identify source from  which  you learned   of   the  opening.  (i.e.  Career  Development  Center, newspaper, employment service, personal contact). 
+I am a PhD student in statistics at the University of Wisconsin - Madison. I would like to apply for and internship position of ``Staff Data Scientist - Personalization'' at Chegg, starting from June, 2016. I came across the position on the company website.
+ 
+\noindent %PARAGRAPH  TWO:  Indicate why you are interested in the position, the company, its products, services - above all, stress what  you can  do  for  the employer. If you are a recent graduate, explain how your academic background makes you a qualified candidate  for the  position.  If  you have practical work experience, point out specific achievements or unique qualifications. Try not to repeat the  same  information  the reader will find in the resume. Refer the reader to the enclosed resume or application which summarizes your  qualifications,  training,  and experiences. The purpose of this section is to strengthen your resume  by  providing  details which bring your experiences to life. 
+Data science is far beyond applying statistics and machine learning algorithms to the data. I have a combined experience of seven years in statistical consulting and quantitave trading industries, before I returned to graduate school. As a statistics PhD student, I have trained in theoretical and computational aspects of statistics and machine learning. I would like to leverage my data science background to address real problems pertaining to improving daily lives. I believe a data scientist should be involved in all four aspects of data analysis: (1) understanding of the data generation mechanism, along with the assumptions and limitations; (2) cleaning and pre-processing the data; (3) analyzing the data to answer the hypotheses; (4) visualizing the results and different patterns. I have academic and industry experience in all the above aspects of data science. I have experience of handling large datasets (several GBs), including high-throughput and high-performance computing on the \href{http://www.opensciencegrid.org/}{open science grid}. I have experience in most unix based systems, and often use unix programs such as sed, vi, bash, for efficient data mining. I have the necessary skills to be a next generation data scientist. 
+
+In addition to my doctoral education in statistics, my experiences in consulting and wall street provide me a competitive edge. I have worked in and led teams of different sizes. I excel in projects with aggressive deadlines. I also enjoy exploratory research projects that push the boundary of human knowledge, which is one reason why I returned to graduate school. I am innovative, diligent, hard-working and persistent. 
+
+\noindent %PARAGRAPH THREE: Request a personal interview and  indicate  your flexibility as to the time and place. Repeat your phone number in the letter and offer assistance to help in a speedy response. For example,  state that you will be in the city where the company is located on a certain date and would like to set up an  interview. Or,  state  that  you  will  call  on a certain date to set up an interview. End the letter by thanking  the  employer  for  taking time to consider your credentials. 
+I can relate to Chegg's vision of helping students of all levels save time, money and get smarter and a data scientist is uniquely placed to contribute towards that mission. I enjoy working in an entrepreneurial environment, finding creative and efficient solutions to complex problems. I will be a great fit for the Staff Data Scientist intern position at Chegg. I am available for a phone interview on most weekdays. I look forward to hearing back from you.
+
+Thank you for your time and considering my candidacy. 
+ 
+\closing{Sincerely yours,} 
+ 
+
+ 
+%\encl{}  				% Enclosures
+
+\end{letter}
+
+\end{document}
+
