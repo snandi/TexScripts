@@ -3,7 +3,8 @@
 %% Parts of this talk are from Documentation/Schwartz_Grp_Mtg/forMeeting_2015-09-28/slides_2015-09-28.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table, notes]{beamer} % To printout the slides without the animations
 %\documentclass[10pt,dvipsnames,table, notes]{beamer} 
 
 %\documentclass[notes]{beamer}       % print frame + notes
@@ -14,8 +15,8 @@
 \usetheme{Madrid} 
 %\usetheme{Marburg} 
 %\usetheme{Warsaw} 
-%\setbeamercolor{structure}{fg=cyan!90!white}
-\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input header file 
@@ -81,7 +82,7 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 \begin{figure}[H]
 \includegraphics[scale=0.6]{Image_Sequence_1.jpg}
 \end{figure}
-\pause
+
 \begin{figure}[H]
 \includegraphics[scale=0.4]{Image_DNA.jpg}
 \end{figure}
@@ -144,7 +145,7 @@ Example, below is a reference map from a bacteria genome, and a nanocoded molecu
 \begin{center}
 \begin{tikzpicture}
   \node (img1) {\includegraphics[scale=0.28]{molecule251_frame68.png}};
-  \pause
+  
   \node (img2) at (img1.north)[yshift=-3cm] {\includegraphics[scale=0.25, page=1]{Frag38_1.pdf}};
 \end{tikzpicture}
 \end{center}
@@ -166,7 +167,7 @@ Dimer of oxazole yellow (YOYO-1) is the fluorescent dye added to the DNA molecul
 \includegraphics[scale=0.3]{DyeMolecule.jpg}
 \end{figure}
 
-\pause
+
 \column{.5\textwidth} 
 Fluorescent properties of bound YOYO depends strongly on base sequence \\
 \vspace{0.5cm}
@@ -309,14 +310,14 @@ intervals, so it is unique from the rest.
 \item For $k$ curves in a group, group similarity index is defined as:
 \[ \bar{\rho_k} = \frac{2}{k(k-1)}\sum \limits_{i \ne j} \rho(f_i, f_j)\] 
 
-\pause \item Estimate the multivariate median at each iteration: For a data set $X = {x_1, \dots, x_n}$, with each $x_i \in \R^p$, the $L_1-$median $\hat{\mu}$ is defined as 
+ \item Estimate the multivariate median at each iteration: For a data set $X = {x_1, \dots, x_n}$, with each $x_i \in \R^p$, the $L_1-$median $\hat{\mu}$ is defined as 
 \[ \hat{\boldsymbol{\mu}}(\mathbf{X}) = \text{argmin}_{\mu} \sum\limits_{i = 1}^{n}\|\mathbf{x_i} - \boldsymbol{\mu} \|\]
 
-\pause \item Register all curves to this median $\hat{\boldsymbol{\mu}}_{(J)}$ by minimizing
+ \item Register all curves to this median $\hat{\boldsymbol{\mu}}_{(J)}$ by minimizing
 \[ \text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda_{(J)} \int \{w^{(m)}(t)\}^2 dt \]
 Notice that $\lambda_{(J+1)} < \lambda_{(J)}$, to reduced the roughness penalty with each iteration
 
-\pause \item Iterate until 
+ \item Iterate until 
 \[ |\hat{\rho}_{(J+1)} - \hat{\rho}_{(J)}| < \epsilon \]
 \end{itemize}
 \end{frame}
@@ -365,7 +366,7 @@ Notice that $\lambda_{(J+1)} < \lambda_{(J)}$, to reduced the roughness penalty 
 \frametitle{Simulation results: Higher power with iterated registration}
 \begin{center}
 \includegraphics[scale=0.35, page=2]{pValue_BeforeAfter_Registration.pdf}
-\pause
+
 \includegraphics[scale=0.35, page=3]{pValue_BeforeAfter_Registration.pdf}
 \end{center}
 \end{frame}
@@ -379,7 +380,7 @@ Notice that $\lambda_{(J+1)} < \lambda_{(J)}$, to reduced the roughness penalty 
 \end{frame}
 
 
-%%%%%%%%%%%% Slide 22 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 17 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Website references}
 Images in my slides were borrowed from: \\
@@ -391,7 +392,7 @@ www.sciencenutshell.com \\
 www.imaging-git.com \\
 \end{frame}
 
-%%%%%%%%%%%% Slide 23 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 17 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Questions? Comments?}
 
