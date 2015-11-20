@@ -197,21 +197,84 @@ http://www.rcsb.org/pdb/explore/jmol.do?structureId=108D
 \begin{figure}
 \includegraphics[scale=0.45, page=2]{Frag38_1.pdf}
 \end{figure}
+\note{
+The fluoresence intensity profiles are inherently smooth functions because neighboring pixels contribute to the grey levels of the images. 
+}
+
 \end{frame}
 
-%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 10 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Distance metric}
+Distance between two curves $f_i$ and $f_j$:
+\[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
+Properties of $\rho(f_i, f_j)$:
+\begin{itemize}
+\item $|\rho(f_i, f_j)| \leq 1$
+\item $|\rho(f_i, f_j)| = 1 \Leftrightarrow \exists \ \ A \in \Real ^+, B \in \Real, \ni f_i = Af_j + B$
+\item Absolute value preserved under affine transformations of functions \\
+$\rho(f_i, f_j) = \text{sign}(A_i\cdot A_j) \rho(A_if_i + B_i, A_jf_j + B_j)$
+\item Also preserved under affine transformations of the abscissa (x-axis or time axis)
+\end{itemize}
+
+\note{
+In mathematics, a Sobolev space is a vector space of functions equipped with a norm that is a combination of $L^p-\text{norms}$ of the function itself and its derivatives up to a given order.
+}
 
 \end{frame}
 
-%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 11 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Registration example}
+\begin{center}
+%\begin{figure}
+\colorbox{white}{\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1e-01.pdf}}
+%\end{figure}
+\end{center}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Registration details}
-
+\begin{enumerate}
+\item Let $x(t)$ be the true curve; $y(t)$ be the curve to register. 
+\item Let $h(t)$ be the warping function; $y[h(t)]$ be the registered curve.
+\item $y[h(t)]$ and and $x(t)$ differ only in terms of amplitude variation, i.e., their values are proportional to one another across the range of $t$
+\item Then, PCA of the following order two matrix should reveal essentially one component (smallest eigen value $\approx 0$) \\
+\[C(h) = 
+\begin{bmatrix}
+\int \{x(t) \}^2dt & \int x(t) y[h(t)]dt \vspace{0.5cm} \\ 
+\int x(t) y[h(t)]dt & \int \{y[h(t)]\}^2dt
+\end{bmatrix}
+\]
+\item Choose $h(t)$ that minimizes the eigen value
+\end{enumerate}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
+%%%%%%%%%%% Slide 13 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation of the warping function}
+\begin{enumerate}
+\item $h(t)$ is a strictly {\emph{monotone increasing}} function; Hence {\emph{invertible}}.
+\item Let $w(t) = \frac{h''(t)}{h'(t)}$ be the relative acceleration of the warping function. \\
+This will be used to {\emph{constrain}} the warping
+\item The objective function is 
+\[ \text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \int \{w^{(m)}(t)\}^2 dt \]
+which is similar to:
+\[ F_{\lambda}(y,x|h) = \int \|y'(t) - x'\{h(t)\} \|^2 dt + \lambda \int \{w^{(m)}(t)\}^2 dt \]
+Penalizing $w(t)$ ensures smoothness and monotonicity
+\item Express $w(t)$ in terms of B-Spline expansion: 
+\[w(t) = \sum \limits_{k=0}^{K} c_k B_k(t)\]
+Solve for the coefficients $c_k$
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Iterated registration}
 
