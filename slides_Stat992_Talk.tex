@@ -228,9 +228,7 @@ In mathematics, a Sobolev space is a vector space of functions equipped with a n
 \begin{frame}
 \frametitle{Registration example}
 \begin{center}
-%\begin{figure}
 \colorbox{white}{\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1e-01.pdf}}
-%\end{figure}
 \end{center}
 
 \end{frame}
@@ -274,16 +272,80 @@ Solve for the coefficients $c_k$
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%% Slide 12 %%%%%%%%%%%%
+%%%%%%%%%%%% Slide 14 %%%%%%%%%%%%
 \begin{frame}
-\frametitle{Iterated registration}
+\frametitle{Why need Iterated registration?}
+\begin{center}
+\includegraphics[scale=0.45, page=1]{Regist_MF_Frag_2_Pixels206To245_2015-07-28.pdf}
+\end{center}
 
+\note{
+The challenge is that the truth is unknown. Need to estimate the median at every stage, before registering the rest of the curves to it. \\
+No way to confirm if we are getting at the right solution, with so much noise. Need to establish some distinguishing feature of any 
+intervals, so it is unique from the rest.
+}
+\end{frame}
+
+%%%%%%%%%%%% Slide 15 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Effect of varying roughness penalty $\lambda = 1$}
+\begin{center}
+\colorbox{white}{\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1.pdf}}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 16 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Effect of varying roughness penalty $\lambda = 0.01$}
+\begin{center}
+\colorbox{white}{\includegraphics[scale=0.55, page=20]{Warpings_Seed10_Lambda_1e-02.pdf}}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%% Slide 17 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated registration setup}
+\begin{itemize}
+\item For $k$ curves in a group, group similarity index is defined as:
+\[ \bar{\rho_k} = \frac{2}{k(k-1)}\sum \limits_{i \ne j} \rho(f_i, f_j)\] 
+
+\pause \item Estimate the multivariate median at each iteration: For a data set $X = {x_1, \dots, x_n}$, with each $x_i \in \R^p$, the $L_1-$median $\hat{\mu}$ is defined as 
+\[ \hat{\boldsymbol{\mu}}(\mathbf{X}) = \text{argmin}_{\mu} \sum\limits_{i = 1}^{n}\|\mathbf{x_i} - \boldsymbol{\mu} \|\]
+
+\pause \item Register all curves to this median $\hat{\boldsymbol{\mu}}_{(J)}$ by minimizing
+\[ \text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda_{(J)} \int \{w^{(m)}(t)\}^2 dt \]
+Notice that $\lambda_{(J+1)} < \lambda_{(J)}$, to reduced the roughness penalty with each iteration
+
+\pause \item Iterate until 
+\[ |\hat{\rho}_{(J+1)} - \hat{\rho}_{(J)}| < \epsilon \]
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%% Slide 18 %%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated registration application}
+\begin{center}
+\includegraphics[scale=0.35, page=1]{Regist_MF_Frag_2_Pixels206To245_2015-07-28.pdf}
+\includegraphics[scale=0.35, page=13]{Regist_MF_Frag_2_Pixels206To245_2015-07-28.pdf}
+\end{center}
 \end{frame}
 
 %%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
 \begin{frame}
 \frametitle{Permutation test}
-
+\begin{enumerate}
+\item $\bar{X}_1(t): $ Pointwise mean of curves of group $1$
+\item $\bar{X}_2(t): $ Pointwise mean of curves of group $2$
+\item $n_1, n_2$: Number of curves in groups 1 and 2
+\item $\Var[x_1(t)]: $ Variance of curves in group 1 at each point $t$ 
+\item $\Var[x_2(t)]: $ Variance of curves in group 2 at each point $t$ 
+\item $C(t) = \frac{|\bar{X}_1(t) - \bar{X}_2(t)|}{\sqrt{\frac{1}{n_1}\Var[x_1(t)] + 
+\frac{1}{n_2}\Var[x_2(t)]}}$: Absolute value of statistic at each point
+\item $\underset{t}{\sup}C(t)$ is our Test statistic (measure of difference of two sets of curves)
+\item To get a null distribution, permute the curves, and repeat steps 1 through 7
+$\underset{t}{\sup}C(t) \underset{n \to \infty}{\rightarrow} \approx \chi^2_{(T-1)}$
+\end{enumerate}
 \end{frame}
 
 %%%%%%%%%%%% Slide 9 %%%%%%%%%%%%
