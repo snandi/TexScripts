@@ -12,9 +12,9 @@ do
     Seed1=${linearray[0]}
     Seed2=${linearray[1]}
 
-    folder=Seed$Seed1"_"Seed$Seed2
+    folder=/home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run03/Seed$Seed1"_"Seed$Seed2
     
-    if (( $i < 300 )) 
+    if (( $i < 1253 )) 
 	then
 	    rm $folder/Log*.log
 	    rm $folder/Iter*/*.out
