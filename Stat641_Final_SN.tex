@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Final Exam}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{December 17, 2015}
+%\date{}
+
+\maketitle
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+\begin{enumerate}
+\item[(a)] 
+\item[(b)] 
+\item[(c)] 
+\item[(d)] 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] 
+\item[(b)] 
+\item[(c)] 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+Let $\hat{\beta}_u$ be the unadjusted estimate of $\beta$, and $\hat{\beta}_a$ be the adjusted estimate of $\beta$. Let $\bar{w}_o$ and $\bar{w}_1$ be the means of $w$ in the groups $z = 0$ and $z = 1$ respectively. Then,
+\begin{eqnarray*}
+\hat{\beta}_a & = & \hat{\beta}_u - \hat{\gamma}(\bar{w}_1 - \bar{w}_0) \\
+              & = & 0.7545 - 0.4250 \cdot 0.1574 \\
+              & = & 0.6876
+\end{eqnarray*}
+$w$ cannot be a confounder because this is a randomized trial.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] 
+\item[(b)] 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] 
+Assuming power = 90\%, $\beta = 0.1; \alpha = 0.025$ \\
+Assuming equal number of patients in each treatment group, $\xi_0=\xi_1=\frac{1}{2}$ \\
+Hazard ratio $= r = 0.8$ \\
+By Schoenfeld’s formula we have:
+\[ \dfrac{(Z_{1-\alpha}+Z_{1-\beta})^ 2}{\xi_0\xi_1(\log r)^2} = \dfrac{3.24^ 2}{(1/2)^2(\log 0.8)^2} = 844.09 \]
+
+%Assume no censoring. \\
+The hazard rate $\lambda$ for the control group is constant at .10/person-year. The active group will have a hazard of 0.8/person-year. Hence, the average of the control and active group hazards is 0.09/person-year; The cumulative hazard is $\Lambda(t) = 0.09t, \ 0 \leq t \leq 4$. \\
+The probability that a subject experiences an event before time $t$ is $1 - e^{-\Lambda(t)}$. If the total length of follow-up is $F$ and the length of the recruitment period is $R$, then the probability of an event is
+\begin{eqnarray*}
+\bar{\rho} &=& \frac{1}{R} \int_{F - R}^{F} 1 - e^{-\Lambda(s)}ds \\
+           &=& 1 - \frac{1}{R} \int_{F - R}^{F} e^{-0.09s} ds \\
+           &=& 1 + \frac{1}{0.09R}\left(e^{-0.09F} - e^{-0.09(F - R)} \right) \\
+           &=& 0.2356
+\end{eqnarray*}
+Hence, the total number of events required is 844 and the expected sample size is $\frac{844}{0.2356} = 3583$. 
+
+%If we assume Censoring times, $C_{ij}$ are uniformly distributed on interval $[F - R, F]$, then the expected sample size is given by:
+%\[ n = \frac{(Z_{1-\alpha}+Z_{1-\beta})^ 2 R \bar{\lambda}}{\left(R\bar{\lambda} - e^{-\bar{\lambda}(F - R)} + e^{-\bar{\lambda}F} \right) \xi_0\xi_1(\log r)^2} = \]
+
+\item[(b)] 
+\item[(c)] The critical values $b_k$, for $Z_k$ for rejecting $H_0: \mu \geq 0$ are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Sat Dec 12 16:16:00 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  Time &  Upper & Exit pr. & Diff. pr. & Nominal Alpha \\ 
+  \hline
+  0.2000 & 3.2905 & 0.0010 & 0.0010 & 0.0010 \\ 
+  0.4000 & 2.9404 & 0.0040 & 0.0030 & 0.0033 \\ 
+  0.6000 & 2.7211 & 0.0090 & 0.0050 & 0.0065 \\ 
+  0.8000 & 2.5481 & 0.0160 & 0.0070 & 0.0108 \\ 
+  1.0000 & 2.4011 & 0.0250 & 0.0090 & 0.0163 \\ 
+  \hline
+\end{tabular}
+\end{table}
+The critical values at $t_k = (0.2, 0.4, 0.6, 0.8, 1.0)$ are 3.2905, 2.9404, 2.7211, 2.5481, 2.4011.
+
+\item[(d)] The non-centrality parameter is
+\begin{eqnarray*}
+ \theta & = & \sqrt{\I}\log r \\
+        & = & \sqrt{D \xi_1 \xi_2} \log r \\
+        & = & \sqrt{844 \cdot 0.5 \cdot 0.5 } \log 0.8 \\
+        & = & -3.2413
+\end{eqnarray*}
+For any interim period $k$, $\Exp(Z_k) = \sqrt{t_k}\theta$. Hence,\\
+$\Exp(Z_1) = -1.4496$; 
+$\Exp(Z_2) = -2.05$; 
+$\Exp(Z_3) = -2.5107$; 
+$\Exp(Z_4) = -2.8991$; 
+$\Exp(Z_5) = -3.2413$ \\
+Hence, the critical values $a_k$, for rejecting $H_1: \mu \leq \log 0.8$ are:\\
+$a_1 = -4.74, \ a_2 = -4.99,\ a_3 = -5.23,\ a_4 = -5.45,\ a_5 = -5.64$
+
+\item[(e)] Power = $0.8160 + \sum_{k = 1}^5 \Prob(\text{Rejecting } H_0) = 0.8160 + 0.0380 = 0.8540$
+
+\item[(f)] 
+\item[(g)] 
+\item[(h)] 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] 
+\item[(b)] 
+\item[(c)] 
+\item[(d)] 
+\item[(e)] 
+\item[(f)] 
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
+
+
