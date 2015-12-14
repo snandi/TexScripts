@@ -6,7 +6,7 @@
 \input{HeaderfileTexDocs}
 
 %%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
-\geometry{left=0.9in, right=0.9in, top=0.9in, bottom=0.8in}
+\geometry{left=0.8in, right=0.9in, top=0.9in, bottom=0.8in}
 %\setlength{\voffset}{0.5in}
 %\setlength{\hoffset}{-0.4in}
 %\setlength{\textwidth}{7.6in}
@@ -31,16 +31,142 @@
 \item[(a)] Below is a plot of $x_1,\ x_2$ versus $x_0$
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = 0.5]{Plot1a.pdf}
+\includegraphics[scale = 0.45, page = 1]{Plot1a.pdf}
 \end{center}
 \caption{$x_1,\ x_2$ versus $x_0$}
+\label{fig:Fig1a}
 \end{figure}
 
-\item[(b)] 
-\item[(c)] 
-\item[(d)] 
+\item[(b)] Below are the model summaries of fitting $x_1$ from three different approaches:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:47:34 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 60.9107 & 1.8094 & 33.66 & 0.0000 \\ 
+  z & 3.9026 & 2.5159 & 1.55 & 0.1265 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 \sim z$; Residual standard error: $9.575$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:50:23 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & -0.2714 & 0.9915 & -0.27 & 0.7853 \\ 
+  z & 3.5914 & 1.3786 & 2.61 & 0.0117 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 - x_0 \sim z$, Residual standard error: $5.247$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:51:14 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 13.7195 & 3.6147 & 3.80 & 0.0004 \\ 
+  z & 3.6626 & 1.2251 & 2.99 & 0.0042 \\ 
+  x0 & 0.7713 & 0.0573 & 13.46 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 \sim x_0 + z$, Residual standard error: $4.662$}
+\end{table}
+
+Clearly baseline variable $x_0$ has a strong correlation with the outcome $x_1$. So, it makes sense that model 3 has the least residual standard error, as well as the least standard error of the coefficient of treatment. Models 2 and 3 are better than model 1 since they both include the baseline variable. However, in model 2, instead of estimating the dependence of $x_1$ on $x_0$, we force it to be 1. In other words, model 2 will yield: $x_1 = x_0 + \beta z $, whereas, model 3 would estimate the coefficient of $x_0$ as well. Model 3 would be the best choice. The final conclusion would be that treatment 1 does have have statistically significant contribution to the treatment, when adjusted for baseline. \\
+
+Here, the baseline, $x_0$ is not a confounder because the trial was randomized. However, it is interesting to observe that even after randomization, the baseline variables exhibit a difference in their means and variances between the treatment groups. Response variables $x_1$ and $x_2$ exhibit the differences in the same direction. 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.35, page = 2]{Plot1a.pdf}
+\includegraphics[scale = 0.35, page = 3]{Plot1a.pdf}
+\end{center}
+\caption{Baseline and Response vs Treatments}
+\label{fig:Fig1b}
+\end{figure}
+
+\item[(c)] Below are the model summaries of fitting $x_2$ from three different approaches:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:14:44 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 61.6179 & 2.0630 & 29.87 & 0.0000 \\ 
+  z & 6.8721 & 2.8685 & 2.40 & 0.0200 \\ 
+   \hline
+\end{tabular}
+\caption{Model 1: Fitting $x_2 \sim z$; Residual standard error: $10.92$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:15:45 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.4357 & 2.6931 & 0.16 & 0.8721 \\ 
+  z & 6.5610 & 3.7446 & 1.75 & 0.0852 \\ 
+   \hline
+\end{tabular}
+\caption{Model 2: Fitting $x_2 - x_0 \sim z$, Residual standard error: $14.25$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:16:59 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 52.7430 & 8.4511 & 6.24 & 0.0000 \\ 
+  z & 6.8270 & 2.8644 & 2.38 & 0.0206 \\ 
+  x0 & 0.1451 & 0.1340 & 1.08 & 0.2836 \\ 
+   \hline
+\end{tabular}
+\caption{Model 3: Fitting $x_2 \sim x_0 + z$, Residual standard error: $10.9$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:17:49 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 47.7695 & 9.4652 & 5.05 & 0.0000 \\ 
+  z & 5.4993 & 3.0791 & 1.79 & 0.0797 \\ 
+  x0 & -0.1346 & 0.2768 & -0.49 & 0.6288 \\ 
+  x1 & 0.3625 & 0.3143 & 1.15 & 0.2539 \\ 
+   \hline
+\end{tabular}
+\caption{Model 4: Fitting $x_2 \sim x_0 + x_1 + z$, Residual standard error: $10.87$}
+\end{table}
+ 
+\item[(d)] When fitting $x_2$ with treatment, controlling for baseline does not have any effect on the estimate or standard error of $\beta_z$. In addition to the three approaches suggested a fourth model was fit, where $x_1$ was included as a covariate. However, it did not seem to improve the fit. From fig (\ref{fig:Fig1a}) it is clear that $x_2$ is not as correlated with $x_0$ as $x_1$ is. So, the model fit result is not surprising. \\
+
+For both $x_1$ and $x_2$ models 3 would be the preferred approach, which controls for baseline. The conclusion in both cases is that the treatment does have a statistically significant effect on the response. 
 \end{enumerate}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,6 +177,7 @@
 \item[(c)] 
 \end{enumerate}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,6 +190,7 @@ Let $\hat{\beta}_u$ be the unadjusted estimate of $\beta$, and $\hat{\beta}_a$ b
 \end{eqnarray*}
 $w$ cannot be a confounder because this is a randomized trial.
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -72,6 +200,7 @@ $w$ cannot be a confounder because this is a randomized trial.
 \item[(b)] 
 \end{enumerate}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,6 +279,7 @@ $a_1 = -1.84,\ a_2 = -0.89,\ a_3 = -0.21,\ a_4 = 0.35,\ a_5 = 0.84$
 
 \end{enumerate}
 
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
