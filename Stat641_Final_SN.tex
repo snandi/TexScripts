@@ -166,18 +166,73 @@ Here, the baseline, $x_0$ is not a confounder because the trial was randomized. 
 For both $x_1$ and $x_2$ models 3 would be the preferred approach, which controls for baseline. The conclusion in both cases is that the treatment does have a statistically significant effect on the response. 
 \end{enumerate}
 
-\newpage
+\rule{\textwidth}{1pt}
+\vspace{1in}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item
 \begin{enumerate}
-\item[(a)] 
-\item[(b)] 
-\item[(c)] 
+\item[(a)] The observed failure times are:\\
+Group 1: 8, 11, 21+, 35, 38 \\
+Group 2: 37, 41+, 76, 83+, 119\\
+Below is the observed data, with the scores:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec 16 20:31:08 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & time & status & group & n.risk ($R_j$)& $\frac{1}{R_j}$ & $\frac{1}{R_j}\cdot \delta_{\text{failure}}$ & Score ($C_j$ \\ 
+  \hline
+  1 & 8 & 1 & 1 & 10 & 0.1000 & 0.1000 & -0.9000 \\ 
+  2 & 11 & 1 & 1 & 9 & 0.1111 & 0.2111 & -0.7889 \\ 
+  3 & 21 & 0 & 1 & 8 & 0.1250 & 0.2111 & 0.2111 \\ 
+  4 & 35 & 1 & 1 & 7 & 0.1429 & 0.3540 & -0.6460 \\ 
+  6 & 37 & 1 & 2 & 6 & 0.1667 & 0.5206 & -0.4794 \\ 
+  5 & 38 & 1 & 1 & 5 & 0.2000 & 0.7206 & -0.2794 \\ 
+  7 & 41 & 0 & 2 & 4 & 0.2500 & 0.7206 & 0.7206 \\ 
+  8 & 76 & 1 & 2 & 3 & 0.3333 & 1.0540 & 0.0540 \\ 
+  9 & 83 & 0 & 2 & 2 & 0.5000 & 1.0540 & 1.0540 \\ 
+ 10 & 119 & 1 & 2 & 1 & 1.0000 & 2.0540 & 1.0540 \\ 
+   \hline
+\end{tabular}
+\end{table}
+$T = \sum_{\text{group } 2} C_i = 2.4032$.\\
+
+Below is a histogram of the randomization distribution of the statistic $T = \sum_{\text{group } 2} C_i$, with 10,000 permutations:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.45]{Plot2.pdf}
+\end{center}
+\caption{Randomization distribution of $T$, $T_{\text{obs}} = 2.4032$}
+\label{fig:Fig2a}
+\end{figure}
+So, the randomization p-value is $0.0378$.\\
+
+The variance of the randomization distribution is 1.3897. The $\chi^2(1)$ test statistic is $\frac{T^2_{\text{obs}}}{\Var(T_{\text{randomized}})} = \frac{2.4032^2}{1.3897} = 4.1556$. The chi-square p-value is $\Prob(4.1557 > \chi^2(1)) = 0.0415$.  
+
+\item[(b)] The log-rank test comparing the two groups yields"
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 21:07:29 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & N & Observed & Expected & V4 \\ 
+  \hline
+group=1 & 5 & 3 & 1.3571 & 5.2488 \\ 
+  group=2 & 5 & 1 & 3.3619 & 5.2488 \\ 
+   \hline
+\end{tabular}
+\caption{Log-rank test, p-value: 0.022}
+\end{table}
+With p-value 0.022, reject the null hypothesis of equality of groups. 
+\item[(c)] All three tests yield the same conclusion, rejecting the null hypothesis of equality of the two groups. The log-rank test uses normality assumption. However, with sample size of 5 in each group, this test is not the most suitable. The randomization test should be used.
 \end{enumerate}
 
-\newpage
+\rule{\textwidth}{1pt}
+\vspace{1in}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -190,7 +245,8 @@ Let $\hat{\beta}_u$ be the unadjusted estimate of $\beta$, and $\hat{\beta}_a$ b
 \end{eqnarray*}
 $w$ cannot be a confounder because this is a randomized trial.
 
-\newpage
+\rule{\textwidth}{1pt}
+\vspace{1in}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -200,7 +256,8 @@ $w$ cannot be a confounder because this is a randomized trial.
 \item[(b)] 
 \end{enumerate}
 
-\newpage
+\rule{\textwidth}{1pt}
+\vspace{1in}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -279,7 +336,8 @@ $a_1 = -1.84,\ a_2 = -0.89,\ a_3 = -0.21,\ a_4 = 0.35,\ a_5 = 0.84$
 
 \end{enumerate}
 
-\newpage
+\rule{\textwidth}{1pt}
+\vspace{1in}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Problem 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
