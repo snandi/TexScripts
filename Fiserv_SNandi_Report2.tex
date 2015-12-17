@@ -1,0 +1,389 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+\geometry{left=0.8in, right=0.8in, top=1in, bottom=0.8in}
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+\bibliographystyle{plain}  %Choose a bibliograhpic style
+
+\title{Report 2: Evaluate Impact of LDP}
+\author{Subhrangshu Nandi\\
+  Statistics PhD Student, \\
+%  Research Assistant,
+%  Laboratory of Molecular and Computational Genomics, \\
+  University of Wisconsin - Madison \\
+  nands31@gmail.com}
+\date{December 17, 2015}
+%\date{}
+
+\maketitle
+
+\newpage
+\section*{Analysis of Your Voice survey}
+Answers of 2015 survey outputs of the following categories were analyzed, to detect any impact of LDP training:
+Direct Report Score, Manager Effectiveness, Quality, Trust, Growth and Development, Recognition, Business Acumen, Client Focus, Market Insight and  Communication. Wherever available, their 2014 scores were used as a baseline value for their 2015 numbers. For each category, the following analysis were conducted:
+\begin{enumerate}
+\item Boxplot - To visually detect any difference between people with and without LDP training
+\item T-test - To detect any significant difference in scores between people with and without LDP training
+\item Linear model - To estimate the effect of LDP training on the 2015 scores, controlling for their baseline 2014 scores. 
+\[ y = \beta_0 + \beta_1 x + \beta_2 z\]
+where, $y: $ 2015 score; $x: $ 2014 score of the same person; $z: $ If the person completed LDP or not. In each of the analysis, the null hypothesis is that LDP has not made any difference to their scores. If the coefficient $\beta_2$ is statistically significant (p-value $<$ 0.05), then we reject the null hypothesis, and conclude that LDP did have an impact. 
+
+\end{enumerate}
+Below are the results: \\
+\subsection*{Analysis Results}
+\begin{enumerate}
+\item {\bf{Direct Report Scores}}\\
+% first column
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=1]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test: p-value = 0.0000 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:50 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+  (Intercept) & 0.7022 & 0.0192 & 36.53 & $0.0000^{**}$ \\ 
+  Data2014 & 0.1268 & 0.0217 & 5.85 & $0.0000^{**}$ \\ 
+  LDP No & -0.0521 & 0.0173 & -3.02 & $0.0027^{**}$ \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, t-test, and linear model, suggest that LDP did have an impact in yielding better direct report scores. p-value is 0.0027. 
+\end{minipage}
+
+\item {\bf{Manager Effectiveness}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=2]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.03124 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:50 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.7120 & 0.0201 & 35.39 & 0.0000 \\ 
+  Data 2014 & 0.1446 & 0.0204 & 7.10 & 0.0000 \\ 
+  LDP (No) & -0.0236 & 0.0181 & -1.30 & 0.1924 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Although t-test yields significant different, when controlling for 2014 scores the inference changes. LDP did not seem to improve manager effectiveness.
+\end{minipage}
+
+\item {\bf{Quality}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=3]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.1886 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:50 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.6528 & 0.0188 & 34.79 & 0.0000 \\ 
+  Data 2014 & 0.1249 & 0.0219 & 5.71 & 0.0000 \\ 
+  LDP (No) & -0.0100 & 0.0171 & -0.59 & 0.5579 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Neither the t-test, nor the linear model show any impact of LDP on quality. 
+\end{minipage}
+
+\item {\bf{Trust}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=4]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0066 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:51 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.8397 & 0.0166 & 50.50 & 0.0000 \\ 
+  Data 2014 & 0.0647 & 0.0151 & 4.28 & 0.0000 \\ 
+  LDP (No) & -0.0271 & 0.0145 & -1.87 & 0.0624 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: The t-test is more significant than the linear model results. As per the linear model, LDP did improve trust, but only at a 0.10 significance level (not the conventional 0.05)
+\end{minipage}
+
+\item {\bf{Growth and Development}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=5]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0097 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:51 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.7744 & 0.0194 & 39.82 & 0.0000 \\ 
+  Data 2014 & 0.0953 & 0.0191 & 5.00 & 0.0000 \\ 
+  LDP (No) & -0.0296 & 0.0174 & -1.70 & 0.0890 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: The t-test is more significant than the linear model results. As per the linear model, LDP did improve growth and development, but only at a 0.10 significance level (not the conventional 0.05)
+\end{minipage}
+
+\item {\bf{Recognition}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=6]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.00034 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:51 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.8209 & 0.0189 & 43.47 & 0.0000 \\ 
+  Data 2014 & 0.0821 & 0.0176 & 4.67 & 0.0000 \\ 
+  LDP (No) & -0.0413 & 0.0166 & -2.48 & 0.0134 \\ 
+  \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, the t-test and linear model show very significant impact of LDP in improving recognition. p-value is 0.0134. 
+\end{minipage}
+
+\item {\bf{Business Acumen}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=7]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0000 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 17:22:36 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.7757 & 0.0207 & 37.56 & 0.0000 \\ 
+  Data 2014 & 0.1563 & 0.0190 & 8.23 & 0.0000 \\ 
+  LDP (No) & -0.0557 & 0.0182 & -3.06 & 0.0023 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, the t-test and linear model show very significant impact of LDP in improving business acumen. p-value is 0.0023. 
+\end{minipage}
+
+\item {\bf{Client Focus}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=8]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0011 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:52 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.8509 & 0.0179 & 47.47 & 0.0000 \\ 
+  Data 2014 & 0.0816 & 0.0160 & 5.11 & 0.0000 \\ 
+  LDP (No) & -0.0345 & 0.0157 & -2.19 & 0.0286 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, the t-test and linear model show very significant impact of LDP in improving client focus. p-value is 0.0286. 
+\end{minipage}
+
+\item {\bf{Market Insight}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=9]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0000 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:53 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.7512 & 0.0208 & 36.15 & 0.0000 \\ 
+  Data 2014 & 0.1723 & 0.0192 & 8.97 & 0.0000 \\ 
+  LDP (No) & -0.0448 & 0.0183 & -2.45 & 0.0147 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, the t-test and linear model show very significant impact of LDP in improving market insight. p-value is 0.0147. 
+\end{minipage}
+
+\item {\bf{Communication}}\\
+\begin{minipage}[t]{0.3\textwidth}
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.3, page=10]{BoxPlots-DR.pdf}
+\end{figure}
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.6\textwidth}
+\vspace{0.8cm}
+t-test p-value = 0.0004 \\
+The model fit is:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 14:51:53 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.6574 & 0.0229 & 28.71 & 0.0000 \\ 
+  Data 2014 & 0.1275 & 0.0280 & 4.56 & 0.0000 \\ 
+  LDP (No) & -0.0607 & 0.0211 & -2.87 & 0.0042 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Conclusion: Both, the t-test and linear model show very significant impact of LDP in improving communication. p-value is 0.0042. 
+\end{minipage}
+\end{enumerate}
+
+\section*{Analysis of 2015 Bonus compensation}
+Below are plots of the 2015 bonus compensation broken down by whether the leaders completed LDP training or not, and also, whether they attended SLM training or not.
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.45, page=1]{BoxPlots-Bonus.pdf}
+\includegraphics[scale=0.45, page=2]{BoxPlots-Bonus.pdf}
+\end{figure}
+As is evident, there is not much difference in bonus compensation when broken down by LDP completion. However, SLM seems to have strong influence. Below is a boxplot broken down by LDP and SLM simultaneously.
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.55, page=3]{BoxPlots-Bonus.pdf}
+\end{figure}
+Fitting this model, with SLM and LDP, and controlling for 2014 compensation as a baseline, we have:
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Wed Dec 16 23:42:06 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+  (Intercept) & 47501 & 4731.3547 & 10.04 & 0.0000 \\ 
+  Bonus\_2014 & 0.15 & 0.0448 & 3.35 & 0.0009 \\ 
+  SLMYes & 35607 & 7439.0652 & 4.79 & 0.0000 \\ 
+  LDP.CompletionNo & -7995 & 7070.1123 & -1.13 & 0.2592 \\ 
+  \hline
+\end{tabular}
+\end{table}
+The model fit confirms that although leaders who completed LDP receive an average of \$7,995 higher than those who did not complete LDP, but that difference is not statistically significant. Leaders who attended SLM on an average receive \$35,607 higher than who did not. This difference is statistically significant (p-value = 0).
+
+\section*{Summary}
+Below are the attributes, ranked in order of decreasing impact of LDP
+\begin{table}[H]
+\centering
+\begin{tabular}{l|c|l}
+\hline
+\hline
+Attribute & p-value & Comment \\
+\hline
+Business Acumen 	& 0.0023 & Strongly Significant \\
+Direct Report Score 	& 0.0027 & Strongly significant \\
+Communication 		& 0.0042 & Strongly significant \\
+Recognition 		& 0.0134 & Significant \\
+Market Insight 		& 0.0147 & Significant \\
+Client Focus 		& 0.0286 & Significant \\
+Trust 			& 0.0624 & Somewhat significant \\
+Growth and Development 	& 0.0890 & Somewhat significant \\
+Manager Effectiveness 	& 0.1924 & Not significant \\
+Quality 		& 0.5579 & Not significant \\
+\hline
+\hline
+\end{tabular}
+\end{table}
+
+Bonus compensation in 2015 was more strongly associated with leaders attending SLM and not as much by LDP completion.
+
+\end{document}
