@@ -161,7 +161,7 @@ Here, the baseline, $x_0$ is not a confounder because the trial was randomized. 
 \caption{Model 4: Fitting $x_2 \sim x_0 + x_1 + z$, Residual standard error: $10.87$}
 \end{table}
  
-\item[(d)] When fitting $x_2$ with treatment, controlling for baseline does not have any effect on the estimate or standard error of $\beta_z$. In addition to the three approaches suggested a fourth model was fit, where $x_1$ was included as a covariate. However, it did not seem to improve the fit. From fig (\ref{fig:Fig1a}) it is clear that $x_2$ is not as correlated with $x_0$ as $x_1$ is. So, the model fit result is not surprising. \\
+\item[(d)] When fitting $x_2$ with treatment, controlling for baseline does not have any effect on the estimate or standard error of $\beta_z$. In addition to the three approaches suggested a fourth model was fit, where $x_1$ was included as a co-variate. However, it did not seem to improve the fit. From fig (\ref{fig:Fig1a}) it is clear that $x_2$ is not as correlated with $x_0$ as $x_1$ is. So, the model fit result is not surprising. \\
 
 For both $x_1$ and $x_2$ models 3 would be the preferred approach, which controls for baseline. The conclusion in both cases is that the treatment does have a statistically significant effect on the response. 
 \end{enumerate}
@@ -252,8 +252,10 @@ $w$ cannot be a confounder because this is a randomized trial.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item
 \begin{enumerate}
-\item[(a)] 
-\item[(b)] 
+\item[(a)] Figures (2) and (3) in \cite{larosa2005intensive} illustrate the causal effect of higher dosage (80mg) of atorvastatin on reduction in major cardiovascular events. Table (1) in \cite{larosa2007safety} illustrate the causal effect of higher dosage (80mg) of atorvastatin on reduced levels of LDL cholesterol. However, from these two studies it is not clear if there exists a causal relationship between reduced levels of LDL cholesterol and lower risks of cardiovascular events. 
+
+\item[(b)] The discussion claims that ``observed benefit on major cardiovascular events in TNT is more closely related to achieved 
+on-treatment LDL cholesterol levels than drug dose per se''. However, the data should suggest otherwise. The data illustrates that benefit on major cardiovascular events is impacted by the drug dose, as also displayed in figure (2) in \cite{larosa2005intensive}. 
 \end{enumerate}
 
 \rule{\textwidth}{1pt}
@@ -284,7 +286,24 @@ Hence, the total number of events required is 844 and the expected sample size i
 %If we assume Censoring times, $C_{ij}$ are uniformly distributed on interval $[F - R, F]$, then the expected sample size is given by:
 %\[ n = \frac{(Z_{1-\alpha}+Z_{1-\beta})^ 2 R \bar{\lambda}}{\left(R\bar{\lambda} - e^{-\bar{\lambda}(F - R)} + e^{-\bar{\lambda}F} \right) \xi_0\xi_1(\log r)^2} = \]
 
-\item[(b)] 
+\item[(b)] The hazard rate is $\bar{\lambda} = 0.09$ and the enrollment rate is $R = \frac{3583}{2} = 1791.5$ per year. The expected number of participants at any given time $0 \leq t \leq 2$ is given by 
+\[X(t) = \frac{R}{\bar{\lambda}}(1 - e^{-\bar{\lambda} t)\]
+Hence, the number of events in $t$ is $R\cdot t - X(t)$. After $t = 2$, there is no more enrollment. Hence, the time after study start at which these fractions of events are expected to accrue, are:
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+  \hline
+  Information Fraction &  Number of Events & Expected Time (years) \\ 
+  \hline
+  0.2000 & 169 & 1.48 \\ 
+  0.4000 & 338 & 2.12 \\ 
+  0.6000 & 507 & 2.71 \\ 
+  0.8000 & 676 & 3.34 \\ 
+  1.0000 & 844 & 4.00 \\ 
+  \hline
+\end{tabular}
+\end{table}
+
 \item[(c)] The critical values $b_k$, for $Z_k$ for rejecting $H_0: \mu \geq 0$ are:
 % latex table generated in R 3.2.2 by xtable 1.7-4 package
 % Sat Dec 12 16:16:00 2015
@@ -386,7 +405,7 @@ None of the Z-statistics of interim periods exceed the critical levels, so the s
 
 \item[(d)] The Z-statistics at each of the interim analyses are within the monitoring boundaries, so the trial would not have stopped early on that basis. At the final analysis, the Z crosses the upper boundary, so we would have demonstrated that treatment 1 is superior to treatment 0.
 
-\item[(e)] For stagewise, we need the probability of stopping early plus the probablity of going to the end and observing a final Z at least as large as that observed. Using the upper bounds of the interim periods from part 6(b) and the final upper bound from part 6(c), the stagewise p-value is 0.0100. \\
+\item[(e)] For stage-wise, we need the probability of stopping early plus the probability of going to the end and observing a final Z at least as large as that observed. Using the upper bounds of the interim periods from part 6(b) and the final upper bound from part 6(c), the stage-wise p-value is 0.0100. \\
 
 To estimate the LR orderings p-values, we need to estimate the exit probabilities: \\
 LR1 exit: $0.0001925816$\\
@@ -413,6 +432,10 @@ Since all the conditional powers are above 20\%, the trial would continue till i
 \end{enumerate}
 
 \end{enumerate}
+
+\bibliographystyle{plain} 
+\bibliography{bibTex_Reference_641}
+
 
 \end{document}
 
