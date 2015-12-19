@@ -21,11 +21,14 @@ do
     folderLocal=$FilePath/Seed$Seed1"_"Seed$Seed2
     folderRemote=/home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/$RunID/Seed$Seed1"_"Seed$Seed2
     
+    #rm $folderLocal/Iter*/*.RData
+    #echo "Deleted"
     scp snandi@submit-5.chtc.wisc.edu:$folderRemote/Iter*/*.RData $folderLocal/.
 
     for Iter in `seq $fromIter $toIter`;
       do
-	mv $folderLocal/TStats_Permute_$Iter.RData $folderLocal/Iter$Iter/.
+	mv -f $folderLocal/TStats_Permute_$Iter.RData $folderLocal/Iter$Iter/.
     done
+    echo "Done"
 done < $FILE
 

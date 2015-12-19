@@ -6,14 +6,15 @@
 fromSeed=$1
 toSeed=$2
 Sleep=$3
+RunID=$4
 
 ## Usage: cd /z/Proj/newtongroup/snandi/Simulation_Registration/ShellScripts_forCondor/
-## ./_runCondorSubmit_Null.sh 101 200 120 (fromSeed, toSeed, Sleepseconds)
+## ./_runCondorSubmit_Null.sh 1 20 120 "Run04" (fromSeed, toSeed, Sleepseconds, RunID (Run04 or higher))
 
 for Seed in `seq $fromSeed $toSeed`;
 do
     echo "Starting Seed $Seed"
-    condor_submit /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submit_Seed$Seed.txt
+    condor_submit /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/$RunID/submit_Seed$Seed.txt
     sleep $Sleep
     condor_release snandi
     sleep $Sleep
@@ -24,3 +25,10 @@ do
     condor_release snandi
     sleep $Sleep
 done
+
+for i in `seq 1 50`;
+do
+    condor_release snandi
+    sleep $Sleep
+done
+
