@@ -360,6 +360,30 @@ Fitting this model, with SLM and LDP, and controlling for 2014 compensation as a
 \end{table}
 The model fit confirms that although leaders who completed LDP receive an average of \$7,995 higher than those who did not complete LDP, but that difference is not statistically significant. Leaders who attended SLM on an average receive \$35,607 higher than who did not. This difference is statistically significant (p-value = 0).
 
+In addition to analyzing the bonus amount, the ``percentage bonus allocated'' variable was also analyzed. Below is a plot of this variable:
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.55, page=3]{BoxPlots-Bonus_pct.pdf}
+\end{figure}
+The model fitting bonus percentage is below:
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Mon Dec 21 23:22:38 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-valie \\ 
+  \hline
+(Intercept) & 0.0142 & 0.0055 & 2.58 & 0.0105 \\ 
+  Bonus\_2014\_pct & 0.9355 & 0.0173 & 54.13 & 0.0000 \\ 
+  SLMYes & 0.0175 & 0.0076 & 2.31 & 0.0216 \\ 
+  LDP.CompletionNo & 0.0108 & 0.0072 & 1.49 & 0.1378 \\ 
+   \hline
+\end{tabular}
+\end{table}
+Neither the boxplot, nor the linear model indicate any impact of LDP completion on bonus percentage. 
+
+
 \section*{Summary}
 Below are the attributes, ranked in order of decreasing impact of LDP
 \begin{table}[H]
