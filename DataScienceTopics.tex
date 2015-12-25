@@ -1,0 +1,59 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.8in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Topics for Data Science Internship \& Job Interviews}
+\author{Subhrangshu Nandi}
+\date{}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Prediction}
+Stuff
+
+\section{Regression Trees}
+Stuff
+
+\subsection{Bagging}
+More stuff
+
+\subsection{Boosting}
+More stuff
+
+\subsection{Random Forest}
+More stuff
+
+\section{Vocabulary}
+\begin{itemize}
+\item Generalization error: Out-of-sample error
+\item Resubstitution error: In-sample error
+\item ROC: Receiver operating characteristics
+\end{itemize}
+
+\section{Miscellaneous Notes}
+\begin{itemize}
+\item Types of errors: Sensitivity; Specificity; True positives; False positives; Positive/Negative predicted value (conditional probability)
+\item Common error measures: Mean squared error; median absolute deviation; sensitivity; specificity; accuracy; concordance;
+\item Use R package {\emph{caret}} for most machine learning purposes. R package {\emph{kernlab}} has a lot of data science examples. 
+\item Machine learning algorithm steps: \\ Question $->$ Data $->$ Features $->$ Algorithms $->$ Prediction/Parameters $->$ Evaluation
+\item Prediction is about accurace tradeoffs: in favor of simplicity, interpretability, speed, scalability
+\item Training (60\%), Testing (20\%), Validation (20\%); OR Training (60\%), Testing (40\%)
+\end{itemize}
+\end{document}
+
