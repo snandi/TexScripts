@@ -15,7 +15,8 @@ do
     Seed1=${linearray[0]}
     Seed2=${linearray[1]}
     	    jobID=Seed$Seed1"_"Seed$Seed2
-	    echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07.txt"
+	    #echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07.txt"
+	    echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07_Run07.txt"
 	    echo "VARS $jobID Row=\"$LineNum\""
 	    echo "VARS $jobID Seed1=\"$Seed1\""
 	    echo "VARS $jobID Seed2=\"$Seed2\""
