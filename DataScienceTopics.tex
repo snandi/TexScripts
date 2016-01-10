@@ -24,6 +24,18 @@
 \tableofcontents
 \newpage
 
+\section{Preprocessing}
+\subsection{Principal Component Analysis}
+\begin{itemize}
+\item Reduce number of predictors
+\item Reduce noise
+\item Tackle multicollinearity
+\item Interpretability could be hard
+\item Should use the same PCA in the test and train datasets
+\item Outliers should be removed before PCA
+\end{itemize}
+
+
 \section{Prediction}
 Stuff
 
@@ -54,6 +66,8 @@ More stuff
 \item Machine learning algorithm steps: \\ Question $->$ Data $->$ Features $->$ Algorithms $->$ Prediction/Parameters $->$ Evaluation
 \item Prediction is about accurace tradeoffs: in favor of simplicity, interpretability, speed, scalability
 \item Training (60\%), Testing (20\%), Validation (20\%); OR Training (60\%), Testing (40\%)
+\item Bootstrap could underestimate the error rate. Use the 0.632 Bootstrap to adjust for the error. Refer to Efron\_Tibshirani\_1997\_JASA.
+\item If you transform the variables on the training set, use the exact same transformations on the test set.
 \end{itemize}
 \end{document}
 
