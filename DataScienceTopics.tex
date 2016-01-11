@@ -40,17 +40,43 @@
 Stuff
 
 \section{Regression Trees}
-Stuff
+\begin{itemize}
+\item Easy to interpret
+\item Better performance in non-linear settings
+\item Could lead to overfitting
+\item Hard to estimate uncertainty
+\item Gini index: measure of impurity $1 - \sum\limits_{k = 1}^{K} \hat{p}^2_{mk}$. Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it were randomly labeled according to the distribution of labels in the subset. 
+\end{itemize}
 
-\subsection{Bagging}
-More stuff
-
-\subsection{Boosting}
-More stuff
+\subsection{Bagging - Bootstrap aggregating}
+\begin{itemize}
+\item Resample cases and recalculate predictions; then average or majority votes
+\item Reduced variance
+\item More useful for nonlinear functions
+\end{itemize}
 
 \subsection{Random Forest}
-More stuff
+\begin{itemize}
+\item Similar to bagging, but here, at each resampling, a subset of the features are included in building the trees.
+\item Grow multiple trees and vote
+\item Pros: Highly accurate
+\item Cons: Slow; Poor interpretability; Overfitting
+\end{itemize}
 
+\subsection{Boosting}
+\begin{itemize}
+\item Take $h_i,\dots, h_k$ classifiers and combine them to one classifier, by weighting $f(x) = \text{sgn}\left(\sum\limits_{t=1}^T \alpha_t h_t(x) \right)$
+\item Goal: To minimize error
+\item Popular boosting algorithm: adaboost
+\item Boosting with trees; model based boosting; boosting with generalized additive models.
+\end{itemize}
+
+\subsection{Ensemble methods}
+\begin{itemize}
+\item Combine classifiers from different methods by averaging/voting
+\item Improves accuracy; Reduces interpretability; 
+
+\end{itemize}
 \section{Vocabulary}
 \begin{itemize}
 \item Generalization error: Out-of-sample error
