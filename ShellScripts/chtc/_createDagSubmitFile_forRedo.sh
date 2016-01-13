@@ -3,10 +3,12 @@
 ## This script creates the dag submit file, only for those iterations
 ## which do not have a .RData file
 ## Usage: Go to ~/ChtcRun/Project_CurveReg/Simulation_Registration/Run03/
-## _createDagSubmitFile_forRedo.sh Seeds_Redo.txt "Run04" > dagSubmit_Redo.dag
+## _createDagSubmitFile_forRedo.sh Seeds_Redo.txt "Run04" 0 499 > dagSubmit_Redo.dag
 
 FILE=$1
 RunID=$2
+fromIter=$3
+toIter=$4
 
 echo "CONFIG dagman_config"
 while read line; 
@@ -14,7 +16,7 @@ do
     linearray=( $line )
     Seed1=${linearray[0]}
     Seed2=${linearray[1]}
-    for Iter in `seq 0 999`;
+    for Iter in `seq $fromIter $toIter`;
 	do
     	    jobID=Seed$Seed1"_"Seed$Seed2"_"$Iter
 	    RDataFile="/home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/$RunID/Seed$Seed1"_"Seed$Seed2/Iter$Iter/TStats_Permute_$Iter.RData"

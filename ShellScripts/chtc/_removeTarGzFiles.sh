@@ -1,6 +1,8 @@
 #!/bin/bash
 
-## This script removes the condor output and log files, to create more space
+## This script removes the RLIBS.tar.gz files produced by condor outputs
+## Usage: Go to the desired RunID folder and do:
+## _removeTarGzFiles.sh SeedsForPower.txt "Run08_6"
 
 FILE=$1
 RunID=$2
@@ -15,13 +17,8 @@ do
 
     folder=/home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/$RunID/Seed$Seed1"_"Seed$Seed2
     
-    if (( $i < 1253 )) 
+    if (( $i < 1500 )) 
 	then
-	    rm $folder/Log*.log
-	    rm $folder/Iter*/*.out
-	    rm $folder/Iter*/*.err
-	    rm $folder/Iter*/*.log
-	    rm $folder/Iter*/CURLTIME*
 	    rm $folder/Iter*/*.tar.gz
 
 	    echo $folder

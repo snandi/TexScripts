@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## This script removes the condor output and log files, to create more space
+## This script removes all condor outputs for re-running the whole simulation
 
 FILE=$1
 RunID=$2
@@ -17,12 +17,8 @@ do
     
     if (( $i < 1253 )) 
 	then
-	    rm $folder/Log*.log
-	    rm $folder/Iter*/*.out
-	    rm $folder/Iter*/*.err
-	    rm $folder/Iter*/*.log
-	    rm $folder/Iter*/CURLTIME*
-	    rm $folder/Iter*/*.tar.gz
+	    rm $folder/Iter*/*
+	    rm -rf $folder/*
 
 	    echo $folder
     fi
