@@ -1,0 +1,79 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 And 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.8in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\bibliographystyle{plain}  %Choose a bibliograhpic style
+
+\title{Statistical framework of Fluoroscanning \\ (the next generation precision genomics)}
+\author{{\Large{Subhrangshu Nandi}}\\
+  Statistics PhD Student, \\
+  Research Assistant, \\
+  Laboratory of Molecular and Computational Genomics, \\
+  University of Wisconsin - Madison}
+\date{February 16, 2015}
+
+\maketitle
+
+\section*{Abstract}
+The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion. Nanocoding \cite{Jo_etal_2007_PNAS} (PNAS, 2007), developed by Laboratory of Molecular and Computational Genomics (LMCG), UW Madison , is a novel system for physically mapping genomes, using measurements of single DNA molecules to construct a high-resolution genome-wide restriction map, whose representation of genome structure complements genome sequences to yield biological insight. Nanocoding is scalable, robust, reliable system that
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\newpage
+
+\section{Introduction}
+\subsection{Motivation}
+The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion. DNA sequencing-based genomic analysis continue to evolve, but their abilities to detect large scale structural variations, or heterozygosity in diploid genomes, remain limited. Next generation sequencing (NGS) is considerable more cost effective, with longer reads, but still have difficulty inferring repetitive structures and duplications \cite{Lander_etal_2001_Nature}, further complicated by gaps and errors in the reference genome. NGS also has inferior sensitivity of detecting heterozygotes \cite{Wheeler_etal_2008_Nature}. In addition, the sheer size of the diploid human genome (6 gigabases) presents multiple challenges of just using NGS technologies to analyze its complexities. The analysis of cancer genomes is made even more complex by the accumulation of large and small-scale structural variations (SVs), and genotype heterogeneity fostered by on-going mutagenesis processes, especially apparent in in solid tumor. Given the current need for comprehensively analyzed human and cancer genomes that are readily created, contemporary sequencing and mapping approaches are insufficient to meet these challenges. In order to achieve our dreams of improving healthcare by precision genomics we need techniques that can overcome the shortcomings of NGS, yet, maintaining economic viability. The answer lies in the latest developments of single molecule genome mapping techniques like optical mapping \cite{Dimalanta_etal_2004_AnalChem}, \cite{Teague_etal_2010_PNAS}, and nanocoding \cite{Jo_etal_2007_PNAS}. 
+
+\subsection{Background} 
+Old spectroscopic papers; \\
+DNA melting experiments—optically assessed; \\
+Genome mapping  (Optical Mapping, Nanocoding) \\
+
+\subsection{Discovery of a new effect}
+Sequence/dye interactions produce reproducible fluoresce intensity profiles when optically measured along the axis of individual DNA molecules. Variables include DNA stretch, specific dye, dye/DNA ratio (stoichiometry)
+
+\subsection{Research question}
+
+\section{Fluorescence Intensity Profiles}
+Show examples of fluorescence intensity profiles—human (MM52), M. florum,  BACs
+\begin{itemize}
+\item Noise considerations (select a set of noise metrics—explain them, justify them and use them consistently throughout the manuscript) that stem from: stretching (show analysis that links stretching with fluorescence signal information content (this curve may look parabolic…..), amount of dye, staing techniques….How fluorescence signals are measured and pre-processed—METHODS SECTION (INCA, etc.)
+\item Dealing with noise (Introduction)—Systematic vs. random effects. How a signal consensus making approach deals must deal with types of noise through preprocessing (automated ranking of fluorescence signal QUAILTY (mathematical, morphological analysis): uneven stretching, dispersed stretching within an interval dataset, extraneous noise (“fluorescent garbage,” nearby molecules , crossing molecules, etc.). 
+\item The Consensus algorithm- Outline algorithm, describe in detail, pseudocode???……..examples of synthetic data, data comparisons using previously. Explain how variants of this algorithm/analysis have been used in other applications…
+\item Preprocessing to improve consensus signal making— Describe both mathematical and computational algorithms and workflow. Comparison and analysis of examples drawn from human, synthetic, M. florum, and BAC data, showing how more confident fluoroscans emerge from considered filtering. Use noise metrics to prove this point.
+\end{itemize}
+
+\section*{Reproducible Fluorescence Intensity signals}
+Discuss mathematics of curve registration, and estimation of consensus signals
+Discuss estimation of consensus profiles for any region on the genome
+
+\section*{Uniqueness of Fluorescence Intensity Profiles}
+Discuss the statistics of establishing uniqueness of consensus signals
+
+\section*{Application: Detecting Insertion}
+
+\section*{Application: Detecting Heterozygosity}
+
+\section*{Conclusion}
+
+\newpage
+\bibliography{bibTex_Reference}
+
+\end{document}
+
