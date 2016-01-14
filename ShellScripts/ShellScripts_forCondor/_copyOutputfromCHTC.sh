@@ -2,12 +2,12 @@
 
 ## This file copies CHTC condor outputs into the biostat folders
 ## Usage: cd into ShellScripts_forCondor/ 
-## _copyOutputFromCHTC.sh ../Run03/SeedsForPower.txt 'Run03'
+## _copyOutputFromCHTC.sh ../Run03/SeedsForPower.txt 'Run03' 499
 
 FILE=$1
 RunID=$2
 fromIter=0
-toIter=999
+toIter=$3
 
 FilePath=/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID
 

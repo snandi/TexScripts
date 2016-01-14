@@ -5,6 +5,8 @@
 
 FILE=$1
 RunID=$2
+fromIter=$3
+toIter=$4
 
 while read line; 
 do
@@ -20,11 +22,11 @@ do
     #echo "$folder/Iter0"
     if [ ! -d "/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID/$folder/Iter0" ]; then
 	echo "Creating Iter folders.."
-     	/z/Proj/newtongroup/snandi/Simulation_Registration/ShellScripts_forCondor/_createIterFolders.sh 0 999
+     	/z/Proj/newtongroup/snandi/Simulation_Registration/ShellScripts_forCondor/_createIterFolders.sh $fromIter $toIter
     fi
-    if [ ! -d "/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID/$folder/Iter999" ]; then
+    if [ ! -d "/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID/$folder/Iter$toIter" ]; then
 	echo "Creating Iter folders.."
-     	/z/Proj/newtongroup/snandi/Simulation_Registration/ShellScripts_forCondor/_createIterFolders.sh 0 999
+     	/z/Proj/newtongroup/snandi/Simulation_Registration/ShellScripts_forCondor/_createIterFolders.sh $fromIter $toIter
     fi
 done < $FILE
 
