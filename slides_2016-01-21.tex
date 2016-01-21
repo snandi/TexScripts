@@ -1,0 +1,73 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Next generation precision genomics}}}
+\author{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+% Department of Statistics \\
+% University of Wisconsin-Madison}
+%\date{April 21, 2015}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated Registration}
+Similarity index:
+\[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
+
+Let $\phi$ denote the consensus intensity profile for a given set of curves. The objective is to maximize the average similarity to the consensus, i.e., maximize
+\[ \rho_{\phi, N} = \frac{1}{N} \sum \limits_{j = 1}^{N} \rho(\phi, f_j)\]
+Stop iteration when $|\rho_{\phi, N (t+1)} - \rho_{\phi, N (t)} | < \epsilon$
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation example}
+\begin{figure}
+\begin{centering}
+\includegraphics[scale = 0.35, page = 4]{SimData_Seed101.pdf}
+\includegraphics[scale = 0.35, page = 4]{SimData_Seed102.pdf}
+\end{centering}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simulation Results: Power increase}
+\begin{figure}
+\begin{centering}
+\includegraphics[scale = 0.33, page = 2]{pValue_Comparison_Between1To1200.pdf}
+\includegraphics[scale = 0.33, page = 3]{pValue_Comparison_Between1To1200.pdf}
+\end{centering}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simultaneous Registration and Clustering}
+\begin{enumerate}
+
+\end{enumerate}
+
+\end{frame}
+\end{document}
+
