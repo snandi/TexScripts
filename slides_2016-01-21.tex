@@ -35,8 +35,8 @@ Similarity index:
 where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
 
 Let $\phi$ denote the consensus intensity profile for a given set of curves. The objective is to maximize the average similarity to the consensus, i.e., maximize
-\[ \rho_{\phi, N} = \frac{1}{N} \sum \limits_{j = 1}^{N} \rho(\phi, f_j)\]
-Stop iteration when $|\rho_{\phi, N (t+1)} - \rho_{\phi, N (t)} | < \epsilon$
+\[ \bar{\rho}_{\phi, N} = \frac{1}{N} \sum \limits_{j = 1}^{N} \rho(\phi, f_j)\]
+Stop iteration when $|\bar{\rho}_{\phi, N (t+1)} - \bar{\rho}_{\phi, N (t)} | < \epsilon$
 \end{frame}
 
 %%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
@@ -61,13 +61,65 @@ Stop iteration when $|\rho_{\phi, N (t+1)} - \rho_{\phi, N (t)} | < \epsilon$
 \end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{Simulation Results: Before/After}
+\begin{figure}
+\begin{centering}
+\includegraphics[scale = 0.45, page = 4]{pValue_Comparison_Between1To1200.pdf}
+\end{centering}
+\end{figure}
+\end{frame}
+
 %%%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Simultaneous Registration and Clustering}
 \begin{enumerate}
-
+\item Eliminate outliers by using ``data-depth''
+\item Check if multiple clusters is better than one $\bar{\rho}_{\{\phi_1, \phi_2\}, N} > \bar{\rho}_{\phi, N}$
+\item Model based, or k-means to get initial clusters, based on pairwise distances between curves
+\item Estimate the medians, and ajust the clusters based on distance between medians and cluster members
+\item Register to the median, re-evaluate the distances between medians and cluster members
+\item Iterate until not much improvement in overall similarity index
+\item Goal: To maximize $\bar{\rho}_{\{\phi_1, \phi_2\}, N}$
 \end{enumerate}
-
 \end{frame}
+
+%%%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Functional Data Depth}
+The univariate depth of the point $x_i(t)$ is given by
+\[ D_n(x_i(t)) = 1 - \left| \frac{1}{2} - F_{n,t} (x_i (t)) \right| \]
+where, $F_{n,t} (x_i (t)) = \frac{1}{n}\sum\limits_{k=1}^{n}\Ind\{ x_k(t) \leq x_i(t)\}$ is the empirical cdf at $t \in [a,b]$ \\
+Then, Fraiman and Muniz functional data depth is given by
+\[ \text{FMD}_n(x_i) = \int\limits_a^b D_n(x_i(t)) dt\] \\
+To detect outliers:
+\begin{itemize}
+\item Obtain the functional depths $\text{FMD}_n(x_1), \dots, \text{FMD}_n(x_n)$
+\item Let $x_{i_1}, \dots, x_{i_k}$ be the $k$ curves such that $\text{FMD}_n (x_{i_k}) \leq C$, for a given cutoff $C$. Then, assume that $x_{i_1}, \dots, x_{i_k}$ are outliers and delete them from the sample.
+\item Repeat until no more outliers
+\item {\emph{But, how do you estimate the cutoff $C$}}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers using Functional Data Depth}
+\begin{itemize}
+\item Obtain the functional depths $\text{FMD}_n(x_1), \dots, \text{FMD}_n(x_n)$
+\item Obtain $B$ standard bootstrap samples of size $n$ from the dataset of curves obtained after deleting the $\alpha \%$ less deepest curves. The bootstrap samples are denoted by $x_i^b$, for $i = 1, \dots, n$ and $b = 1, \dots, B$.
+\item For each bootstrap set $b = 1, \dots, B$, obtain $C^b$ as the empirical $1\%$ percentile of the distribution of the depths, $D(x_i^b), i = 1, \dots, n$.
+\item Take $C$ as the median values of $C^b, b = 1, \dots, B$.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers using Functional Data Depth}
+\begin{figure}
+\includegraphics[scale = 0.27]{Plot0.pdf} \\
+\includegraphics[scale = 0.27]{Plot1.pdf}
+\end{figure}
+\end{frame}
+
 \end{document}
 
