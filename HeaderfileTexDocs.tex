@@ -7,31 +7,38 @@
 \usepackage{animate}
 \usepackage{bbold}
 %\usepackage{bigints}
+\usepackage{caption}    %% For multiple line captions
 \usepackage{color, colortbl}
 \usepackage{dsfont}
 \usepackage{enumerate}
 \usepackage[mathscr]{eucal}
 %\usepackage{fancyhdr}
 \usepackage{float}
-%\usepackage{fullpage} %% Dont use this for beamer presentations
+%\usepackage{fullpage}  %% Dont use this for beamer presentations
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{indentfirst}
 \usepackage{latexsym}
 \usepackage{listings}
+\usepackage{longtable}  %% to add pagebreaks in between table
 \usepackage{lscape}
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{multirow}
 \usepackage{natbib}
 \usepackage{pdfpages}
+\usepackage{setspace}   %% Allows to set double or single space
+\usepackage{tcolorbox}  %% For colored textboxes
 \usepackage{verbatim}
 \usepackage{wrapfig}
 \usepackage{xargs}
 \usepackage{xcolor}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
+
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}  %% For wrapping text in table headers
 
 %%%%%%%%%%%%%%%%%%%%%%%% Commands %%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\Sup}{\textsuperscript}
@@ -44,6 +51,7 @@
 %\newcommand{\G}{\mathcal{G}}
 \newcommand{\I}{\mathcal{I}}
 \newcommand{\R}{\mathcal{R}}
+\newcommand{\Y}{\mathcal{Y}}
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\be}{\begin{equation}}
 \newcommand{\ee}{\end{equation}}
@@ -72,3 +80,5 @@
 \newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
 \newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
 \newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
