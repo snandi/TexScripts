@@ -6,8 +6,8 @@
 
 FILE=$1
 RunID=$2
-fromIter=0
-toIter=$3
+fromIter=$3
+toIter=$4
 
 FilePath=/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID
 

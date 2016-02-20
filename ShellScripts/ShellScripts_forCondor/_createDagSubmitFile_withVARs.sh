@@ -2,10 +2,11 @@
 
 ## This script creates the dag submit file, example dagSubmit.dag 
 ## Go to /z/Proj/newtongroup/snandi/Simulation_Registration/Run04/
-## ../ShellScripts_forCondor/_createDagSubmitFile_withVARS.sh SeedsForPower.txt "Run07" > dagSubmit_Run07_2015-12-19.dag
+## ../ShellScripts_forCondor/_createDagSubmitFile_withVARS.sh SeedsForPower.txt "Run07" "submitFile_VAR_RS10-11_Run08_6-SingleIter.txt" > dagSubmit_Run08_2016-02-17.dag
 
 FILE=$1
 RunID=$2
+submitFile=$3
 
 LineNum=0
 echo "CONFIG dagman_config"
@@ -17,7 +18,8 @@ do
     Seed2=${linearray[1]}
     	    jobID=Seed$Seed1"_"Seed$Seed2
 	    #echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07.txt"
-	    echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07_$RunID.txt"
+	    #echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/submitFile_VAR_RS10-07_$RunID.txt"
+	    echo "JOB $jobID /z/Proj/newtongroup/snandi/Simulation_Registration/RScripts_forCondor/SubmitFiles/submitFiles_bcg/$submitFile"
 	    echo "VARS $jobID Row=\"$LineNum\""
 	    echo "VARS $jobID Seed1=\"$Seed1\""
 	    echo "VARS $jobID Seed2=\"$Seed2\""
