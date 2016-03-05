@@ -1,0 +1,94 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+\logo{\includegraphics[scale=0.4]{uwlogo_web_sm_fl_wht.png}}
+%\logo{\includegraphics[width=\beamer@sidebarwidth,height=\beamer@headheight]{uwlogo_web_sm_fl_wht.png}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Functional outliers]{Detecting outliers in functional data}
+\author[S. Nandi]{Subhrangshu Nandi}
+\institute[UW Madison]{
+Department of Statistics \\
+University of Wisconsin-Madison \\
+\vspace{1cm}
+ENAR 2016}
+\date{March 8, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\setbeamertemplate{logo}{}
+
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Objective of this talk}
+{\Large{
+\begin{enumerate}
+\item Explore some functional data depth concepts
+\vspace{0.5cm}
+\item Use them to detect outliers (distant realizations) in functional data
+\vspace{0.5cm}
+\item Apply them to an image-processing data of cells
+\end{enumerate}
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{What the data looks like}
+
+%\begin{figure}
+%\includegraphics
+%\end{figure}
+
+\begin{block}{Goal of the project}
+To estimate a consensus profile of these realizations
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers in univariate data}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\centering
+\includegraphics[scale = 0.45]{Outliers_Univ/Slide1.PNG}
+\end{figure}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers in bivariate data}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\centering
+\includegraphics[scale = 0.38]{Outliers_Univ/Slide2.PNG}
+\end{figure}
+\vspace{-0.5cm}
+{\footnotesize{Need a measure of multivariate depth in $\Real ^ p$}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
