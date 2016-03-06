@@ -22,12 +22,17 @@
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \title[Functional outliers]{Detecting outliers in functional data}
-\author[S. Nandi]{Subhrangshu Nandi}
-\institute[UW Madison]{
-Department of Statistics \\
-University of Wisconsin-Madison \\
-\vspace{1cm}
-ENAR 2016}
+\author[S. Nandi]{Subhrangshu Nandi \inst{1} \and Chengyue Wu \inst{2} \and Alicia Nieto-Reyes \inst{3} \and Michael A. Newton \inst{1}} 
+\institute[UW Madison]{\inst{1} University of Wisconsin-Madison \and %
+                      \inst{2} University of Science and Technology of China \and %
+                      \inst{3} Universidad de Cantabria}
+
+%\author[S. Nandi]{Subhrangshu Nandi}
+%\institute[UW Madison]{
+%Department of Statistics \\
+%University of Wisconsin-Madison \\
+%\vspace{1cm}
+%ENAR 2016}
 \date{March 8, 2016}
 
 \begin{document}
@@ -55,9 +60,9 @@ ENAR 2016}
 \begin{frame}
 \frametitle{What the data looks like}
 
-%\begin{figure}
-%\includegraphics
-%\end{figure}
+\begin{figure}
+\includegraphics[scale = 0.3, page = 2]{Plots/chr13_frag66.pdf}
+\end{figure}
 
 \begin{block}{Goal of the project}
 To estimate a consensus profile of these realizations
@@ -237,8 +242,73 @@ We need to select $C$ such that in the absence of outliers, \[ \Prob\left( D_n(y
 \frametitle{Application to image processing data}
 \Large
 \begin{block}{Comparison of outliers by different depth functions}
-Critical: We need to minimize type-II-error!
+\begin{enumerate}
+\item Detect outliers by image processing
+\item Detect outliers by different data depths
+\item Choose technique that maximizes power
+\end{enumerate}
 \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Case study: application to sample of 23 curves}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\includegraphics[scale = 0.23, page = 3]{Plots/OutlierComparisons_66.pdf}
+\hspace{0.5cm}
+\includegraphics[scale = 0.23, page = 4]{Plots/OutlierComparisons_66.pdf} \\
+\includegraphics[scale = 0.23, page = 6]{Plots/chr13_frag66.pdf}
+\hspace{0.5cm}
+\includegraphics[scale = 0.23, page = 7]{Plots/chr13_frag66.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Results}
+\begin{itemize}
+\item Outlier comparison applied to 144 samples, each with at least 20 curves
+\item Images of each curve analyzed, and tagged as ``Poor'' or ``Good'' quality
+\item Curves were normalized by its median, smoothed by B-spline ($4^{th}$ order)
+\item Outliers of all samples were estimated by four different data-depth methods
+\item Power of outlier detection was estimated
+\end{itemize}
+Total image processed outliers: 373 (11.2\% of all samples) \\
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Sun Mar  6 00:30:24 2016
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+  \hline
+  Depth function & Outliers & Power \\ 
+  \hline
+  FMD & 34 & 9.12 \\ 
+  h-Mode & 64 & 17.16 \\ 
+  RTukey & 70 & 18.77 \\ 
+  RProj & 73 & 19.57 \\ 
+  Union & 121 & 32.44 \\ 
+  \hline
+  \hline
+\end{tabular}
+\end{table}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+%\small
+\item Outlier detection in functional data significantly more challenging
+\item Different techniques have different strengths and weaknesses
+\item Outliers should be further investigated, instead of being discarded from the data
+\item Outlier detection may not be robust to choice of smoothing techniques
+\end{itemize}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
