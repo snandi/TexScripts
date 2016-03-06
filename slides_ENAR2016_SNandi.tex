@@ -83,10 +83,162 @@ To estimate a consensus profile of these realizations
 \vspace{-0.5cm}
 \begin{figure}[t]
 \centering
+\includegraphics[scale = 0.38]{Plots/Plot2.jpg}
+\end{figure}
+\vspace{-0.5cm}
+How to detect an outlier (or distant observation) in a bivariate data?
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers in bivariate data}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\centering
 \includegraphics[scale = 0.38]{Outliers_Univ/Slide2.PNG}
 \end{figure}
 \vspace{-0.5cm}
-{\footnotesize{Need a measure of multivariate depth in $\Real ^ p$}}
+Need a measure of multivariate depth in $\Real ^ p$
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Functional data framework}
+\begin{itemize}
+\item {\emph{A functional random variable}}: $\Y$ takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data.
+\item {\emph{A functional data}} $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$. $y_i = {y_{i,1}, \dots, y_{i,p}}$ are $p$ discretely observed points on the function $y_i$
+\item The abscissa will be denoted by $x$, where the observations $y_{i,1}, \dots, y_{i,p}$ are made at $x_1 \dots x_p$
+\item In our data, each curve will be denoted by $\mathbf{y_i}, \ i = 1, \dots n$
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Functional data depth}
+\LARGE
+\begin{enumerate}
+\item The Fraiman and Muniz depth
+\vspace{0.25in}
+\item The h-modal depth
+\vspace{0.25in}
+\item The random projection depth
+\vspace{0.25in}
+\item The half-space Tukey depth
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{The Fraiman-Muniz depth}
+\small
+\begin{itemize}
+\item The empirical c.d.f. of the values of the curves $y_1(x), \dots , y_n(x)$ at a given position $x \in [a, b]$
+\[ F_{n,x} (y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ y_k(x) \leq y_i(x)\}\]
+\item The univariate depth of a point $y_i(x)$ is given by
+\[ D_n(y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (y_i (x)) \right| \]
+Note the $D_n(y_i(x)) \in [0, \frac{1}{2}]$
+\item Fraiman and Muniz functional depth (FMD), of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is given by 
+\[ \text{FMD}_n(y_i) = \int\limits_a^b D_n(y_i(x)) dx \]
+Note: Higher values of FMD implies deeper curve; lower values of FMD implies more distant from the deepest curve
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{The h-modal depth}
+The h-modal depth of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is given by
+\[ \text{MD}_n(y_i, h) = \sum\limits_{k = 1}^n K\left( \frac{\|y_i - y_k \|}{h} \right),\]
+where, \begin{itemize}
+\item $\|\cdot\| = L^2 \text{ or } L^{\infty}$ norm (for example)
+\item $K(\cdot): \Real^{+} \rightarrow \Real^{+}$ is a kernel function, for example, $K(x) = \frac{2}{\sqrt{2\pi}} \text{exp}\left(-\frac{x^2}{2}\right), t > 0$, the truncated Gaussian kernel;
+\item $h$ reasonable bandwidth, for example, $15^{th}$ percentile of the empirical d.f. of $\{ \|y_i - y_k \|, i, k = 1, \dots n \}$
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{The random projection depth}
+\begin{itemize}
+\item When a sample $y_1, \dots, y_n$ of curves is projected on a random direction $a, a \indep y_i$, with the operation $ \langle a, \mathbf{y} \rangle$ then sample depth of $y_i$ is the rank (univariate depth) of $ \langle a, y_i \rangle$
+\item For example, if $y_i \in \text{ Hilbert space } L^2[0,1]$, then the projection is defined by its standard inner product 
+\[ \langle a, y \rangle = \int\limits_0^1 a(x) y(x) dx\]
+\item The random projection depth of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is defined as
+\[ \text{RPD}_n(y_i) = \frac{1}{P} \sum\limits_{j = 1}^P D_n(\langle a_j, y_i \rangle)\]
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+%\begin{frame}
+%\frametitle{The half-space Tukey depth}
+%
+%\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Depth and Outliers}
+\Large
+\begin{block}{Outliers?}
+How do we detect outliers using these data depth definitions?
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Detect Outliers using depth}
+For a sample of curves $y_1, \dots , y_n$
+\begin{enumerate}
+\item[1] Estimate functional depth $D_n(y_1), \dots , D_n(y_n)$ using any of the above depth functions FMD, MD, RPD, RTD
+\item[2] For a cutoff $C$, if $D_n(y_j) \leq C$, for any $j \in 1, \dots, n$, consider $y_j$ as outliers. Remove them from the sample
+\item[3] Repeat steps [1] and [2] until no outliers are detected
+\end{enumerate}
+\vspace{1cm}
+\begin{block}{What is $C$?}
+Do we know the distributions of the functional data depth estimators?
+\end{block}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{How do we estmate Cutoff $C$?}
+\Large
+\begin{block}{Obtain $C$ by nonparametric bootstrap procedure}
+We need to select $C$ such that in the absence of outliers, \[ \Prob\left( D_n(y_i) \leq C\right) = 0.01,\ \ i = 1, \dots, n \]
+\end{block}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Bootstrap procedure for $C$}
+\begin{enumerate}
+%\small
+\item[1] Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, using any depth function
+\item[2] Obtain $B$ standard bootstrap samples from the curves in which each original curve is sampled with a probability proportional to its depth. Let $y_i^b, i = 1, \dots, n$ and $b = 1, \dots, B$, be these samples.
+\item[3] For each bootstrap, set $b = 1, \dots, B$, obtain $C_b$ as the $\alpha^{th}$ empirical percentile of the distribution of the depths, $D(y_i^b(x)), i = 1, \dots, n$
+\item[4] Take $C = \text{median}(C_b), b = 1, \dots, B$ 
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Application to image processing data}
+\Large
+\begin{block}{Comparison of outliers by different depth functions}
+Critical: We need to minimize type-II-error!
+\end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
