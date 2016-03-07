@@ -59,13 +59,14 @@
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{What the data looks like}
-
+\vspace{-0.5cm}
 \begin{figure}
 \includegraphics[scale = 0.3, page = 2]{Plots/chr13_frag66.pdf}
 \end{figure}
 
+\vspace{-0.5cm}
 \begin{block}{Goal of the project}
-To estimate a consensus profile of these realizations
+To estimate a consensus profile (some measure of average) of these realizations (curves)
 \end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -84,11 +85,24 @@ To estimate a consensus profile of these realizations
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Concept of Depth in univariate data}
+\begin{itemize}
+\item For a set of $n$ distinct points $x_1, x_2, \dots, x_n \in \Real$, the depth of a point $x \in \Real$ is
+\[ d(x) = \min(\sum \limits_{i = 1}^n \Ind\{ x_i \leq x\}, \sum \limits_{i = 1}^n \Ind\{ x_i \geq x\}) \]
+\vspace{0.5cm}
+\item {\bf{Median}} is the point of maximum depth. 
+\[ d(\text{Median}\left(x_1, \dots, x_n)\right) = \floor{\frac{n + 1}{2}} \]
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Outliers in bivariate data}
 \vspace{-0.5cm}
 \begin{figure}[t]
 \centering
-\includegraphics[scale = 0.38]{Plots/Plot2.jpg}
+\includegraphics[scale = 0.3]{Plots/Plot2.jpg}
 \end{figure}
 \vspace{-0.5cm}
 How to detect an outlier (or distant observation) in a bivariate data?
@@ -101,10 +115,10 @@ How to detect an outlier (or distant observation) in a bivariate data?
 \vspace{-0.5cm}
 \begin{figure}[t]
 \centering
-\includegraphics[scale = 0.38]{Outliers_Univ/Slide2.PNG}
+\includegraphics[scale = 0.3]{Outliers_Univ/Slide2.PNG}
 \end{figure}
 \vspace{-0.5cm}
-Need a measure of multivariate depth in $\Real ^ p$
+Need a measure of multivariate depth in $\Real ^ p$ and depth of ``functional'' data
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -113,9 +127,9 @@ Need a measure of multivariate depth in $\Real ^ p$
 \frametitle{Functional data framework}
 \begin{itemize}
 \item {\emph{A functional random variable}}: $\Y$ takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data.
-\item {\emph{A functional data}} $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$. $y_i = {y_{i,1}, \dots, y_{i,p}}$ are $p$ discretely observed points on the function $y_i$
+\item {\emph{A functional data}} $Y_1, \dots, Y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$, where $\Y_i \stackrel{iid}{\sim} \Y$. $Y_i = {y_{i,1}, \dots, y_{i,p}}$ are $p$ discretely observed points of the function $\Y_i$
 \item The abscissa will be denoted by $x$, where the observations $y_{i,1}, \dots, y_{i,p}$ are made at $x_1 \dots x_p$
-\item In our data, each curve will be denoted by $\mathbf{y_i}, \ i = 1, \dots n$
+\item In our data, each curve will be denoted by $Y_i, \ i = 1, \dots n$
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,9 +157,11 @@ Need a measure of multivariate depth in $\Real ^ p$
 \begin{itemize}
 \item The empirical c.d.f. of the values of the curves $y_1(x), \dots , y_n(x)$ at a given position $x \in [a, b]$
 \[ F_{n,x} (y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ y_k(x) \leq y_i(x)\}\]
+\pause
 \item The univariate depth of a point $y_i(x)$ is given by
 \[ D_n(y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (y_i (x)) \right| \]
-Note the $D_n(y_i(x)) \in [0, \frac{1}{2}]$
+Note the $D_n(y_i(x)) \in [0, 1]$
+\pause
 \item Fraiman and Muniz functional depth (FMD), of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is given by 
 \[ \text{FMD}_n(y_i) = \int\limits_a^b D_n(y_i(x)) dx \]
 Note: Higher values of FMD implies deeper curve; lower values of FMD implies more distant from the deepest curve
@@ -171,8 +187,10 @@ where, \begin{itemize}
 \frametitle{The random projection depth}
 \begin{itemize}
 \item When a sample $y_1, \dots, y_n$ of curves is projected on a random direction $a, a \indep y_i$, with the operation $ \langle a, \mathbf{y} \rangle$ then sample depth of $y_i$ is the rank (univariate depth) of $ \langle a, y_i \rangle$
+\pause
 \item For example, if $y_i \in \text{ Hilbert space } L^2[0,1]$, then the projection is defined by its standard inner product 
 \[ \langle a, y \rangle = \int\limits_0^1 a(x) y(x) dx\]
+\pause
 \item The random projection depth of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is defined as
 \[ \text{RPD}_n(y_i) = \frac{1}{P} \sum\limits_{j = 1}^P D_n(\langle a_j, y_i \rangle)\]
 \end{itemize}
@@ -206,6 +224,7 @@ For a sample of curves $y_1, \dots , y_n$
 \item[3] Repeat steps [1] and [2] until no outliers are detected
 \end{enumerate}
 \vspace{1cm}
+\pause
 \begin{block}{What is $C$?}
 Do we know the distributions of the functional data depth estimators?
 \end{block}
@@ -230,8 +249,11 @@ We need to select $C$ such that in the absence of outliers, \[ \Prob\left( D_n(y
 \begin{enumerate}
 %\small
 \item[1] Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, using any depth function
+\pause
 \item[2] Obtain $B$ standard bootstrap samples from the curves in which each original curve is sampled with a probability proportional to its depth. Let $y_i^b, i = 1, \dots, n$ and $b = 1, \dots, B$, be these samples.
+\pause
 \item[3] For each bootstrap, set $b = 1, \dots, B$, obtain $C_b$ as the $\alpha^{th}$ empirical percentile of the distribution of the depths, $D(y_i^b(x)), i = 1, \dots, n$
+\pause
 \item[4] Take $C = \text{median}(C_b), b = 1, \dots, B$ 
 \end{enumerate}
 \end{frame}
@@ -258,9 +280,12 @@ We need to select $C$ such that in the absence of outliers, \[ \Prob\left( D_n(y
 \begin{figure}[t]
 \includegraphics[scale = 0.23, page = 3]{Plots/OutlierComparisons_66.pdf}
 \hspace{0.5cm}
+\pause
 \includegraphics[scale = 0.23, page = 4]{Plots/OutlierComparisons_66.pdf} \\
 \includegraphics[scale = 0.23, page = 6]{Plots/chr13_frag66.pdf}
+\pause
 \hspace{0.5cm}
+\pause
 \includegraphics[scale = 0.23, page = 7]{Plots/chr13_frag66.pdf}
 \end{figure}
 \end{frame}
@@ -276,6 +301,7 @@ We need to select $C$ such that in the absence of outliers, \[ \Prob\left( D_n(y
 \item Outliers of all samples were estimated by four different data-depth methods
 \item Power of outlier detection was estimated
 \end{itemize}
+\pause
 Total image processed outliers: 373 (11.2\% of all samples) \\
 % latex table generated in R 3.2.2 by xtable 1.8-0 package
 % Sun Mar  6 00:30:24 2016
