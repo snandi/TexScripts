@@ -24,52 +24,65 @@
 
 
 \section*{Abstract}
-The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion. Nanocoding \cite{Jo_etal_2007_PNAS} (PNAS, 2007), developed by Laboratory of Molecular and Computational Genomics (LMCG), UW Madison , is a novel system for physically mapping genomes, using measurements of single DNA molecules to construct a high-resolution genome-wide restriction map, whose representation of genome structure complements genome sequences to yield biological insight. Nanocoding is scalable, robust, reliable system that
+We will do this last and need to contour it for the journal we wish to publish with
+
+%% The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion. Nanocoding \cite{Jo_etal_2007_PNAS} (PNAS, 2007), developed by Laboratory of Molecular and Computational Genomics (LMCG), UW Madison, is a novel system for physically mapping genomes. It uses measurements of single DNA molecules to construct a high-resolution genome-wide restriction map, whose representation of genome structure complements genome sequences to yield biological insight. Staining the DNA molecules with cyanine dyes and imaging them are essential procedural requirements of nanocoding. The quantum yield of the fluorescence intensity of these stained molecules are DNA sequence dependent. In fact, for dye complexed with GC-rich DNA sequences the quantum yield are about twice as large as for those complexed with AT-rich sequences. Hence, regions with distinct genomic sequence compositions should exhibit unique fluorescence intensity profiles. Establishing the fluorescence intensity profiles of a genome would provide invaluable insights into its sequence compositions without having to sequence it. This is akin to producing a mp3 version of a wave file, an approximation of the true sequence, yet preserving the salient characteristics. This newly discovered technique is named ``Fluoroscanning''. Fluoroscanning can be applied to analyzing whole genomes. For example, imaged DNA molecules from the same region on a genome should exhibit similar intensity profiles, unless there has been a modification in the underlying genomic sequence. Fluoroscanning can also be used to identify heterozygotes and detect large scale structural variations as a result of cancer or other diseases. In the quest of establishing fluoroscanning as the next generation precision genomics we need to address some interesting statistical and computational challenges. In this thesis we apply some aspects of functional data analysis, like curve registration, to establish reproducibility and uniqueness of fluorescence intensity profiles. We also show how fluroscanning can detect structural variations and heterozygotes in a dataset collected from a cancer genome.
 
 \newpage
 
-\section*{Motivation}
-The Human Genome Project (HGP), completed in 2003, is considered one of the greatest accomplishments of exploration in history of science. Since then thousands of genomes have been sequenced. However, no individual human genome has been annotated to completion. DNA sequencing-based genomic analysis continue to evolve, but their abilities to detect large scale structural variations, or heterozygosity in diploid genomes, remain limited. Next generation sequencing (NGS) is considerable more cost effective, with longer reads, but still have difficulty inferring repetitive structures and duplications \cite{Lander_etal_2001_Nature}, further complicated by gaps and errors in the reference genome. NGS also has inferior sensitivity of detecting heterozygotes \cite{Wheeler_etal_2008_Nature}. In addition, the sheer size of the diploid human genome (6 gigabases) presents multiple challenges of just using NGS technologies to analyze its complexities. The analysis of cancer genomes is made even more complex by the accumulation of large and small-scale structural variations (SVs), and genotype heterogeneity fostered by on-going mutagenesis processes, especially apparent in in solid tumor. The sequencing technologies currently being used were developed  primarily for characterization of single genes, not entire genomes and, as such, are not ideal to analyze polygenic diseases, complex trait inheritance, and population-based molecular genetics \cite{Samad_etal_1995_GenomeResearch}. Given the current need for comprehensively analyzed human and cancer genomes that are readily created, contemporary sequencing and mapping approaches are insufficient to meet these challenges. In order to achieve our dreams of improving healthcare by precision genomics we need techniques that can overcome the shortcomings of NGS, yet, maintaining economic viability. The answer lies in the latest developments of single molecule genome mapping techniques like optical mapping and nanocoding. 
-
-\section*{Background} 
-\noindent
-{\bf{Optical Mapping}} \\
-Pioneered by LMCG, single molecule genome mapping techniques like optical mapping \cite{Schwartz_etal_1993_Science}, \cite{Dimalanta_etal_2004_AnalChem}, and nanocoding \cite{Jo_etal_2007_PNAS} have changed the landscape of whole genome analysis. Optical Mapping is a novel platform for analyzing genomes: it uses measurements of single DNA molecules to infer a high-resolution genome-wide restriction map, whose representation of genome structure complements genome sequence to yield biological insight. Briefly, DNA from thousands of cells in solution is randomly sheared to produce pieces that are around 500 Kb long. The solution is then passed through a micro-channel, where the DNA molecules are stretched and then attached to a positively charged glass support. A restriction enzyme is then applied, cleaving the DNA at corresponding restriction sites. The DNA molecules remain attached to the surface. The surface is photographed under a microscope after being stained with a fluorochrome. The cleavage sites show up in the image as tiny gaps in the fluorescent line of the molecule, giving an snapshot of the full restriction map. Even though these molecules are large by many standards, they may still represent only a small fraction of the chromosome they come from. Naturally, the amount of information in an optical map data set is related to the size of the underlying genome. 
-
-Information about genomic variation can thus be obtained from these restriction maps, that do not record the full nucleotide sequence. A physical map is a listing of the locations along the genome where certain markers occur. A restriction map is a physical map induced by restriction enzymes. The ordered sequence of distances in base pairs between successive marker positions summarizes the genome sequence and can be viewed as a sort of bar code of the genome. Genomic differences can affect the presence or absence of markers, the distances between them and their orientation, inducing analogous changes in the bar code. Having a reference copy of the human genome allows us to perform such {\emph{in silico}} experiments. The availability of in silico reference maps can be extremely helpful. \\
-
-\noindent
-{\bf{Nanocoding}} \\
-Nanocoding (1), also invented in LMCG, is also a novel DNA barcoding technique, to obtain genome-wide restriction maps.  \\
-
-\noindent
-{\bf{Dye - DNA interaction}} \\
-Stuff
-
-\section*{Discovery of a new effect - Fluoroscanning}
-Sequence/dye interactions produce reproducible fluoresce intensity profiles when optically measured along the axis of individual DNA molecules. Variables include DNA stretch, specific dye, dye/DNA ratio (stoichiometry)
-
-\section*{Fluorescence Intensity Profiles}
-Show examples of fluorescence intensity profiles—human (MM52), M. florum,  BACs
+\section*{Introduction}
 \begin{itemize}
-\item Noise considerations (select a set of noise metrics—explain them, justify them and use them consistently throughout the manuscript) that stem from: stretching (show analysis that links stretching with fluorescence signal information content (this curve may look parabolic…..), amount of dye, staing techniques….How fluorescence signals are measured and pre-processed—METHODS SECTION (INCA, etc.)
-\item Dealing with noise (Introduction)—Systematic vs. random effects. How a signal consensus making approach deals must deal with types of noise through preprocessing (automated ranking of fluorescence signal QUAILTY (mathematical, morphological analysis): uneven stretching, dispersed stretching within an interval dataset, extraneous noise (“fluorescent garbage,” nearby molecules , crossing molecules, etc.). 
-\item The Consensus algorithm- Outline algorithm, describe in detail, pseudocode???……..examples of synthetic data, data comparisons using previously. Explain how variants of this algorithm/analysis have been used in other applications…
-\item Preprocessing to improve consensus signal making— Describe both mathematical and computational algorithms and workflow. Comparison and analysis of examples drawn from human, synthetic, M. florum, and BAC data, showing how more confident fluoroscans emerge from considered filtering. Use noise metrics to prove this point.
+\item Background on high-throughput analysis of human genomes: SNPs, sequencing, the need to discover and catalogue structural variation in normal and cancer genomes.
+\item The challenges facing large-scale genome analysis of human populations that are parsimonious, yet comprehensive. (PRECISION MEDICINE) These bottlenecks include: sample preparation, measurement, preprocessing of measurements into data sets, computational pipelines which run slowly ({\emph{we’ll need to address this critical issue here}}), and genomic resolution (power to discover new polymorphisms and mutations, yet enable tabulation of known genomic variants, across a broad spectrum of types - SNPs, SVs, CNVs.
+\item Large, genomic molecules are ideal substrates, analyzed at the level of the individual molecule as ensembles. Avoidance of clones, or amplicons, which add errors and unneeded steps.
+\item Background on OM, nanocoding, maybe nanaopore sequencing
+\item Mapping systems are valuable, but must advance to encompass additional information that approaches sequencing. Efforts in this vein include single molecule analysis of melting curves, issues with such approaches center on necessary baroque implementations, precluding high-throughput and parsimony.
+\item Fluorochrome binding and luminosity measurements are governed by sequence, which are leveraged by single molecule measurement approaches. 
+\item A short history of dye/DNA interactions, going back to the 60’s (2 sentences).
 \end{itemize}
 
-\section*{Reproducible Fluorescence Intensity signals}
-Discuss mathematics of curve registration, and estimation of consensus signals
-Discuss estimation of consensus profiles for any region on the genome
+\begin{enumerate}
+\item Accordingly, we reasoned that given the spatial resolution of high N.A. fluorescence microscopy that usable ``signals'' are extractable from such data, despite scaling issues involving fluoro-binding considerations covering $~5$ bp and optical resolution spanning hundred of bps AND signal convolution considerations, involving the optical train.
+\item It follows, that stretched, genomic DNA molecules are ideal analytes for Fluoroscanning. Use of Nanocoding provide a way to boot into Fluroscanning analysis and provide an ideal environment for cross-checking.
+\end{enumerate}
 
-\section*{Uniqueness of Fluorescence Intensity Profiles}
-Discuss the statistics of establishing uniqueness of consensus signals
+REST OF INTRODUCTION WILL BE CRAFTED ONCE WE’VE WRITTEN OUR RESULTS SECTION. Here, we introduce and summarize our findings.
 
-\section*{Application: Detecting Insertion}
+\section*{Results}
+\begin{enumerate}
+\item Stretched DNA molecules, presented on charged surfaces have varied fluorescence, as measured along molecular ``backbones''. Such initial findings prompted us to investigate further - are these signals reproducible? What errors are associated with such measurements?
+\item Errors (physical/chemical): Stretching, dye concentration, surface conditions, photo bleaching effects of labeled punctates
+\item Errors (machine vision): Overlapping molecules, backbone tracing, spurious fluorescence signals associated with molecules, surface/molecule interactions creating outlier signals
+\item Model system ({\emph{M. florum}}) and data preprocessing. Small genome, allows facile acquisition of large data sets. Nanocoded datasets and alignment allow unambiguous identification of random, genomic DNA molecules.
+\begin{itemize}
+\item Describe M. florum dataset.
+\item Normalization of Nmaps (Fscans). Relative signal used—method developed for normalizing signals, obviating error-prone “absolute” fluorescence intensity measurements.
+\item Signals are noisy. They suffer from errors regarding stretching, imaging, and dye concentration, which is mediated by stretch. Consensus signals overcome such errors.
+\item Describe the method for creating consensus signals using {\emph{M. florum}} data. Output ``maps'' are termed ``FCscans''. Validation of consensus method—perhaps tables showing statistical measures of success.
+\item Are FCscans reproducible? Provide descriptions of tests that speak to reproducibility - use {\emph{M. florum}} data and analysis here.
+\item How unique are FCscans? Present tests, in {\emph{M. florum}} that establish a quantitative measure of uniqueness. Here we don’t want to know the underlying sequence. We simply want a test of FCscan vs. FCscan. We will later discern sequence underpinnings to this important question. Permutations tests, etc.
+\end{itemize}
+\item Scaling to the human genome. 
+\begin{itemize}
+\item Ribosomal work - for reproducibility of FCscans
+\item How sequence affects signals.
+\item Heterozygosity
+\end{itemize}
+\end{enumerate}
 
-\section*{Application: Detecting Heterozygosity}
+\section*{Discussion}
+We’ll write this after the results are in. Here we contextualize our findings with the worlds of statistics, genomics, and physical chemistry.
 
-\section*{Conclusion}
+\section*{Conslusion}
+
+\section*{Methods}
+\begin{itemize}
+\item Chemistries, imaging, preprocessing
+\item Computational techniques, statistical proofs, etc
+\end{itemize}
+
+\section*{Acknowledgements}
+
 
 \newpage
 \bibliography{bibTex_Reference}
