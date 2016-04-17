@@ -82,13 +82,13 @@ getSequenceForLocs.pl -locFile my-loctrac > output.fa
 \end{verbatim}
 
 \item
-In the folder \begin{verbatim} ~/Project_GC_Content/RData/ \end{verbatim}, 
+In the folder \begin{verbatim} ~/Project_GC_Content/RData/ \end{verbatim}
 the files \begin{verbatim} chr*_fragIndexList_Min20 \end{verbatim} 
-contains the list of fragments in that chromosome that have at least 20 molecules aligned to them, in the reference. These files are created by \begin{verbatim} RScript11_AlignmentChunks.R \end{verbatim}. 
+contains the list of fragments in that chromosome that have at least 20 molecules aligned to them, in the reference. These files are created by \begin{verbatim} RScript11_AlignmentChunks.R \end{verbatim} 
 
 \item
 The above fragIndexList files are used by the shell script \begin{verbatim} _generateExtractionCommandFile.sh \end{verbatim}
-to use the syntax mentioned in Step 4 to get the intensities of all the molecules aligned to a particular fragment index location. These fragment index locations are read in from the fragIndexList files created by R. This shell script creates a shell script for each chromosome, containing the commands for extracting intensities for one fragment per line. For example, these shell scripts are named \begin{verbatim} _extractIntensities_chr3.sh \end{verbatim}.
+to use the syntax mentioned in Step 4 to get the intensities of all the molecules aligned to a particular fragment index location. These fragment index locations are read in from the fragIndexList files created by R. This shell script creates a shell script for each chromosome, containing the commands for extracting intensities for one fragment per line. For example, these shell scripts are named \begin{verbatim} _extractIntensities_chr3.sh \end{verbatim}
 
 \item
 {\bf{Instructions to create the MFlorum data}}\\
@@ -162,7 +162,7 @@ MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.alignmentChunks
 These lines have been scripted into a shell script named {\bf{createFinalIntensityFiles.sh}} in the folder 
 \begin{verbatim} 
 ~/Project_GC_Content/RData/mflorum/ 
-\end{verbatim}. 
+\end{verbatim} 
 Modify this file with the appropriate input folder paths and output file names and the intensity files for each fragment will be created. These files will be ready to be read by the RScript, like RScript13\_2 or RScript16\_2. 
 \end{itemize}
 
@@ -191,7 +191,7 @@ grep LINE Chr11_Repeats > Chr11_LINE
 Use the dataset produced above to create loctracs, preferably for particular families, by running 
 \begin{verbatim} 
 RScript17-1_LINE_Seq_L1.R 
-\end{verbatim}. 
+\end{verbatim} 
 An example of the options for creating a loctrac file for all L1 LINE segments in Chr17, that are at least 4KB, is:
 \begin{verbatim}
 Chr <- `Chr17'
@@ -222,7 +222,7 @@ This command will produce files named \begin{verbatim} L1_Chr17.sequence*.fa \en
 Use the datasets produced above to plot the sequences, by running 
 \begin{verbatim} 
 RScript17-0_LINE_Seq.R 
-\end{verbatim}. 
+\end{verbatim} 
 \end{itemize}
 
 \item
@@ -313,6 +313,28 @@ Use the above parameter file to align the rDNA sequence to the {\emph{in silico}
 \begin{verbatim}
 soma_align.LINUX soma.param_RiboDNA
 \end{verbatim}
+
+\item \emph{Different in silico references} \\
+Smaller fragments were both left-merged and right merged to create different {\emph{in silico}} reference maps to align the molecules to. These were
+ named rDNA\_X20\_merge1.maps and rDNA\_X20\_merge2.maps.
+
+In the soma.param\_RiboDNA, the parameter values of ``Reference Mapset File'' and ``Genspect File'' were changed accordingly, to re-align all mm52 Nmaps to these riboDNA mapset.  
+
+\item \emph{After alignment} \\
+Run the following command after alignment to create .maps files from .xml files
+\begin{verbatim}
+GetAlignedMaps.sh -f AlignmentOutput.xml > AlignmentOutput.maps
+\end{verbatim}
+
+\item \emph{Re-aligning after discussion with Steve} \\
+Changed ``Number Alignment'' parameter from 2 to 1, so that alignment of same fragment to different locations are not allowed. 
+
+To make sure that these Nmaps are not aligned to other regions on the human genome, align these maps files with the human references. These references are in 
+\begin{verbatim} /omm/data/sequence/human_wchr-b37/ \end{verbatim} 
+by chromosome. For example, chr1\_500\_NtBspQI.maps is the reference for chr1. Firt concatenate all the Nmaps aligned to ribosomal repeats, and name the file
+``mm52-post-rDNA\_alignmentOutput\_X20\_All.maps''. Then, align these maps to the human reference, one chromosome at a time. These are in the folder 
+\begin{verbatim} /aspen/nandi/mm52-all7341/RiboDNA/alignRibo_whuman-b37\end{verbatim} 
+Enter the appropriate input and output maps files in the the soma parameter file and align. 
 
 \end{itemize}
 \end{enumerate}
