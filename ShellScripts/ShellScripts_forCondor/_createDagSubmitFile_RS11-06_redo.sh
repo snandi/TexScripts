@@ -19,11 +19,15 @@ do
 	Seed1=${linearray[0]}
 	Seed2=${linearray[1]}
 
-	jobID="Seed"$Seed1"_Seed"$Seed2
-	echo "JOB $jobID /z/Proj/newtongroup/snandi/Project_CurveReg/SubmitFiles/submitFile_CurveReg_RS11-06.txt"
-	echo "VARS $jobID Seed1=\"$Seed1\""
-	echo "VARS $jobID Seed2=\"$Seed2\""
-	echo " "
+        pValueFile="/z/Proj/newtongroup/snandi/Simulation_Registration/Run09_1/pValues/pValue_before_Seed"$Seed1"_Seed"$Seed2".RData"
+	if [ ! -f "$pValueFile" ];
+	then
+	    jobID="Seed"$Seed1"_Seed"$Seed2
+	    echo "JOB $jobID /z/Proj/newtongroup/snandi/Project_CurveReg/SubmitFiles/submitFile_CurveReg_RS11-06.txt"
+	    echo "VARS $jobID Seed1=\"$Seed1\""
+	    echo "VARS $jobID Seed2=\"$Seed2\""
+	    echo " "
+	fi
     fi
 done < $FILE
 
