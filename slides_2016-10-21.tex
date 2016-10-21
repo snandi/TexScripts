@@ -1,0 +1,90 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Comparison of FScan Consensus and Genomic Sequences}}}
+\author{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+% Department of Statistics \\
+% University of Wisconsin-Madison}
+\date{October 21, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Distance between consensus signals}
+Similarity index $\rho(f_i, f_j)$ between two consensus FScan signals $f_i$ and $f_j$:
+\[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
+$-1 \leq \rho(f_i, f_j) \leq 1$ \\
+Higher values of $\rho$ implies more {\emph{similarity}} between two consensus
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Distance between sequences of two intervals}
+Needleman–Wunsch algorithm for global alignment between two intervals:
+\begin{itemize}
+\item Substitution matrix: \\
+\[ \bordermatrix{~  & A & C & G & T \cr
+                  A & 1 & 0 & 0 & 1 \cr
+                  C & 0 & 1 & 1 & 0 \cr
+                  G & 0 & 1 & 1 & 0 \cr
+                  T & 1 & 0 & 0 & 1 \cr
+}
+\]
+\item Gap penalty = -10
+\item Slide $\text{Sequence}_1$ 200 bp either side of $\text{Sequence}_2$ and obtain global alignment score
+\item Final sequence similarity score: Average of alignment scores
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example}
+\begin{figure}
+\begin{centering}
+\includegraphics[page=5, scale=0.3]{SeqVsConsensus_SelectedFew_Chr22.pdf}
+\includegraphics[page=17, scale=0.3]{SeqVsConsensus_SelectedFew_Chr22.pdf}
+\end{centering}
+\end{figure}
+Consensus similarity: $\rho = 0.5984$ \\
+Sequence alignment score: $F = 0.5061$
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pairwise comparison}
+\begin{itemize}
+\item In chromosome 22, there are 403 sub-intervals that are 10.3 kb long, with at least 15 Nmaps depth
+\item $ \binom {403} {2} = 81,003 $ pairs to compare. 
+\end{itemize}
+
+\end{frame}
+
+\end{document}
+
