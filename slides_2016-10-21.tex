@@ -72,7 +72,7 @@ Needleman–Wunsch algorithm for global alignment between two intervals:
 \end{centering}
 \end{figure}
 Consensus similarity: $\rho = 0.5984$ \\
-Sequence alignment score: $F = 0.5061$
+Sequence alignment score: $\delta = 0.5061$
 
 \end{frame}
 
@@ -82,7 +82,26 @@ Sequence alignment score: $F = 0.5061$
 \begin{itemize}
 \item In chromosome 22, there are 403 sub-intervals that are 10.3 kb long, with at least 15 Nmaps depth
 \item $ \binom {403} {2} = 81,003 $ pairs to compare. 
+\item Mixed effects model to estimate relationship between consensus FScans ($\rho$) and sequence alignment scores $\delta$:
+\[ 
+\rho_{i,j} = \alpha_i + \beta_j + \gamma \delta_{i,j} + \epsilon_{i,j}\ \ \ i, j = 1, \dots, 403,\ \ i \ne j
+\]
+$\alpha_i \sim \mathcal{N}(0, \tau_1^2), \ \ \beta_j \sim \mathcal{N}(0, \tau_2^2), \ \ \epsilon_{i,j} \sim \mathcal{N}(0, \sigma^2)$ \\
+$ \alpha_i \indep \beta_j \indep \epsilon_{i,j}$
+\item Result: $\hat{\gamma} = 0.5178, \text{p-value} = 0.00009$ (likelihood-ratio test)
 \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Visually not evident}
+\begin{figure}
+\begin{centering}
+\includegraphics[page=1, scale=0.4]{ScatterPlots.pdf}
+\includegraphics[page=2, scale=0.4]{ScatterPlots.pdf}
+\end{centering}
+\end{figure}
 
 \end{frame}
 
