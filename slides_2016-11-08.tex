@@ -1,0 +1,132 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Comparison of FScan Consensus and Genomic Sequences}}}
+\author{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+% Department of Statistics \\
+% University of Wisconsin-Madison}
+\date{November 08, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Distance between consensus signals}
+Similarity index $\rho(f, g)$ between two consensus FScan signals $f$ and $g$:
+\[ \rho(f, g) = \frac{\int _{S_{fg}}f(s)g(s) ds}{\int _{S_{fg}}f(s)^2 ds \int _{S_{fg}}g(s)^2 ds} \]
+where, $S_{fg} = S_f \cap S_g$, the intersection of Sobolev spaces formed by the functions $f, g$.\\
+$-1 \leq \rho(f, g) \leq 1$ \\
+Higher values of $\rho$ implies more {\emph{similarity}} between two consensus
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Distance between sequences of two intervals: Similarity between GC Profiles}
+\begin{figure}
+\centering
+\includegraphics[width=0.42\textwidth]{chr19_frag2481_pg8.png}
+\includegraphics[width=0.42\textwidth]{chr19_frag3756_pg8.png}
+\caption{$\rho_{gc} = 0.84, \rho_{fscan} = 0.70$}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Dissimilar GC and Fscan profiles}
+\begin{figure}
+\centering
+\includegraphics[width=0.42\textwidth]{chr19_frag2481_pg8.png}
+\includegraphics[width=0.42\textwidth]{chr19_frag5423_pg8.png}
+\caption{$\rho_{gc} = -0.56, \rho_{fscan} = -0.21$}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Pairwise comparison results}
+\begin{itemize}
+\item In chromosome 19, there are 457 sub-intervals that are 10.3 kb long, with at least 15 Nmaps depth
+\item $ \binom {457} {2} = 104,196 $ pairs to compare. 
+\item Mixed effects model to estimate relationship between consensus FScans ($\rho_{fscan}$) and GC profile scores $\rho_{gc}$:
+\[ 
+\rho_{fs_{i,j}} = \alpha_i + \gamma_j + \beta \rho_{gc_{i,j}} + \epsilon_{i,j}\ \ \ i, j = 1, \dots, 457,\ \ i \ne j
+\]
+$\alpha_i \sim \mathcal{N}(0, \tau_1^2), \ \ \gamma_j \sim \mathcal{N}(0, \tau_2^2), \ \ \epsilon_{i,j} \sim \mathcal{N}(0, \sigma^2)$ \\
+$ \alpha_i \indep \gamma_j \indep \epsilon_{i,j}$
+\end{itemize}
+
+\begin{block}{Random effect model estimate}
+$\hat{\beta} = 0.149, \text{p-value} = 0.0$ (likelihood-ratio test)
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Rank based regression}
+To fit the linear model
+\[ y = \alpha + X\beta + \epsilon\]
+the rank estimator of $\beta$ is defined as
+\[ \hat{\beta}_{\varphi} = \text{Arg min } \| y - X\beta\|_{\varphi}\]
+where, $\| \cdot \|_{\varphi}$ is Jaeckel’s dispersion function, a pseudo-norm defined by
+\[ \| u \|_{\varphi} = \sum\limits_{i=1}^n a R(u_i)u_i\]
+where, $R$ denotes rank and $a(t) = \varphi(\frac{t}{n+1})$, and $\varphi$ is a
+non-decreasing, square-integrable score function defined on the interval $(0, 1)$.
+
+\begin{block}{Rank based estimate}
+$ \hat{\beta}_{\varphi} = 0.156$, p-value = 0 (Wald test)
+\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimate of fewer intervals with signals}
+Using around 20\% of the original dataset
+
+\begin{block}{Random effect model estimate}
+$\hat{\beta} = 0.261, \text{p-value} = 0.0$ (likelihood-ratio test)
+\end{block}
+
+\begin{block}{Rank based estimate}
+$ \hat{\beta}_{\varphi} = 0.277$, p-value = 0 (Wald test)
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 7 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Scatterplot with fewer intervals with signals}
+\begin{figure}
+\centering
+\includegraphics[width=0.4\textwidth, page=1]{ScatterPlots.pdf}
+\includegraphics[width=0.4\textwidth, page=2]{ScatterPlots.pdf}
+\end{figure}
+
+\end{frame}
+
+\end{document}
+
