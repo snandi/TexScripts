@@ -11,6 +11,9 @@
 \usepackage{xcolor}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg, .jpeg}
 
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.8in, right=0.8in, top=0.9in, bottom=0.8in}
+
 \begin{document}
 
 \title{Instructions for using LMCG code libraries to access necessary data}
@@ -21,20 +24,25 @@
 %\date{July 13, 2013}
 \maketitle
 
-\begin{enumerate}
-\item
-In general, all perl libraries written by Steve, will be in the folder \begin{verbatim} /home/steveg/bin \end{verbatim}
+\tableofcontents
+
+\section{Instructions for the mm52-post data}
+\begin{itemize}
+\item In general, all perl libraries written by Steve, will be in the folder \vspace{-0.25cm}{\scriptsize{\begin{verbatim} /home/steveg/bin \end{verbatim} 
+}}
 \item
 To extract data on nanocoding, particularly, for the GC-Intensity project, go to 
-\begin{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} 
 /home/steveg/bin/nMaps/GC_content/ 
 \end{verbatim} 
+}} 
 Use the file \texttt{alignmentLocations.pl} to produce tables like 
-\begin{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} 
 /aspen/steveg/human_nMaps/GC_content/alignmentChunks.withLength.all7134Groups.goldOnly 
 \end{verbatim} 
+}} 
 which look like
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 refID refStartIndex refEndIndex opID opStartIndex opEndIndex refStartCoor 
 refEndCoord opStartCoor opEndCoord orient lengthRatio
 
@@ -49,125 +57,167 @@ chr1 2 3 2393020_734_2060368 14 13 19740 28925 111465 103128 -1 1.04471447859582
 chr1 2 3 2396217_734_2060303 1 2 19740 28925 2060 11742 1 0.95170660205211
 chr1 2 3 2398509_734_2060043 1 2 19740 28925 2266 11742 1 0.941316312241508
 \end{verbatim}
+}}
 \item
-To list intensities at each pixel, for any fragment, use the file \texttt{fluorIntensityFor\_nMaps.byPixel.pl}. This script parses the mol\_N.txt files and produces a table like the one named \begin{verbatim} pixelIntensities.eachFragment.all7134Groups \end{verbatim}
+To list intensities at each pixel, for any fragment, use the file \texttt{fluorIntensityFor\_nMaps.byPixel.pl}. This script parses the mol\_N.txt files and produces a table like the one named \vspace{-0.25cm}{\scriptsize{\begin{verbatim} pixelIntensities.eachFragment.all7134Groups \end{verbatim} 
+}}
 which for a fragment with 4 pixels looks like
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 moleculeID      fragmentIndex   fragmentLength  pixelIntensities
 2327101_734_2060000     0       3.708   24211   23480   23352   23029
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 To create the dataset to be read into R, do the following:\\
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 ./intensityForAlignedFrags.pl -ch 1 -f 2 -a 
 alignmentChunks.withLength.all7134Groups.goldOnly 
 -nM pixelIntensities.eachFragment.all7134Groups
-\end{verbatim}
+\end{verbatim} 
+}}
 To be more specific, the following is the complete command, including the correct folder paths
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 intensityForAlignedFrags.pl -ch 3 -f 13762 -a 
 /aspen/steveg/human_nMaps/GC_content/alignmentChunks.withLength.all7134Groups.goldOnly 
 -nM /aspen/steveg/human_nMaps/GC_content/subdivideFragments/
 pixelIntensities.eachFragment.all7134Groups > chr3_frag13762_intensities
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item
-The human build 37 reference genome is located at \begin{verbatim} /omm/data/sequence/human_wchr-b37/Human_wchr-b37-all.fa \end{verbatim}
+The human build 37 reference genome is located at \vspace{-0.25cm}{\scriptsize{\begin{verbatim} /omm/data/sequence/human_wchr-b37/Human_wchr-b37-all.fa 
+\end{verbatim} 
+}}
 
 \item
-In order to extract sequence data for a given window of nucleotide locations using the perl script \begin{verbatim} getSequenceForLocs.pl \end{verbatim} 
+In order to extract sequence data for a given window of nucleotide locations using the perl script \vspace{-0.25cm}{\scriptsize{\begin{verbatim} getSequenceForLocs.pl \end{verbatim} 
+}} 
 is done by the following command:
-\begin{verbatim} cat /omm/data/sequence/human_wchr-b37/Human_wchr-b37-all.fa | 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} cat /omm/data/sequence/human_wchr-b37/Human_wchr-b37-all.fa | 
 getSequenceForLocs.pl -locFile my-loctrac > output.fa 
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item
-In the folder \begin{verbatim} ~/Project_GC_Content/RData/ \end{verbatim}
-the files \begin{verbatim} chr*_fragIndexList_Min20 \end{verbatim} 
-contains the list of fragments in that chromosome that have at least 20 molecules aligned to them, in the reference. These files are created by \begin{verbatim} RScript11_AlignmentChunks.R \end{verbatim} 
+In the folder \vspace{-0.25cm}{\scriptsize{\begin{verbatim} ~/Project_GC_Content/RData/ \end{verbatim} 
+}}
+the files \vspace{-0.25cm}{\scriptsize{\begin{verbatim} chr*_fragIndexList_Min20 \end{verbatim} 
+}} 
+contains the list of fragments in that chromosome that have at least 20 molecules aligned to them, in the reference. These files are created by \vspace{-0.25cm}{\scriptsize{\begin{verbatim} RScript11_AlignmentChunks.R \end{verbatim} 
+}} 
 
 \item
-The above fragIndexList files are used by the shell script \begin{verbatim} _generateExtractionCommandFile.sh \end{verbatim}
-to use the syntax mentioned in Step 4 to get the intensities of all the molecules aligned to a particular fragment index location. These fragment index locations are read in from the fragIndexList files created by R. This shell script creates a shell script for each chromosome, containing the commands for extracting intensities for one fragment per line. For example, these shell scripts are named \begin{verbatim} _extractIntensities_chr3.sh \end{verbatim}
+The above fragIndexList files are used by the shell script \vspace{-0.25cm}{\scriptsize{\begin{verbatim} _generateExtractionCommandFile.sh \end{verbatim} 
+}}
+to use the syntax mentioned in Step 4 to get the intensities of all the molecules aligned to a particular fragment index location. These fragment index locations are read in from the fragIndexList files created by R. This shell script creates a shell script for each chromosome, containing the commands for extracting intensities for one fragment per line. For example, these shell scripts are named \vspace{-0.25cm}{\scriptsize{\begin{verbatim} _extractIntensities_chr3.sh \end{verbatim} 
+}}
 
-\item
-{\bf{Instructions to create the MFlorum data}}\\
+\item \emph{Alignment output files of mm52-post} \\
+The alignment output files for the mm52-post dataset are in
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+/home/steveg/MM52_post/byChromosome 
+or
+/aspen/nandi/mm52_all7341/alignmentOutput/ByChromosome/
+\end{verbatim} 
+}}
+To produce these files, 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+go to the folder /aspen/nandi/mm52-all7341/alignmentOutput/ and run the command:
+merge_xml.pl --chrom --match 'chr(.+)$' --out ByChromosome/chrXX.xml.gz merged.xml.gz >& merge.err
+\end{verbatim} 
+}}
+
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%% End of mm52-post %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Start of Mflorum %%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Instructions to create the MFlorum data}
 \begin{itemize}
 \item
 Before alignment, create a mapset file, either with one conversion factor or with multiple conversion factors. The syntax for creating this mapset file is:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 cd /aspen/nandi/MF_cap348/maps_inca34/
 cat group1-*-inca34-outputs/FragmentLengthsApprox3.maps | 
 makeMapsetFromPixel_Steve.pl 
 -factor 209 -run 734 -minSize 10 -minFrags 5 
 > MF_cap348_inca34_cf209_minSize10_minFrag5.maps
-\end{verbatim}
+\end{verbatim} 
+}}
 This mapset file will serve as the input to alignment.
 \item
 Edit the soma parameter file, with appropriate inputfile name (the mapset file created in the above set), the reference filename (mesoplasm\_ref.map) and the output filename (the xml output, to be read by subsequent scripts), and appropriate parameters, and do an alignment. The command for running an alignment (with soma parameter filename soma.param\_cf209) is:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 soma_align.LINUX soma.param_cf209
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 To view the result of the alignment in genspect, which reads in the xml output of the previous step, run the following command:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 genspectx MF_cap348_inca34_cf209_minSize10_minFrag5_Aligned.xml
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 To see some basic statistics before and after alignment, use the command 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 mass3 inputmapset.maps, or
 mass3 alignedmapset.maps
-\end{verbatim}
+\end{verbatim} 
+}}
 To produce the alignedmapset.maps file, use the following shellscript:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 GetAlignedMaps.sh -f AlignmentOutput.xml > AlignmentOutput.maps
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item
 The MFlorum alignment data are in the folders
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /aspen/nandi/MF_asp74   and   /aspen/nandi/MF_cap348
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 All data extracted from these alignment data will be in 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /home/nandi/mflorum_nMaps/GC_Content
-\end{verbatim}
+\end{verbatim} 
+}}
 Filenames and folder structures will be same as those of the human genome data. 
 \item
 To create the file {\it{pixelIntensities.eachFragment.asp74\_inca34}}, use the modified version of Steve's perl script: 
-\begin{verbatim}
-fluorIntensityFor_nMaps.byPixel_forMFlorum.pl > 
-                             pixelIntensities.eachFragment.asp74_inca34
-\end{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+fluorIntensityFor_nMaps.byPixel_forMFlorum.pl > pixelIntensities.eachFragment.asp74_inca34
+\end{verbatim} 
+}}
 The above script looks into the molecule.txt files and extracts the intensity numbers.
 Use appropriate directory in line 31 of this perl script to extract data from asp or cap mount, inca 34 or 36.
 \item
 The ``alignmentChunks'' file is produced by the following command:
-\begin{verbatim}
-alignmentLocations.pl 5 MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.xml > 
-		MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.alignmentChunks
-\end{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+alignmentLocations.pl 5 MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.xml > MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.alignmentChunks
+\end{verbatim} 
+}}
 The first argument is the minimum number of fragments and the second argument is a list of xml files of the alignment. 
 \item
 Below is an example to produce the final dataset for each fragment, to be read in by the R script:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 intensityForAlignedFrags.pl -ch 1 -f 11 -a 
 /aspen/nandi/MF_cap348/maps_inca34/
 MF_cap348_inca34_cf209_minSize50_minFrag5_Aligned.alignmentChunks 
 -nM ~/mflorum_nMaps/GC_Content/pixelIntensities.eachFragment.cap348_inca34 
 > ~/Project_GC_Content/RData/mflorum/chr1_frag11_intensities
-\end{verbatim}
+\end{verbatim} 
+}}
 These lines have been scripted into a shell script named {\bf{createFinalIntensityFiles.sh}} in the folder 
-\begin{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} 
 ~/Project_GC_Content/RData/mflorum/ 
 \end{verbatim} 
+}} 
 Modify this file with the appropriate input folder paths and output file names and the intensity files for each fragment will be created. These files will be ready to be read by the RScript, like RScript13\_2 or RScript16\_2. 
 \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%% End of Mflorum %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\item
-{\bf{Instructions to extract and plot LINE segments}}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Start of LINE %%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Instructions to extract and plot LINE segments}
 \begin{itemize}
 \item 
 \emph{Get Repeats data:} \\ 
@@ -177,142 +227,171 @@ Go to the UCSC Genome Browser, Tools, Table Browser. \\
 (c) For ``Track'', choose ``RepeatMaster'', and \\
 (d) enter a chromosome number and click on ``get output''. \\ 
 This would produce an text file like 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /home/nandi/Project_GC_Content/LINE/Chr11_Repeats
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 \emph{Get LINE coordinates:} \\ 
 Run a simple shell command to extract the rows from the Repeats table that pertain only to LINE segments.
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 grep LINE Chr11_Repeats > Chr11_LINE
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 \emph{Create loctrac file:} \\ 
 Use the dataset produced above to create loctracs, preferably for particular families, by running 
-\begin{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} 
 RScript17-1_LINE_Seq_L1.R 
 \end{verbatim} 
+}} 
 An example of the options for creating a loctrac file for all L1 LINE segments in Chr17, that are at least 4KB, is:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 Chr <- `Chr17'
 ChrNum <- 17
 RepFamily <- `L1'
 RepName <- `L1PA4'
 SeqLenStart <- 4000
 SeqLenEnd <- 7000
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 \emph{Get Sequences:} \\ 
 Run the following perl script to extract the sequence of the L1 LINE segments, in the loctrac file created above:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 cat /omm/data/sequence/human_wchr-b37/Human_wchr-b37-all.fa | 
 getSequenceForLocs.pl -locFile Chr17_L1_loctrac > L1_Chr17.fa
-\end{verbatim}
+\end{verbatim} 
+}}
 \item
 \emph{Split the sequences by LINE locations:} \\
 Use the following perl command (by Steve) to split the big sequence file: 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 perl -nle 'BEGIN{$i=0} if (/^>/) 
 {  close OUT; $i++; ($fileName = $ARGV)=~s/\.fa//; open OUT, 
 ">$fileName.sequence$i.fa";} print OUT'  L1_Chr17.fa
-\end{verbatim}
-This command will produce files named \begin{verbatim} L1_Chr17.sequence*.fa \end{verbatim}
+\end{verbatim} 
+}}
+This command will produce files named \vspace{-0.25cm}{\scriptsize{\begin{verbatim} L1_Chr17.sequence*.fa \end{verbatim} 
+}}
 \item
 \emph{Plot the LINE sequences in R:} \\
 Use the datasets produced above to plot the sequences, by running 
-\begin{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} 
 RScript17-0_LINE_Seq.R 
 \end{verbatim} 
+}} 
 \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%% End of LINE %%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\item
-{\bf{Data extraction - mm52 (winter vacation, 2015)}}
+\section{Data extraction - mm52 (winter vacation, 2015)}
 \begin{itemize}
 \item \emph{Creating the bploc file} \\
 Extracted columns 1, 2, 7 and 8 from the file 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 alignmentChunks.withLength.all7134Groups.goldOnly
-\end{verbatim}
+\end{verbatim} 
+}}
 in the folder
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /aspen/steveg/human_nMaps/GC_content
-\end{verbatim}
+\end{verbatim} 
+}}
 and created the file 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 ~/human_nMaps/GC_Content/mm52_all7431.goldOnly.bploc
 \end{verbatim} 
+}} 
 by keeping only the unique rows. This file will be read in by RScripts to give the beginning and ending base pair locations for any chromosome and any fragment.
 \item \emph{Creating data for 1 or 3 pixels around backbone} \\
 There are a total $7,341$ groups. Extracted the list of groups into the file ``Groups\_mm52''. Then divided this file into smaller files with 200 groups in each file. This division was done by the scripts 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 _createSplitGroup.sh,  _splitGroups.sh
-\end{verbatim}
+\end{verbatim} 
+}}
 in the folder 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /aspen/nandi/mm52-all7341/maps_inca34_3pixel/
-\end{verbatim}
+\end{verbatim} 
+}}
 Parallel instances of the python program 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 ~/PythonProgramming/P05_readMoleculetxt.py
-\end{verbatim}
+\end{verbatim} 
+}}
 were run on different servers, by the following shell script, to convert the 5 pixel data to 3 and 1 pixel data, using the following command:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 cd ~/PythonProgramming
-$nohup ./_loopthroughGroups_mm52_3px.sh Groups_mm52_1To200 &
-\end{verbatim}
+nohup ./_loopthroughGroups_mm52_3px.sh Groups_mm52_1To200 &
+\end{verbatim} 
+}}
+
 \item \emph{Alignmentchunks file} \\
 The alignment chunks file has nothing to do with the number of pixels around the backbone. Hence, the same file can be used for 1, 3 and 5 pixels around the backbone. The symbolic link 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 alignmentChunks.withLength.all7134Groups.goldOnly
-\end{verbatim}
+\end{verbatim} 
+}}
 links to the right file in Steve's folder on /aspen.
 \item \emph{pixelintensities file} \\
 Change the folder path in the ``fluorIntensityFor\_nMaps.byPixel.pl'' script and run it to produce the pixelIntensities file:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 ./fluorIntensityFor_nMaps.byPixel_1pixel.pl > pixelIntensities.all7134Groups_1pixel
-\end{verbatim}
+\end{verbatim} 
+}}
 Do this for 1 and 3 pixel around the backbone separately. 
 \item \emph{Molecules towards the edges of frames} \\
 Molecules that are close to the edge of the frames do not have intensity numbers in the files produced by INCA3.4. A check was added in the python scripts to discard these molecules. There were a series of shell scripts written to identify the groups that have molecules with this problem and their conversion was done again. The scripts can be found in:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /aspen/nandi/mm52-all7341/Groups_Redo/
-\end{verbatim}
+\end{verbatim} 
+}}
 \end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\item
-{\bf{Ribosomal DNA data extraction \& analysis}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Start of Ribosomal DNA %%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ribosomal DNA data extraction \& analysis}
 \begin{itemize}
 \item Directory location: All files are located in the directory:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 /aspen/nandi/mm52-all7341/RiboDNA
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item \emph{Ribosomal DNA repeat unit} \\
 This sequence was provided by Dave, and the filename is 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 rDNA_repeatUnit.fa
-\end{verbatim}
+\end{verbatim} 
+}}
 It was concatenated 10 and 20 times to create longer contigs, for aligning as many Nmaps as possible. These filenames are 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 rDNA_repeatUnit_X10.fa, rDNA_repeatUnit_X20.fa
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item \emph{Create in silico reference maps} \\
 The following command was run by Mike Place, to create a reference map of the ribosomal DNA sequence:
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 javarun.sh edu.wisc.lmcg.seq.flash.CreatePMap -f rDNA_repeatUnit_X20.fa 
 -enzyme ntsapi -label UTPF2 -resmap rDNA_X20.maps
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item \emph{Aligning sequence to in silico reference} \\
 Created the soma parameter file from some examples recommended by Mike. The examples are saved as symbolic links. The file I created is named 
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 soma.param_RiboDNA
-\end{verbatim}
+\end{verbatim} 
+}}
 Use the above parameter file to align the rDNA sequence to the {\emph{in silico}} reference
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 soma_align.LINUX soma.param_RiboDNA
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item \emph{Different in silico references} \\
 Smaller fragments were both left-merged and right merged to create different {\emph{in silico}} reference maps to align the molecules to. These were
@@ -322,20 +401,110 @@ In the soma.param\_RiboDNA, the parameter values of ``Reference Mapset File'' an
 
 \item \emph{After alignment} \\
 Run the following command after alignment to create .maps files from .xml files
-\begin{verbatim}
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
 GetAlignedMaps.sh -f AlignmentOutput.xml > AlignmentOutput.maps
-\end{verbatim}
+\end{verbatim} 
+}}
 
 \item \emph{Re-aligning after discussion with Steve} \\
 Changed ``Number Alignment'' parameter from 2 to 1, so that alignment of same fragment to different locations are not allowed. 
 
 To make sure that these Nmaps are not aligned to other regions on the human genome, align these maps files with the human references. These references are in 
-\begin{verbatim} /omm/data/sequence/human_wchr-b37/ \end{verbatim} 
-by chromosome. For example, chr1\_500\_NtBspQI.maps is the reference for chr1. Firt concatenate all the Nmaps aligned to ribosomal repeats, and name the file
-``mm52-post-rDNA\_alignmentOutput\_X20\_All.maps''. Then, align these maps to the human reference, one chromosome at a time. These are in the folder 
-\begin{verbatim} /aspen/nandi/mm52-all7341/RiboDNA/alignRibo_whuman-b37\end{verbatim} 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} /omm/data/sequence/human_wchr-b37/ \end{verbatim} 
+}} 
+by chromosome. For example, chr1\_500\_NtBspQI.maps is the reference for chr1. Firt concatenate all the Nmaps aligned to ribosomal repeats, and name the file 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+mm52-post-rDNA\_alignmentOutput\_X20\_All.maps''
+\end{verbatim} 
+}}
+Then, align these maps to the human reference, one chromosome at a time. These are in the folder 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim} /aspen/nandi/mm52-all7341/RiboDNA/alignRibo_whuman-b37\end{verbatim} 
+}} 
 Enter the appropriate input and output maps files in the the soma parameter file and align. 
 
 \end{itemize}
-\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%% End of Ribosomal DNA %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Start of BAC DNA %%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{BAC DNA alignment and analysis}
+This section lists the LMCG pipeline steps for extracting data from omm database, aligning them, extracting data for fluoroscanning, etc. 
+\begin{itemize}
+\item \emph{To download collected groups from omm}\\
+From a linux terminal, do
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+PATH=/home/forrest/gnomm/build-opt-Linux/omari:$PATH ommcraft &
+\end{verbatim} 
+}}
+Select the groups you want to extract the Nmaps of. Then click on the icon ``GroupGetMaps'' and save it in the folder of choice. 
+
+\item \emph{To extract the folder paths of molecule.txt files}\\
+Select the groups you want to extract the paths of and click on the icon ``Commands > ExportView'' and save the text file in the desired folder. For example, 
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+/home/nandi/Project_BAC/Alignments/RP11-257P11_groups2556772-2556791/ has the file
+ommview_groups2557772-2556791.txt, which has the folder paths in the 32nd column. 
+Do,
+cat filename | awk '{print NF}'
+awk '{print $1}' filename > groupFolders
+For example,
+groupFolders_groups2557772-2556791.txt
+\end{verbatim} 
+}}
+
+\item \emph{To align the Nmaps with a reference}\\
+Get the appropriate reference maps file. For example,
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+RP11-257P11_ntsapi_ref.maps is the reference maps file
+\end{verbatim} 
+}}
+
+\item \emph{To view the alignment outputs}\\
+The alignment output xml file can be viewed by genspectx:
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+genspectx RP11-257P11_groups2556772-2556791_cutoff0-04.xml
+\end{verbatim} 
+}}
+
+\item \emph{To produce the alignedmapset.maps file}\\
+Use the following shellscript:
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+GetAlignedMaps.sh -f AlignmentOutput.xml > AlignmentOutput.maps
+\end{verbatim} 
+}}
+
+\item \emph{To copy group folders from omm database}\\
+If the experiment is small, make a local copy of the group folders, with all the molecule.txt files. Use the script \_copyGroupFolders.sh
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+_copyGroupFolders.sh groupFolders_groups2557772-2556791.txt 
+\end{verbatim} 
+}}
+
+\item \emph{To create the file pixelIntensities file} \\
+Use the modified version of Steve’s perl script, with the path to the group folders updated in the script
+\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+fluorIntensityFor_nMaps.byPixel_forBAC.pl > pixelIntensities_groups2556772-2556791
+\end{verbatim} 
+}}
+
+\item \emph{To produce the alignmentChunks file} \\
+Use Steve's perl script
+\vspace{-0.25cm} {\scriptsize{\begin{verbatim}
+alignmentLocations.pl RP11-257P11_groups2556772-2556792_cutoff3-04.xml > RP11-257P11_groups2556772-2556792_cutoff3-04.alignmentChunks
+\end{verbatim} 
+}}
+
+\item \emph{To produce the final dataset for each fragment, to be read in by the R script:} \\
+Need to use intensityForAlignedFrags.pl
+
+\end{itemize}
+
+%\vspace{-0.25cm}{\scriptsize{\begin{verbatim}
+%\end{verbatim} 
+%}}
+
+
 \end{document}
