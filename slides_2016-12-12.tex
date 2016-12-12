@@ -1,0 +1,108 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Manuscript outline}}}
+\author[S. Nandi]{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+% Department of Statistics \\
+
+
+% University of Wisconsin-Madison}
+\date{December 09, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+\begin{frame}
+\frametitle{Stretch vs Signal}
+\begin{enumerate}
+\item Use {\emph{M. florum}} nanocoded dataset
+\item Divide Nmaps into 5 groups, by lengths (number of molecules) of their images
+\item Smooth, register and estimate consensus of each group
+\item Compare the consensus with GC-profile, using ``similarity index''
+\end{enumerate}
+
+\vspace{1cm}
+
+Example: Fragment 22, 30
+
+Example (reproducibility): Fragment 21, 25, 28 
+
+Example (spurious): Fragment 12
+\end{frame}
+
+\begin{frame}
+\frametitle{Predicting Fscan from sequence features}
+\begin{enumerate}
+\item Used counts of g, c, a, t, 2-mers, 3-mers and 4-mers to fit consensus Fscans (FCscans)
+\item Used Gaussian kernel, to account for effect of 400bp on either side of a pixel in addition to the 200bp in the middle
+\item Fit a random forest model
+\end{enumerate}
+\vspace{2cm}
+Some examples of prediction
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction example, Interval 970, Chr 19}
+\begin{figure}
+\includegraphics[scale=0.35, page=2]{SeqVsConsensus_SelectedFew_Chr19.pdf}
+\pause
+\includegraphics[scale=0.35]{chr19_frag970_0_predicted.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction example, Interval 5615, Chr 19}
+\begin{figure}
+\includegraphics[scale=0.35, page=5]{SeqVsConsensus_SelectedFew_Chr19.pdf}
+\pause
+\includegraphics[scale=0.35]{chr19_frag5615_2_predicted.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction example, Interval 5518, Chr 19}
+\begin{figure}
+\includegraphics[scale=0.35, page=8]{SeqVsConsensus_SelectedFew_Chr19.pdf}
+\pause
+\includegraphics[scale=0.35]{chr19_frag5518_0_predicted.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Prediction example, Interval 1374, Chr 19}
+\begin{figure}
+\includegraphics[scale=0.35, page=27]{SeqVsConsensus_SelectedFew_Chr19.pdf}
+\pause
+\includegraphics[scale=0.35]{chr19_frag1374_1_predicted.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Manuscript outline}
+
+\end{frame}
+
+
+\end{document}
+
