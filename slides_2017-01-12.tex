@@ -1,0 +1,195 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Predicting Fscan from Sequence}}}
+\author[S. Nandi]{Subhrangshu Nandi}
+%\institute[Stat 741]{Stat 741, Spring 2015 \\
+% Department of Statistics \\
+
+
+% University of Wisconsin-Madison}
+\date{January 12, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 1 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Predicting Fscan from Sequence}
+\begin{itemize}
+\item Random Forest
+\vspace{1in}
+\item Stochastic Gradient Boosting
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 2 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Predicting Fscan from Sequence - Set up}
+\begin{itemize}
+\item Total sample size: 3,860 sub-intervals from chromosomes 17, 18, 19, 20, 21.
+\item Each sub-interval: 10kb
+\item Counts of 1 to 5-mers
+\item Training set: 90\%, Testing set: 10\%
+\pause
+\item $\rho_{c}:$ {\emph{Similarity}} between average training {\bf{c}}onsensus Fscan and testing sub-interval, $|\rho_{c}| \leq 1$
+\item $\rho_{p}:$ {\emph{Similarity}} between average {\bf{p}}redicted Fscan and testing sub-interval, $|\rho_{p}| \leq 1$
+\item $\gamma = \frac{\rho_{p} - \rho_{c}}{1 - \rho_{c}} $ {\emph{Similarity}} improvement or prediction improvement
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 3 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example: chr19, interval 5558 (part of testing set)}
+\begin{figure}
+\includegraphics[page=1, scale=0.3]{chr19_5558_1_predictedBySeed.pdf}
+\includegraphics[page=3, scale=0.3]{PredictionComparisonPlots_RFRun03.pdf}
+\end{figure}
+
+\begin{block}{{\emph{Similarity}} between average training cFscan and true Fscan}
+ $\rho_{c} = 0.0745$
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 4 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example: chr19, interval 5558 (part of testing set)}
+\begin{columns}[t]
+\column{0.6\textwidth}
+\begin{figure}
+\includegraphics[page=3, scale=0.35]{chr19_5558_1_predictedBySeed.pdf}
+\end{figure}
+
+\column{0.4\textwidth}
+\begin{block}{{\emph{Similarity}} between predicted Fscan and true Fscan}
+$\rho_{p} = 0.8937$
+\end{block}
+
+\begin{block}{Prediction Improvement}
+$\gamma = \frac{\rho_{p} - \rho_{c}}{1 - \rho_{c}} = 0.8851 $
+\end{block}
+
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 5 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example: chr18, interval 5869 (part of testing set)}
+\begin{columns}[t]
+\column{0.6\textwidth}
+\begin{figure}
+\includegraphics[page=3, scale=0.35]{chr18_5869_1_predictedBySeed.pdf}
+\end{figure}
+
+\column{0.4\textwidth}
+\begin{block}{{\emph{Similarity}} between predicted Fscan and true Fscan}
+ $\rho_{p} = 0.9415$
+\end{block}
+
+\begin{block}{Prediction Improvement}
+$\gamma = \frac{\rho_{p} - \rho_{c}}{1 - \rho_{c}} = 0.8112 $
+\end{block}
+
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 6 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Example: chr18, interval 5869 (part of testing set)}
+
+\begin{columns}
+\column{0.5\textwidth}
+\begin{figure}
+\includegraphics[page=3, scale=0.35]{chr18_5869_1_predictedBySeed_RFRun03.pdf}
+\end{figure}
+ $\rho_{p} = 0.9181$
+
+\column{0.5\textwidth}
+\begin{figure}
+\includegraphics[page=3, scale=0.35]{chr18_5869_1_predictedBySeed.pdf}
+\end{figure}
+ $\rho_{p} = 0.9415$
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 7 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Prediction Improvement - Random Forest}
+\begin{figure}
+\includegraphics[page=1, scale=0.35]{PredictionComparisonPlots_RFRun03.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 8 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Prediction Improvement - Random Forest \& Gradient Boosting}
+\begin{figure}
+\includegraphics[page=1, scale=0.33]{PredictionComparisonPlots_RFRun03.pdf}
+\includegraphics[page=1, scale=0.33]{PredictionComparisonPlots_GBMRun01.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 9 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{When prediction is worse than mean model}
+Example: chr19, interval 936 \\
+ $\rho_{p, RF} = -0.0619$ \hspace{1.5in} $\rho_{p, GBM} = -0.0066$
+\begin{figure}
+\includegraphics[page=3, scale=0.3]{chr19_936_0_predictedBySeed_RFRun03.pdf}
+\includegraphics[page=1, scale=0.3]{chr19_936_0_predictedBySeed_GBMRun01.pdf}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 10 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{When prediction is worse than mean model}
+Example: chr19, interval 936 \\
+\begin{figure}
+\includegraphics[page=3, scale=0.3]{chr19_936_0_predictedBySeed_RFRun03.pdf}
+\includegraphics[page=8, scale=0.3]{chr19_frag936_0_registered.pdf}
+\end{figure}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 11 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Application}
+\begin{itemize}
+\item Could we use $\gamma$ as a measure of prediction improvement?
+\vspace{1cm}
+\item When $\rho_{p} < -0.5$, could this help us detect structural variation? How small?
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 12 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Fluoroscanning Workflow}
+\vspace{-0.5cm}
+\begin{figure}
+\includegraphics[scale=0.4]{FluoroscanningWorkflow_v2.pdf}
+\end{figure}
+
+\end{frame}
+
+\end{document}
+
