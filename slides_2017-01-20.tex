@@ -1,0 +1,180 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{item projected}{fg=green,bg=red}
+%\setbeamercolor{itemize subitem}{fg=blue}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Next Generation Precision Genomics}}}
+\author[S. Nandi]{Subhrangshu Nandi}
+\institute[LMCG]{	Laboratory of Molecular and Computational Genomics \\
+ 			University of Wisconsin - Madison }
+\date{January 20, 2017}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Motivation}
+{\Large{
+Next generation genomic sciences need to build systems to
+\begin{enumerate}
+\item Analyze genomes of every individual of the population
+\item Analyze the complexities of cancer genomes
+\item Develop targeted and precise treatment options for complex diseases
+\end{enumerate}
+in an {\underline{economical}} and {\underline{parsimonious}} manner.
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Limitations of Sequencing Technologies \footnote{\tiny{Wikipedia}} }
+\vspace{-0.8cm}
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{itemize} 
+
+\item {\bf{\small{Pac Bio}}}
+{\footnotesize{only 87\% accuracy; moderate throughput }}
+
+\item {\bf{\small{Ion Torrent Sequencing}}}
+{\footnotesize{up to 400 bp read length; homo-polymer errors }}
+
+\item {\bf{\small{Illumina sequencing}}}
+{\footnotesize{up to 300 bp read length; very expensive equipment}}
+
+\item {\bf{\small{Sanger sequencing}}}
+{\footnotesize{impractical for large sequencing projects}}
+
+\end{itemize}
+\end{column}
+
+\begin{column}{0.4\textwidth}
+\begin{center}
+\begin{figure}[t]
+\includegraphics[scale=0.28]{Images/sequencingtechnology.pdf} \footnote{\tiny{https://www.broadinstitute.org/ \\blog/celebrating-fruits-human-genome-sequence}}
+\end{figure}
+\end{center}
+\end{column}
+
+\end{columns}
+
+\begin{block}{Common limitations}
+\begin{itemize}
+{\small{
+\item CANNOT completely sequence a human genome because of repetitive structures \footnote{\cite{Lander_etal_2001_Nature}} and other complexities
+\item CANNOT detect heterozygotes \footnote{\cite{Wheeler_etal_2008_Nature}}
+\item are Inadequate for analyzing complex cancer genomes, or other polygenic diseases
+}}
+\end{itemize}
+\end{block}
+\note{}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Motivation: mp3 representation of a Genome}
+\vspace{-0.5cm}
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\includegraphics[scale=0.24]{Images/wav.png} 
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{itemize}
+{\footnotesize{
+\item Wave is an uncompressed or ``lossless'' format
+\item High sampling frequency of sound waves; high quality of music
+\item Extremely large file size
+}}
+\end{itemize}
+
+\begin{figure}[H]
+\includegraphics[scale=0.18]{Images/200114_Genome_650.jpg} 
+\end{figure}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\includegraphics[scale=0.18]{Images/mp3.jpg}
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{itemize}
+{\footnotesize{
+\item MP3 is a compressed or ``lossy'' format
+\item Reduces the signal to its most necessary components
+\item Very manageable file size; Easily transferable
+}}
+\end{itemize}
+\vspace{-0.5cm}
+\begin{figure}[H]
+\hspace{-1cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1000_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{0.5cm}
+\includegraphics[scale=0.28]{Plots/chr13_frag1025_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{-2cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1050_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{1cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1052_consensusOnly.pdf} \\
+\end{figure}
+
+\end{column}
+\end{columns}
+{\tiny{Images from \footnote{\tiny{https://nasiirblog.wordpress.com/2014/05/22/wav-vs-mp3/, http://archive.cosmosmagazine.com/}} }}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Fluoroscanning}
+\begin{block}{Fluoroscanning}
+A system to extract usable information about genomic sequences from fluorescence intensity profiles of imaged DNA molecules. 
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\includegraphics[scale=0.45]{Images/FluoroscanningWorkflow_v3.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Reference}
+{\footnotesize{
+    \bibliographystyle{apalike}
+    \bibliography{bibTex_Reference}
+}}
+\end{frame}
+
+\end{document}
+
