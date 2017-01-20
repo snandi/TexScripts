@@ -169,6 +169,137 @@ A system to extract usable information about genomic sequences from fluorescence
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Fluoroscanning: Specific Aims}
+\begin{block}{Aim 1}
+Fluoroscanning signals (Fscans) of genomic intervals are unique and reproducible
+\end{block}
+\vspace{0.5in}
+\begin{block}{Aim 2}
+Predict Fscans from underlying sequence compositions of genomic intervals
+\end{block}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Examples of Fscans}
+\begin{figure}[t]
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7465.pdf}
+%\hspace{0.25cm}
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7491.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Types of noise}
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{figure}[H]
+\begin{center}
+%\hspace{2cm} \vspace{-1cm}
+\includegraphics[scale = 0.25]{Images/Outlier_1.jpg}
+\end{center}
+\caption{Molecules too close to each other}
+\end{figure}
+
+%\item Molecules not straight
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.25]{Images/Outlier_4.jpg}
+\end{center}
+\caption{Molecules not straight}
+\end{figure}
+
+\end{column}
+\begin{column}{0.4\textwidth}
+%\item Too much overlap, and curves molecules
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.2]{Images/Outlier_2.jpg}
+\end{center}
+\caption{Too much overlap, and curved molecules}
+\end{figure}
+
+%\item Fragments overlapping DNA molecules
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.2]{Images/Outlier_3.jpg}
+\end{center}
+\caption{Fragments overlapping DNA molecules}
+\end{figure}
+\end{column}
+
+%\item 
+%\end{itemize}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Need preprocessing}
+\begin{figure}[t]
+\includegraphics[scale=0.25, page=2]{Plots/chr13_frag7465.pdf}
+\end{figure}
+\vspace{-0.5cm}
+\begin{itemize}
+\item Image processing to detect noisy molecules
+\item Normalize fluorescence intensities of each fragment by its median
+\item Smooth the fluorescence intensities and evaluate them at equidistant points
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Analyzing Fscans: Need Registration}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,page=2]{Plots/MF_Frag15.pdf}
+\end{center}
+\caption{NMaps aligned to {\emph{M. florum}} Interval 15}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+%\footnotesize
+\item Molecules are of different lengths
+\vspace{1cm}
+\item Features are not aligned
+\vspace{1cm}
+\item Estimating consensus is not simple
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Statistical challenges}
+\begin{block}{Statistical challenges}
+{\Large{The primary challenge is to build statistical tools to enable Fluoroscanning data analysis.}} \\This involves
+\begin{itemize}
+\item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
+\vspace{0.5cm}
+\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establishing their sequence dependence
+\vspace{0.5cm}
+\item Setting up a {\bf{hypothesis testing}} framework to test intensity profiles from different genomic intervals for dissimilarity
+\end{itemize}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Reference}
 {\footnotesize{
     \bibliographystyle{apalike}
