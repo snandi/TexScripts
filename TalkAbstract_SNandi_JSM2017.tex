@@ -1,0 +1,20 @@
+\documentclass[11pt]{extarticle} %extarticle for fontsizes other than 10, 11 and 12
+%\documentclass[11p]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+
+\title{Iterated Curve Registration increases accuracy and power}
+\author{Subhrangshu Nandi, Michael A. Newton} 
+
+\maketitle
+
+In functional data analysis, where both amplitude and phase variability affect individual trajectories, it is often desirable to eliminate (or reduce) the phase variability in order to study a cross-sectional mean function. Techniques like dynamic time warping and curve registration have successfully addressed this question. However, these rely on having a good initial curve against which the others are aligned. Furthermore, when the data includes different types of outliers, a simple cross-sectional mean is not representative of the true underlying function. We develop an ``iterated curve registration'' technique that includes outlier detection and weighted estimation of the mean function at every step. We show that when the data includes noisy realizations of a smooth function, along with outliers, this iterated registration technique yields more accurate estimation of the true function and has more power to detect changes in the mean functions associated with covariates. This development greatly advances the analysis of gray-level intensity measurements derived from large-scale analyte datasets.
+
+\end{document}
+
