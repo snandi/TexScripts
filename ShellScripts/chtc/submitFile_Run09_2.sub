@@ -1,0 +1,53 @@
+# submitFile_Run09_2.txt
+#
+#  Specify the HTCondor Universe (vanilla is the default and is used
+#  for almost all jobs), the desired name of the HTCondor log file,
+#  and the desired name of the standard error file.  
+#  Wherever you see $(Cluster), HTCondor will insert the queue number
+#  assigned to this set of jobs at the time of submission.
+universe                  = vanilla
+log                       = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/Seed$(Seed1)_Seed$(Seed2)/Iter$(Iter)/Seed$(Seed1)_Seed$(Seed2)_Iter$(Iter).log
+error                     = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/Seed$(Seed1)_Seed$(Seed2)/Iter$(Iter)/Seed$(Seed1)_Seed$(Seed2)_Iter$(Iter).err
+ 
+#  Specify your executable (single binary or a script that runs several
+#  commands), arguments, and a files for HTCondor to store standard
+#  output (or "screen output").
+#  $(Process) will be a integer number for each job, starting with 0
+#  and increasing for the relevant number of jobs.
+executable                = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/R_executable.sh
+arguments                 = "$(Seed1) $(Seed2) $(Iter)"
+output                    = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/Seed$(Seed1)_Seed$(Seed2)/Iter$(Iter)/Seed$(Seed1)_Seed$(Seed2)_Iter$(Iter).out
+initialdir                = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/Seed$(Seed1)_Seed$(Seed2)/Iter$(Iter)
+ 
+#  Specify that HTCondor should transfer files to and from the
+#  computer where each job runs. The last of these lines *would* be
+#  used if there were any other files needed for the executable to run.
+ 
+should_transfer_files     = YES
+when_to_transfer_output   = ON_EXIT
+
+transfer_input_files      = /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/shared/, /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/shared_SeedData/SimData_Seed$(Seed1).RData, /home/snandi/ChtcRun/Project_CurveReg/Simulation_Registration/Run09_2/shared_SeedData/SimData_Seed$(Seed2).RData
+
+#
+# Tell HTCondor what amount of compute resources
+#  each job will need on the computer where it runs.
+ 
+request_cpus              = 1
+request_memory            = 3GB
+request_disk              = 2GB
+ 
++WantFlocking             = true
++WantGlideIn              = true
+ 
+## To release jobs that are on hold for more than 10 minutes (600 secs)
+periodic_release = ( JobStatus == 5 ) && ( ( CurrentTime - EnteredCurrentStatus) > 600 ) && ( JobRunCount < 3 ) && ( HoldReasonCode != 1 ) && ( HoldReasonCode != 6 ) && (HoldReasonCode != 14 ) && ( HoldReasonCode != 22 )
+ 
+## To hold jobs that are take more than 6 hrs (21600 secs)
+## periodic_hold = ( JobStatus == 2 ) && ( ( time() - JobStartDate) > 21600 ) 
+
+## The expression below will not let the job leave the queue if it exited by a signal and that signal number was 11 (representing segmentation fault). In any other case of the job exting, it will leave the queue.
+on_exit_remove = (ExitBySignal == FALSE) && (ExitCode == 0)
+
+# Tell HTCondor to run 1 instances of our job:
+queue 1
+

@@ -4,7 +4,7 @@
 
 ## Go to /z/Proj/newtongroup/snandi/Project_RScripts/SubmitFiles/
 ## The input files are in /z/Proj/newtongroup/snandi/mm52-all7341/alignmentChunks/
-## _createDagSubmitFile_RS11-06.sh /z/Proj/newtongroup/snandi/Simulation_Registration/Run09_1/SeedCombinations.txt > dagSubmit_Run09_1_pValueBefore.dag
+## _createDagSubmitFile_RS11-06.sh /z/Proj/newtongroup/snandi/Simulation_Registration/Run09_2/SeedCombinations.txt > dagSubmit_Run09_2_pValueBefore.dag
 
 FILE=$1
 

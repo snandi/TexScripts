@@ -4,9 +4,10 @@
 
 ## Go to /z/Proj/newtongroup/snandi/Project_RScripts/SubmitFiles/
 ## The input files are in /z/Proj/newtongroup/snandi/mm52-all7341/alignmentChunks/
-## _createDagSubmitFile_RS11-06.sh /z/Proj/newtongroup/snandi/Simulation_Registration/Run09_1/SeedCombinations.txt > dagSubmit_Run09_1_pValueBefore.dag
+## _createDagSubmitFile_RS11-06_redo.sh /z/Proj/newtongroup/snandi/Simulation_Registration/Run09_2/SeedCombinations.txt "Run09_2" > dagSubmit_Run09_2_pValueBefore_redo.dag
 
 FILE=$1
+RunID=$2
 
 LineNum=0
 echo "CONFIG dagman_config"
@@ -19,7 +20,7 @@ do
 	Seed1=${linearray[0]}
 	Seed2=${linearray[1]}
 
-        pValueFile="/z/Proj/newtongroup/snandi/Simulation_Registration/Run09_1/pValues/pValue_before_Seed"$Seed1"_Seed"$Seed2".RData"
+        pValueFile="/z/Proj/newtongroup/snandi/Simulation_Registration/$RunID/pValues/pValue_before_Seed"$Seed1"_Seed"$Seed2".RData"
 	if [ ! -f "$pValueFile" ];
 	then
 	    jobID="Seed"$Seed1"_Seed"$Seed2

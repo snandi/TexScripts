@@ -18,7 +18,8 @@ do
     if (( $i < 1253 )) 
 	then
 	    rm $folder/Iter*/*
-	    rm -rf $folder/*
+            rm $folder/*.log
+	    #rm -rf $folder/*
 
 	    echo $folder
     fi
