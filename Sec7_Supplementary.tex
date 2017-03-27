@@ -1,0 +1,278 @@
+\section{Supporting Information} \label{Sec7}
+
+\subsection{Data acquisition}
+\subsubsection{Nanocode labeling {\emph{M. florum}} and human (mm52) - acquisition of Nmaps dataset} \label{Sec7_Nanocoding}
+
+\subsubsection{Computer vision, imaging, INCA} \label{Sec7_Inca}
+
+\subsubsection{Alignment process, SOMA} \label{Sec7_Soma}
+
+\subsubsection{\mf Dataset} \label{Sec7_MFData}
+We imaged molecules of {\emph{Mesoplasma Florum}} (\mf) and analyzed them. \mf are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, \mf are of interest because of their extremely small genome size. The \mf genome Nmap consists of 39 intervals. The whole genome is approximately 793 kb. The intervals are between 2.111 kb and 81.621 kb. 
+
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Tue Feb 16 15:11:00 2016
+%\begin{table}[H]
+\begin{center}
+\footnotesize           %% Make sure this is outside of the longtable environment. 
+\begin{longtable}{lrrr|rrr}
+%\centering
+%\begin{tabular}{l*{7}{c}}
+%\begin{tabular}{lrrr|rrr}
+%  \hline
+%  \caption[An optional table caption ...]{A long table\label{long}}\\
+  \caption[\mf data]{Coverage of \mf data} \\
+  \hline 
+  \multicolumn{4}{c |}{Reference Interval} & \multicolumn{3}{| c}{Molecular Fragment lengths} \\
+  \hline
+   Int  & molecules & pixels & length(kb) & min (kb) & avg (kb) & max (kb)\\ 
+  \hline
+  \endhead
+
+  \hline
+  \endfoot
+    0 &  66 & 391 & 81.62 & 65.67 & 81.07 & 92.79 \\ 
+    1 & 208 & 89 & 18.68 & 13.27 & 18.64 & 21.55 \\ 
+    2 & 467 & 284 & 59.40 & 43.92 & 59.24 & 69.39 \\ 
+    3 & 734 & 67 & 13.94 & 9.59 & 13.86 & 17.34 \\ 
+    4 & 895 & 43 & 9.03 & 6.47 & 8.99 & 11.48 \\ 
+    5 & 849 & 24 & 5.04 & 2.14 & 5.02 & 5.90 \\ 
+    6 & 939 & 59 & 12.34 & 6.58 & 12.29 & 15.55 \\ 
+    7 & 1200 & 49 & 10.24 & 6.74 & 10.20 & 12.22 \\ 
+    8 & 965 & 72 & 15.02 & 11.13 & 15.00 & 19.48 \\ 
+    9 & 751 & 122 & 25.45 & 20.52 & 25.45 & 30.91 \\ 
+   10 & 784 & 19 & 3.89 & 2.40 & 3.90 & 4.94 \\ 
+   11 & 898 & 100 & 20.89 & 14.35 & 20.83 & 26.42 \\ 
+   12 & 883 & 75 & 15.57 & 9.97 & 15.43 & 19.24 \\ 
+   13 & 855 & 49 & 10.21 & 6.21 & 9.98 & 13.72 \\ 
+   14 & 731 & 45 & 9.47 & 6.84 & 9.19 & 12.79 
+    \label{Sec7_mftable} \\
+   15 & 631 & 53 & 11.12 & 5.69 & 10.42 & 13.94 \\ 
+   16 & 203 & 24 & 4.99 & 1.46 & 4.24 & 7.99 \\ 
+   17 & 151 & 66 & 13.73 & 8.29 & 12.97 & 16.76 \\ 
+   18 & 377 & 126 & 26.28 & 21.17 & 25.66 & 31.02 \\ 
+   19 & 551 & 183 & 38.28 & 29.91 & 38.14 & 43.33 \\ 
+   20 & 488 & 10 & 2.11 & 1.46 & 2.14 & 3.18 \\ 
+   21 & 572 & 148 & 31.02 & 18.48 & 31.12 & 35.62 \\ 
+   22 & 712 & 91 & 19.10 & 14.66 & 19.12 & 24.44 \\ 
+   23 & 918 & 17 & 3.62 & 1.04 & 3.61 & 6.37 \\ 
+   24 & 947 & 154 & 32.19 & 25.89 & 32.24 & 37.16 \\ 
+   25 & 876 & 198 & 41.30 & 30.39 & 41.20 & 48.77 \\ 
+   26 & 824 & 47 & 9.76 & 4.62 & 9.74 & 13.15 \\ 
+   27 & 835 & 78 & 16.38 & 10.50 & 16.34 & 20.35 \\ 
+   28 & 666 & 75 & 15.69 & 11.18 & 15.96 & 18.90 \\ 
+   29 & 653 & 30 & 6.28 & 4.07 & 5.86 & 7.36 \\ 
+   30 & 881 & 175 & 36.50 & 29.11 & 36.34 & 42.61 \\ 
+   31 & 795 & 88 & 18.31 & 12.95 & 18.24 & 21.90 \\ 
+   32 & 668 & 153 & 32.07 & 25.75 & 31.81 & 38.11 \\ 
+   33 & 431 & 100 & 20.95 & 15.15 & 20.86 & 23.97 \\ 
+   34 & 334 & 16 & 3.28 & 1.25 & 3.03 & 4.60 \\ 
+   35 & 295 & 68 & 14.26 & 11.32 & 14.16 & 16.37 \\ 
+   36 & 191 & 245 & 51.31 & 36.60 & 50.81 & 59.52 \\ 
+   37 & 103 & 77 & 15.99 & 12.06 & 15.90 & 18.12 \\ 
+   38 &  68 & 86 & 17.88 & 15.04 & 17.68 & 20.14 \\ 
+%  \hline
+%  \hline
+%\end{tabular}
+%\caption{Coverage of \mf data}
+%\label{tab:Sec7_mftable}
+%\end{table}
+\end{longtable}
+\end{center}
+
+\subsubsection{{\emph{Multiple myeloma}} Dataset} \label{Sec7_MM52}
+For detailed background of the patient whose genome was sequenced and nanocoded can be found in the ``Case History'' section of supporting information of \cite{Gupta_etal_2015_PNAS}. We have nanocoded data from DNA samples were prepared from purified CD138 plasma cells (MM-S and MM-R sample) and paired cultured stromal cells (normal) from a 58-year old male MM patient with International Staging System (ISS) Stage IIIb disease. Multiple myeloma is the malignancy of B lymphocytes that terminally differentiate into long-lived, antibody-producing plasma cells. Although it is a cancer genome, substantial portions of it are still identical to the reference human genome. This genome has been comprehensively analyzed to characterize its genome structure and variation by integrating findings from optical mapping with those from DNA sequencing-based genomic analysis \cite{Gupta_etal_2015_PNAS}. While the {\emph{M. florum}} genome only had 39 intervals, the table below (table \ref{tab:Sec7_mm52table}) lists the number of intervals each chromosome of the human genome contains.
+
+\begin{table}[H]
+\small
+\centering
+\begin{tabular}{c | r || c | r}
+  \hline
+  \hline
+  Chromosome & Number of intervals & Chromosome & Number of intervals \\ 
+  \hline
+  \hline
+   1 & 26069  & 13 & 9916 \\
+   2 & 26772  & 14 & 9764 \\
+   3 & 21334  & 15 & 9701 \\
+   4 & 19406  & 16 & 9106 \\
+   5 & 19359  & 17 & 9291 \\
+   6 & 18504  & 18 & 8306 \\
+   7 & 16797  & 19 & 5763 \\
+   8 & 15828  & 20 & 7311 \\
+   9 & 13553  & 21 & 3900 \\
+  10 & 15053  & 22 & 4326 \\
+  11 & 15212  &  X & 15953 \\
+  12 & 14371  &  Y & 2582 \\
+  \hline
+  \hline
+\end{tabular}
+\caption{Number of intervals in each human chromosome}
+\label{tab:Sec7_mm52table}
+\end{table}
+
+\subsection{Statistical Methods} \label{Sec7_Stat}
+\subsubsection{Permutation test to compare two groups of smooth curves} \label{Sec7_FTTest}
+We describe a permutation t-type test for two groups of functional data objects \cite{Ramsay_etal_2009_Functional_R}. We extended this test to verify that the iterated registration method improves power. Let $Y_{1,1}, \dots, Y_{1,n_1}$ and $Y_{2,1}, \dots, Y_{2,n_2}$ be two sets of $n_1$ and $n_2$ curves respectively. Without making any distributional assumptions we want to test if they are from the same distribution. Assume $Y_{1,.}\  \stackrel{iid}{\sim} \ \Y_1$, $Y_{2,.}\  \stackrel{iid}{\sim} \ \Y_2$, $Y_{1,i}\  \indep \ Y_{2,j}, \ \ \forall i, j$, Each curve $Y_{1,.}, Y_{2,.}$ have the same number of data points. The 
+\[ H_0: \Y_1 \ \stackrel{\mathcal{D}}{=} \ \Y_2 \ \ vs \ \ H_a: \Y_1 \ \stackrel{\mathcal{D}}{\ne} \ \Y_2 \]
+
+Denote $\bar{Y}_1(x)$ and $\bar{Y}_2(x)$ be the consensus curves estimated from curves from groups 1 and 2 respectively. Let $\Var[Y_1(x)]$ and $\Var[Y_2(x)]$ be the variances of curves of group 1 and 2 respectively, at a function of the abscissa $x$. Define $T(x) = \frac{|\bar{Y}_1(x) - \bar{Y}_2(x)|}{\sqrt{\frac{1}{n_1}\Var[Y_1(x)] + \frac{1}{n_2}\Var[Y_2(x)]}}$, the absolute value of a t-type statistic at each point. Define $T_{\text{sup}}:  \sup\limits_{x} T(x)$ as our test statistic (measure of difference of two sets of curves). To get a null distribution of $T_{\text{sup}}$, permute the curves between the two groups, and repeat the steps to estimate $T_{\text{sup, permute}}$. Then, for $N$ permutations
+\[  \text{p-value} = \frac{1}{N}\sum\limits_{j = 1}^{N}\Ind\{T_{\text{sup, obs}} > T_{\text{sup, permute}} \} \]
+
+\subsubsection{Functional Anderson-Darling (FAD) test} \label{Sec7_FAD}
+First introduced in \cite{Pomann_etal_2016_JRSSC}, functional Anderson-Darling (FAD) test can be used to test the hypothesis in section \ref{Sec7_FTTest}. Recall that $Y_{1i}$'s and $Y_{2i}$'s are realizations of $\Y_1$ and $\Y_2$ respectively, and assume here that both the mean function $\mu(x)$ and the eigen-basis $\{\phi_k(\cdot)\}_{k \ge 1}$ of the mixture process $\Y(\cdot)$ are known. Then, the corresponding basis coefficients can be estimated as: $\xi_{1ik} = \int \{Y_{1i}(x) - \mu(x) \}\phi_k dx$  and $\xi_{2ik} = \int \{Y_{2i}(x) - \mu(x) \}\phi_k dx$, where the smooth curves can be expressed via the Karhunen-Lo\`{e}ve expansion as $\Y(x) = \mu(x) + \sum\limits_{k = 1}^{\infty} \xi_k \phi_k(x)$. Following the setup in \cite{Pomann_etal_2016_JRSSC}, let $\tilde{F}_{1k}(\cdot)$ and $\tilde{F}_{2k}(\cdot)$ be the corresponding empirical conditional distributions functions of $\{\xi_{1ik}\}_i$ and $\{\xi_{2ik}\}_i$ respectively. Then, the Anderson-Darling test statistic is defined as
+\[ \text{AD}_k^2 = \frac{n_1 n_2}{n_1 + n_2} \bigintsss_{-\infty}^{\infty} \frac{ \{\tilde{F}_{1k}(x) - \tilde{F}_{2k}(x)\}^2 }{ \tilde{F}_{k}(x)\{ 1 - \tilde{F}_{k}(x) \} } d\tilde{F}_{k}(x) \]
+where, $\tilde{F}_{k}(x) = \frac{ n_1\tilde{F}_{1k}(x) + n_2\tilde{F}_{2k}(x) }{ n_1 + n_2 }$. Before final rejection of the $\text{H}_0$ above, Bonferroni and Benjamini-Hochberg corrections were applied to the p-values to ensure nominal size of the testing procedure, conditional on the truncation level $K$, which is determined by the percentage of variance in the samples explained by the functional principal components. It is demonstrated in \cite{Pomann_etal_2016_JRSSC} that for smaller sample size FAD test has more power than the Cram\'{e}r-von Mises (CVM)-type test introduced in \cite{Hall_etal_2007_StatSinica}. FAD test is computationally less expensive than the CVM-type test because it does not involve bootstrapping from the curve samples.
+
+\subsubsection{Similarity Index} \label{Sec7_Similarity}
+Before discussing the techniques of curve registration, it is important to establish the notion of ``distance'' or ``similarity'' between two smooth functions, or two curves. We use the {\emph{similarity index}} between two curves in $\Real$, introduced in \cite{Sangalli_etal_2009_JASA}. Let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y'_i \in L^2(S_i \subset \Real; \Real)$ and $y'_j \in L^2(S_j \subset \Real; \Real)$, and let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. $S_{(.)}$ are Sobolev spaces. Assuming that $\|y'_i\|_{L^2(S_{ij})} \ne 0$ and $\|y'_j\|_{L^2(S_{ij})} \ne 0$, the similarity index between $y_i$ and $y_j$ is defined as
+\begin{equation}
+\rho(y_i, y_j) = \frac{\int _{S_{ij}}y'_i(x)y'_j(x) dx}{\sqrt{\int _{S_{ij}}y'_i(x)^2 ds}\sqrt{ \int _{S_{ij}} y'_j(x)^2 dx}}
+\label{eq:Sec7_Similarity}
+\end{equation}
+This is the cosine of the angle $\theta_{ij}$ between first derivatives of the functions $y_i$ and $y_j$, with the inner product $\int _{S_{ij}}y'_i(x)y'_j(x) dx$.  $\rho(y_i, y_j)$ can also be interpreted as a continuous version of Pearson’s uncentered correlation coefficient for first derivatives. Following are some useful properties of $\rho(y_i, y_j)$:
+\begin{enumerate}
+\item[(i)] From Cauchy-Schwartz inequality it follows that $|\rho(y_i, y_j)| \leq 1$
+\item[(ii)] $\rho(y_i, y_j) = 1 \ \Leftrightarrow \ \exists \ a \in \Real^{+}, b \in \Real, \ni y_i = ay_j + b $
+\item[(iii)] For all invertible affine transformations of $y_i$ and $y_j$, say $t_1 \circ y_i = a_1y_i + b_2$ and $t_2 \circ y_j = a_2y_j + b_2$, with $a_1, a_2 \ne 0$, 
+\[ \rho(y_i, y_j) = \text{sign}(a_1 a_2)\rho(t_1 \circ y_i, t_2 \circ y_j)\]
+\item[(iv)] For all invertible affine transformations of the abscissa $x$, say $h_1(x) = a_1 x + b_1$ and $h_2(x) = a_2 x + b_2$, with $a_1, a_2 > 0$, we have
+\[ \rho(y_i \circ h_1, y_j \circ h_2) = \rho(y_i \circ h_1 \circ h_2^{-1}, y_j) = \rho(y_i , y_j \circ h_2 \circ h_1^{-1}) \]
+\end{enumerate}
+
+\subsubsection{Functional Outlier Detection} \label{Sec7_Outliers}
+When a sample $y_1, \dots, y_n$ of curves is projected on a random direction $a, a \indep y_i$, with the operation $ \langle a, \mathbf{y} \rangle$ then sample depth of $y_i$ is the rank (univariate depth) of $ \langle a, y_i \rangle$. For example, if $y_i \in \text{ Hilbert space } L^2[0,1]$, then the projection is defined by its standard inner product $\langle a, y \rangle = \int\limits_0^1 a(x) y(x) dx$ \cite{Cuevas_etal_2007_CSDA}. The random projection depth of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is defined as $ \text{RPD}_n(y_i) = \frac{1}{P} \sum\limits_{j = 1}^P D_n(\langle a_j, y_i \rangle) $. ``Depth'' and ``outlyingness'' are inverse notions, so for a curve to be an outlier in the dataset, it will have a significant low depth. We used the following procedure for functional outlier detection in the Fscan data $y_1, \dots, y_n$, as outlined in \cite{Febrero-Bande_etal_2007_Environmetrics}. 
+
+(1) Obtain the functional depths $\text{RPD}_n(y_1), \dots, \text{RPD}_n(y_n)$. (2) Let $y_{i1}, \dots, y_{ik}$ be the $k$ curves such that $\text{RPD}_n(y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $y_{i1}, \dots, y_{ik}$ are outliers and delete them from the sample. (3) Then, come back to step 1 with the new data set after deleting the outliers found in step 2. Repeat this until no more outliers are found. To ensure type-I error of detecting outliers is under some small threshold $\alpha$, we need to choose $C$ such that $\Prob(\text{RPD}_n(y_i) \leq C) = \alpha,\ \ i = 1, \dots, n$
+However, since the distribution of the functional depth statistic RPD is unknown, it is estimated here using the following bootstrap procedure: (a) Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, using any depth function. (b) Obtain $B$ standard bootstrap samples from the curves in which each original curve is sampled with a probability proportional to its depth. Let $y_i^b, i = 1, \dots, n$ and $b = 1, \dots, B$, be these samples. (c) For each bootstrap, set $b = 1, \dots, B$, obtain $C_b$ as the $\alpha^{th}$ empirical percentile of the distribution of the depths, $D(y_i^b(x)), i = 1, \dots, n$ (4) Take $C = \text{median}(C_b), b = 1, \dots, B$ 
+
+\subsubsection{Iterated Registration} \label{Sec7_Registration}
+\noindent
+{\bf{Curve Registration to reduce phase variability }} \\
+Due to differential stretching of the molecules and non-uniform dye concentration Fscans include amplitude and phase variability. While amplitude variability can be attenuated by normalizing the Fscans with their median values, phase variability remains unaddressed. In particular, features of Fscans from molecules aligned to the same location of a genome should be aligned to each other, along the abscissa. Otherwise, consensus estimates from these Fscans would not reflect the true underlying signal. Hence, eliminating phase variability is essential before consensus estimation. Pioneered by Silverman in \cite{Silverman_1995_JRSSB}, Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} and further advanced by Ramsay and Silverman in \cite{Ramsay_2006_Functional}, {\emph{Curve Registration}} is the technique that addresses this problem. Figure \ref{fig:PhaseVar} is a simulated example of four ``warped'' realizations of a true signal. These curves have phase variability. These are a result of warping their abscissa, by warping functions plotted in figure \ref{fig:WarpingFunc}. The goal of registration is to estimate these warping functions so that the sample of curves when transformed by the inverse of these warping functions will exhibit less (or zero) phase variability. 
+
+\begin{figure}
+\begin{subfigure}{0.49\linewidth}
+\centering
+\includegraphics[scale=0.3, page=2]{../Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\caption{Curves with phase variability}
+\label{fig:PhaseVar}
+\end{subfigure}
+\begin{subfigure}{0.49\linewidth}
+\centering
+\includegraphics[scale=0.3, page=1]{../Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\caption{Warping functions}
+\label{fig:WarpingFunc}
+\end{subfigure}
+\caption{(a) 4 sample curves of the ``true''(black) curve, with phase variability (b) Warping functions producing the phase variability }
+\label{fig:ExampleWarping}
+\end{figure}
+
+Let $n$ functions (or curves) $y_1, \dots, y_n$ be defined on a closed real interval $[0, X]$. Let $h_i(x)$ be a transformation of the abcissa $x$ for curve $i$. The warping function is often referred to as ``time warping'' as time is a common abcissa in problems with phase variability. In the context of Fluoroscanning, the abcissa is genomic location along the backbone of DNA molecules. The warping function should satisfy the following: (1) $h(0) = 0$ and $h(X) = X$, $0$ and $X$ being the endpoints of the interval on which the functions are defined. (2) The timings of events remain in the same order regardless of the timescale entails that $h_i$, the time-warping function, should be strictly increasing, i.e. $h_i(x_1) > h_i(x_2)$ for $x_1 > x_2$. (3) $h^{-1}[h(x)] = x$
+
+The objective of curve registration is that the {\emph{registered}} functions $y_1(h_1(x)), \dots, y_n(h_n(x))$ will have no phase variability. \\
+
+\subsubsection*{Existing work on curve registration} \label{Sec7_registration}
+Marker registration is often used in engineering, biology and other fields. It is the process of aligning curves by identifying the timing of certain salient features in the curves. Curves are then aligned by transforming time (or the abcissa) so that marker events occur at the same values of the transformed times. Comparisons between marker timings can also be made by using corresponding transformed times. Sakoe in Chiba in \cite{Sakoe_Chiba_1978_IEEE} estimated the warping function $h$ at marker timings by minimizing the sum of weighted distances of two speech patterns at the marker timings and imposing monotonicity and continuity on $h$. They solved for the discrete values of $h$ using a dynamic programming algorithm, which widely popularized as {\emph{dynamic time warping}}. Kneip and Gasser in \cite{Kneip_Gasser_1992_AnnStat} studies the statistical aspects, including the asymptotic properties of these estimators \cite{Kneip_etal_2000_CJS}. These methods, however, can be sensitive to errors in feature location, and the  required features may even be missing in some curves. Moreover,substantial phase variation may remain between widely separated markers. In \cite{Kneip_etal_2000_CJS}, they introduce a local nonlinear regression technique, but acknowledge that a lot of tuning parameters are left to user's experimentation and best guess. Following are some of the subsequent curve registration techniques that helped develop an iterated registration algorithm to analyze the fluoroscanning data. \\
+
+\noindent
+{\bf{Penalized least square criterion}} \\
+Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} set it up as a penalized least square (PLS) fitting problem. When registering $y(x)$ to a template $y_0(x)$, they minimize the penalized squared error criterion
+\[ F_{\lambda}(y_0, y|h) = \displaystyle \int \| y_0(x) - y\{h(x)\} \|^2 dx + \lambda \displaystyle \int w^2(x)dx\]
+where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is the relative curvature of the warping function.\\
+
+\noindent
+{\bf{Minimum second eigenvalue method}} \\
+Ramsay and Silverman in \cite{Ramsay_2006_Functional} argued the PLS technique addressed more of the amplitude variability and not as much of the phase variability. They suggested the following continuous registration technique. Suppose two curves $y_0(x)$ and $y_1(x)$ differ only in amplitude but not in phase. Then, if we plot the function values against each other, we will see a straight line. Amplitude differences will then be reflected in the slope of the line, a line at $45^{\circ}$ corresponding to no amplitude differences. To evaluate both the target function $y_0(x)$ and the registered function $y*$ at a fine mesh of $n$ values of $x$ to obtain the pairs of values $(y_0(x), y\{h(x) \}$. Let the $n$ x $2$ matrix $\mathbf{X}$ contain these pairs of values. Then, to analyze the principal components, we would analyze the functional analog of the cross product matrix $\mathbf{X'X}$. 
+\begin{equation}
+C(h) = 
+\begin{bmatrix}
+\int \{y_0(x) \}^2dx & \int y_0(x) y[h(x)]dx \vspace{0.5cm} \\ 
+\int y_0(x) y[h(x)]dx & \int \{y[h(x)]\}^2dx
+\end{bmatrix}
+\end{equation}
+Then, PCA of $C(h)$ should reveal essentially one component (smallest eigen value $\approx 0$). Now, the objective function for curve registration between a template $y_0(x)$ and a sample curve $y(x)$ becomes
+\[ \text{MINEIG}(h) = \mu_2[C(h)]\]
+where, $\mu_2$ is the size of the second eigenvalue of its argument. When $\text{MINEIG}(h)=0$, registration is achieved, and $h$ is the warping function that does the job. Including the penalty term on the relative curvature of the warping function, the Minimum second eigenvalue (MSE) fitting criterion is
+\begin{equation}
+\text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx
+\end{equation}
+When registering a sample of replicated curves, they \cite{Ramsay_etal_2009_Functional_R} recommended using the mean of the curves as the template and registering all of the curves to that template. \\
+
+\noindent
+{\bf{Iterative registration using similarity index}} \\
+Sangalli, et al, in \cite{Sangalli_etal_2009_JASA} introduce an iterative registration (E-M) algorithm. Given the similarity index $\rho(y_i, y_0)$, defined in \ref{eq:Sec7_Similarity}, between two curves, registering a curve $y_i$ to a template curve $y_0$ means finding the function $h$ in a class of warping functions $W$ that maximizes 
+\[ \rho(y_i \circ h^{-1}, y_0)\]
+The consider $W$ as a group of strictly increasing affine transformations of the abcissa:
+\begin{equation}
+W = \{h:h(s) = as + b,\ \ a \in \Real^{+}, b \in \Real  \}
+\label{eq:3_affine}
+\end{equation}
+This approach is quite intuitive and elegant. This is the first approach that defines a metric to estimate the quality of a registration procedure and use it as a convergence criterion of the iterative E-M algorithm. Similar to local linear regression method in \cite{Kneip_etal_2000_CJS} and the MSE method in \cite{Ramsay_2006_Functional}, they start the registration procedure with the mean of the curves as the template and update the template at each ``Expectation'' step of the E-M algorithm. They successfully extend this algorithm to simultaneous clustering and registration of curves in \cite{Sangalli_etal_2010_CSDA} and \cite{Sangalli_etal_2014_EJS}. \\
+
+\noindent
+{\bf{Registration using the Fisher-Rao metric}} \\
+Registration using the {\emph{Fisher-Rao}} metric was developed by Srivastava et al., in \cite{Srivastava_etal_2011_v2_arXiv}. The space of functions considered here is
+\[ F = \left\{f: [0,1] \rightarrow \Real, f \text{ absolutely continuous}  \right\}\] and the space of warping functions:
+\[ \Gamma = \left\{\gamma: [0,1] \rightarrow [0,1], \gamma(0) = 0, \gamma(1) = 1, \gamma \text{ monotone increasing }, \gamma \text{ is a diffeomorphism}  \right\} \]
+The Fisher-Rao metric is defined on the space tangent to the variety of $F$ as:
+{\bf{Definition 3.3}} For $f \in F$ and $v_1, v_2 \in T_f(F)$, the Fisher-Rao metric is defined as: 
+\[ \langle\langle \cdot , \cdot \rangle \rangle_f: T_f(F) \times T_f(F) \rightarrow \Real; \langle\langle v_1 , v_2 \rangle \rangle_f = \frac{1}{4} \displaystyle \int \limits_0^1 \frac{\dot{v}_1(t) \dot{v}_2(t)}{|\dot{f}(t) |}dt \]
+To find this distance it requires the geodetic path which connect functions $f$ and $g$ with respect to the Fisher-Rao metric. The minimization of this quantity is therefore quite challenging. This is why a  new representation of the functions was introduced.
+{\bf{Definition 3.4}} The square-root velocity function (SRVF) of a function $f \in F$ is defined as
+\[ q:\Real \rightarrow \Real, \ q(x) = 
+  \begin{cases}
+    \frac{x}{\sqrt{\|x \|}}       & \|x\| \ne 0 \\
+    0 & \text{otherwise} \\
+  \end{cases} 
+\] 
+A fundamental property of this metric is that under the SRVF representation, the Fisher-Rao metric becomes the $L^2$ norm. In $L^2$ space the geodesic distance is simply the $L^2$ norm. They estimate the warping functions on this SRVF space, performing the following optimization:
+\[ \gamma_i^* = \argmin_{\gamma \in Gamma} \|\mu - (q_i \circ \gamma)\sqrt{\dot{\gamma}}  \|_{L^2} \]
+In the Fisher-Rao method they were able to include in the space of warping functions almost all kind of transformations, with the only constraint being diffeomorphism. This leads to a very large class of transformations and hence, generally, to a better result in aligning functional data. However, this is also its limitation \cite{Patriarca_2013_PhDThesis}. With this method it is possible to align almost any group of functions, however disparate they might be. In addition, the warping function loses interpretability. In many cases, including fluoroscanning data, the warping function plays an important role in analyzing the causes of phase variability. \\
+
+\noindent
+{\bf{Bayesian approach to registering and clustering}} \\
+Zhang and Inoue developed a Bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a Bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered functions as Gaussian processes. They go beyond estimation, and inference and provide the framework of prediction of registered functions. \\
+
+\noindent
+{\bf{Why Iterated registration?}}
+\begin{enumerate}
+\item {\bf{Starting template}}: In Fluoroscanning dataset, we do not have a true Fscan to register the other Fscans to. In most of the methods above, the cross-sectional mean of the curve sample is the starting template to which the rest of the curves are registered to. This approach works well if the noise to signal ratio is small, and the extent of abcissa warping is limited. However, in Fluoroscanning dataset, the signals are warped to a much larger extent and consequently, the cross-sectional mean of intensity profiles is not representative of the true features of that sample of curves. We present an iterated registration scheme, similar to \cite{Sangalli_etal_2009_JASA}, but the estimation of our template at each ``expectation'' step of the E-M algorithm will be more sophisticated and robust. 
+\item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in the sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In Fluoroscanning data there are multiple reasons why some intensity profiles could be outliers. It is important to detect, but not necessarily discard, intensity profiles with unusual features and underweight them when estimating the consensus signal. 
+\item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the phase variability. In Fluoroscanning, it is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. Neither could they be as complex and uninterpretable as in \cite{Srivastava_etal_2011_v2_arXiv}. 
+\end{enumerate}
+To address all the above requirements and improve on accuracy and statistical power, we propose an ``iterated curve registration'' scheme to estimate the cFscans of genomic intervals, from Fscans of molecules aligned to those locations. \\
+
+\noindent
+{\bf{Simulation set up}} \\
+This simulation set up is similar to, but considerably more complex than all the simulation studies used to test different curve registration techniques, for example, in \cite{Kneip_Ramsay_2008_JASA}, \cite{Srivastava_etal_2011_v2_arXiv}, etc. The goal was to add noise to true signals, warp them, and add outliers to the samples, and compare samples before and after iterated registration and other single iteration techniques to demonstrate that iterated registration improves accuracy as well as power. 
+\begin{enumerate}[nolistsep]
+\item Set up the abcissa $x$ from $1$ to $40$.
+
+\item Randomly choose 3 locations $x_1, x_2, x_3 \in (1, 40)$ where the curves will have distinctive features.
+
+\item Generate a true curve (smooth) by the following formula: 
+\begin{equation}
+\footnotesize
+y = ae^{-\frac{(x - x_1)^2}{16}} - ae^{-\frac{(x - x_2)^2}{16}} + ae^{-\frac{(x - x_3)^2}{16}},\ \ a=0.04 
+\label{eq:SimTrue}
+\end{equation}
+\item Add smooth noise at the signal locations and two more randomly chosen locations $x_{12} \subset (x_1, x_2) \ \& \ x_{23} \subset (x_2, x_3) $, the resulting curves are of the form:
+\begin{equation}
+\footnotesize
+ y = (a + \epsilon_1)e^{-\frac{(x - x_1)^2}{16}} + \epsilon_2e^{-\frac{(x - x_{12})^2}{16}} - (a + \epsilon_3)e^{-\frac{(x - x_2)^2}{16}} + \epsilon_4e^{-\frac{(x - x_{23})^2}{16}} + (a + \epsilon_5)e^{-\frac{(x - x_5)^2}{16}};\ \epsilon_i \sim \mathcal{N}(0, 0.03)
+\label{eq:SimNoise}
+\end{equation}
+\item Warp the noisy curves by the following operation on the abcissa: Let $x_1$ and $x_p$ be the end points of the abcissa. Randomly choose a location $x^*$ at which the warping direction will change from positive to negative or vice-versa. Note that at any $x$ if $h(x) > x$, then the abcissa has been stretched outward and if $h(x) < x$, it has been squeezed inward. 
+{\footnotesize
+\begin{eqnarray}
+h_1(x) &=& x_1 + (x^* - x_1) \frac{e^{\frac{u_i(x - x_1)}{x^* - x_1}} - 1}{e^{u_i} - 1};\  \ \ 
+h_2(x) = x_* + (x_p - x^*) \frac{e^{\frac{v_i(x - x^*)}{x_p - x^*}} - 1}{e^{v_i} - 1} \\
+\nonumber
+h(x) &=& \Ind_{\{ x \le x^*\}} h_1(x) + \Ind_{\{ x > x^*\}} h_2(x);\  \ \ u_i, v_i \sim \mathcal{N}(0, 1); i = 1, \dots, 40
+\label{eq:SimWarp}
+\end{eqnarray}}
+
+\end{enumerate}
+\subsubsection{Quality Scores for Images} \label{Sec7_QualityScore}
+

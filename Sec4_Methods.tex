@@ -1,0 +1,131 @@
+\section{Methods}
+
+\subsection{Statistical Methods for Preprocessing} \label{Sec4_Smooth}
+\noindent
+{\bf{Definition:}} {\emph{A random variable $\Y$ is called a functional variable if it takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data.}} \cite{Ferraty_Vieu_2006_Nonparametric}\\
+\noindent
+{\bf{Definition:}} {\emph{A functional data set $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}} $y_i = {y_{i,1}, \dots, y_{i,p}}$ are $p$ discretely observed points on the function $y_i$\\
+
+The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a string of individual observations \cite{Ramsay_2006_Functional}. In practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that were applied to our data set to answer our research questions.
+
+In Fluoroscanning the grey level of each pixel point of the image of a DNA molecule corresponds to 206 bp of genomic sequence. Any pixel intensity value is a result of superimposition of point spread functions of the fluorescent dye molecules intercalated between the nucleotide bases. Hence, there is an inherent smoothness in the fluorescence intensity profiles of the images of the DNA molecules. Figure \ref{fig:Smooth_a} is an example of fluorescence intensity profiles (Fscans) of intervals of Nmaps that have been aligned to interval 1058 of chromosome 13, of the reference human genome. Since the Fscans are merely discrete observations of the fluorescence intensity profiles, it is imperative to smooth them before further analysis. Another source of variability in the data set is the different lengths of the Nmap intervals, aligned to the same genomic interval. As explained in \ref{Results}, there could be several possible reasons causing this. In order to estimate consensus fluorescence intensity profiles (cFscans) of all genomic intervals ($\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$), each $y_i$ need to be of the same length. This is achieved by smoothing each profile and evaluating the functions at regular intervals, based on the length of the reference interval. 
+
+Below is the smoothing procedure applied to Fscans, as part of the preprocessing:
+\begin{enumerate}
+\item {\bf{Normalizing}}: As can be seen in figure \ref{fig:Smooth_a} the intensity values range between 6,000 and 12,000. This is because these intervals are parts of molecules that have been imaged on different glass surfaces. Some surfaces are brighter than others. In order to eliminate the surface ``effect'', each Fscan was divided by the median value of that interval. This normalization was done after truncating ten pixels from either end of the Fscan intervals, as those values could be dampened by the presence of the red punctates that separate the Nmap intervals.
+\item {\bf{Basis choice}}: We used B-spline \cite{deBoor_1978_Splines} to smooth each of intensity profile individually. For an intensity profile $y_i$, with $p$ observed points $y_{i,1}, \dots, y_{i,p}$, we used $\frac{p}{2}$ breakpoints, with $4^{th}$ order basis functions. Since the number of basis functions and their orders have the following relationship, $ n_{\text{basis}} = n_{\text{knots}} + n_{\text{order}} - 2 = \frac{p}{2} + 4 - 2 = \frac{p}{2} + 2 $
+\item {\bf{Smoothing}}: We used {\emph{generalized cross validation}} (GCV) measure, developed by Craven and Wahba (1979) \cite{Craven_Wahba_1978_NumMath} to estimate the roughness penalty $\lambda_{i}$ for each Fscan $y_i$. $ \lambda_i = \argmin_{\lambda} \text{GCV}(\lambda), \ \ \text{for\ \ } e^{-5} \leq \lambda \leq e^5 $
+\item {\bf{Evaluation at regular intervals}}: For a genomic interval with $Q$ bp, since each pixel in the image accounts for 206 bp, ideally each Nmap interval that aligns to that location should be $\frac{Q}{206}$ pixels long. After smoothing, the smooth Fscan functions are evaluated at $\frac{Q}{206} + 1$ equidistant points. Figure \ref{fig:Smooth_c} illustrates smoothing of Fscans of chromosome 13, interval 1058 and eval
+\item {\bf{Outlier detection}}: We used Random-Projection functional depth (\cite{Cuevas_etal_2007_CSDA}) and the bootstrap approach outlined in \cite{Febrero-Bande_etal_2007_Environmetrics} to detect functional outliers in the Fscan data. Figure \ref{fig:Smooth_d} shows the outlier in the Fscans of interval 1058 in chromosome 13. Details of functional outlier detection is discussed in section \ref{Sec7_Outliers}. 
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.23\linewidth}
+\includegraphics[page=2, width=\textwidth]{../Plots/chr13_frag1058.pdf}
+\caption{}
+\label{fig:Smooth_a}
+\end{subfigure}
+\begin{subfigure}{0.23\linewidth}
+\includegraphics[page=3, width=\textwidth]{../Plots/chr13_frag1058.pdf}
+\caption{}
+\label{fig:Smooth_b}
+\end{subfigure}
+\begin{subfigure}{0.23\linewidth}
+\includegraphics[page=4, width=\textwidth]{../Plots/chr13_frag1058.pdf}
+\caption{}
+\label{fig:Smooth_c}
+\end{subfigure}
+\begin{subfigure}{0.23\linewidth}
+\includegraphics[page=5, width=\textwidth]{../Plots/chr13_frag1058.pdf}
+\caption{}
+\label{fig:Smooth_d}
+\end{subfigure}
+\caption{Different stages of preprocessing the Fscans. An example from human genome, chromosome 13, interval 1058. (a) Original Fscans of Nmaps aligned to this location (b) After normalizing each Fscan by their median values (c) After smoothing each Fscan using B-splines (d) After detecting functional outliers using Random-projection functional depth. The outlier is in red.} 
+\label{fig:Smooth}
+\end{figure}
+
+\subsection{Iterated Curve Registration} \label{Sec4_Registration}
+Refer to section \ref{Sec7_registration} for a detailed discussion on existing work on curve registration and why an iteration curve registration scheme is essential to Fluoroscanning. Here, we re-define the registration problem with respect to the Fluoroscanning and introduce an ``Iterated registration with weighted-average template'' scheme to register the Fscans.
+For any genomic interval where there are $n$ molecular intervals aligned, let the Fscans be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where Fscan $i$ has $p_i$ points. 
+\begin{itemize}
+\item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{Sec4_Smooth}, we normalize all the Fscans, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
+\item {\bf{Step 2}} Detect outliers: As explained in section \ref{Sec4_Smooth}, we detect functional outliers in the data set, using Random-Projection functional depth. 
+\item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the Fscans to, we employ a 2-step approach. 
+\begin{enumerate}
+\item {\emph{Median}}: Estimate $L_1-\text{Median}$ by the algorithm proposed by Vardi and Zhang in \cite{Vardi_Zhang_2000_PNAS}, where $L_1-\text{Median }$ $y_m$ is the minimizer of 
+\[ \sum\limits_{i = 1}^n \|y_i - y_m \| \]
+where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}^p u_j^2}$. Here we ensure that the median is estimated only from the Fscans not deemed as ``functional outliers'' in Step 2. 
+\item {\emph{Weighted mean}}: Estimate the similarity index between the Fscans and the median $\rho(y_i, y_m), \ i = 1,\dots,n$ and estimate the template $\phi$ as the weighted average of the Fscans, with the weights being these similarity indices. 
+\[ \phi = \frac{1}{n}\sum\limits_{i = 1}^n \rho(y_i, y_m) y_i \]
+\end{enumerate}
+This 2-step process ensures that the template to register to has little influence from an outlier Fscan, at the same time giving higher weights to Fscans that have retained some similarity between their features, in spite of being warped. 
+\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the Fscans to the template $\phi$. As explained in \ref{Sec7_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the Fscans. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 0.01$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. \\
+\item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
+\[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
+Hence, we iterate steps 3 and 4, until
+\[ |\bar{\rho}_{\phi_{(t+1)}, n}^{\ (t+1)} - \bar{\rho}_{\phi_{(t)}, n}^{ \ (t)} | < \eta \]
+where $t$ denotes iteration number, for some predetermined $\eta$
+\end{itemize}
+
+\subsection{Models for uniqueness of cFscans} \label{Sec4_Uniqueness}
+Comprehensive pairwise comparisons of genomic intervals were conducted to establish uniqueness of cFscans. For example, in chromosome 19, there were 457 intervals that were 10.3 kb long, and had at least 15 Nmaps aligned to them. For each interval, cFscans were estimated. Then, 104,196 ($ \binom {457} {2} = 104,196 $) pairwise comparisons were made, between their GC-profiles and their cFscans. Mixed effects regression and rank based regressions (described in section \ref{Sec4_Uniqueness}) were conducted to estimate the association between GC-profile ($x$) similarity and cFscan ($y$) similarity. 
+\begin{equation}
+y_{i,j} = \alpha_i + \gamma_j + \beta x_{i,j} + \epsilon_{i,j}\ \ \ i, j = 1, \dots, 457,\ \ i \ne j
+\end{equation}
+where, $y_{i,j} = \rho(\text{\tiny{cFscan}}_i, \text{\tiny{cFscan}}_j)$, $x_{i,j} = \rho(\text{gc}_i, \text{gc}_j)$, $\alpha_i \sim \mathcal{N}(0, \tau_1^2), \ \ \gamma_j \sim \mathcal{N}(0, \tau_2^2), \ \ \epsilon_{i,j} \sim \mathcal{N}(0, \sigma^2)$ and $\alpha_i \indep \gamma_j \indep \epsilon_{i,j}$, $\alpha_i$ and $\gamma_j$ are random effect coefficients associated with intervals $i$ and $j$ respectively. Inference on $\beta$ was made by likelihood ratio tests. 
+
+Rank-based regression (\cite{Kloke_McKean_2012_R}) models was also fit between the pairwise similarities between GC-profiles and cFscans. To fit the model $ y = \alpha + \beta x + \epsilon$, the rank estimator of $\beta$ is defined as 
+\begin{equation}
+\hat{\beta}_{\varphi} = \text{Arg min } \| y - X\beta\|_{\varphi}
+\end{equation}
+where, $\| \cdot \|_{\varphi}$ is Jaeckel’s dispersion function, a pseudo-norm defined by
+\[ \| u \|_{\varphi} = \sum\limits_{i=1}^n a R(u_i)u_i\]
+where, $R$ denotes rank and $a(t) = \varphi(\frac{t}{n+1})$, and $\varphi$ is a non-decreasing, square-integrable score function defined on the interval $(0, 1)$. Inference on $\beta$ was made by Wald's test (\cite{Hettmansperger_etal_2010_Robust}). 
+
+\subsection{Machine Learning methods for genome-wide Fscan prediction} \label{Sec4_ML}
+Random Forest (RF) is a relatively recent tree-based machine learning tool that has enjoyed increasing popularity with the proliferation of big data analytics. Ever since its introduction (\cite{Breiman_2001_ML}), RF has been increasingly used in regression and classification settings (\cite{Efron_Hastie_2016}). RF is particularly appealing in high-dimensional settings and in prediction involving covariates with multicollinearity. It combines the concepts of adaptive nearest neighbors and bagging (\cite{Breiman_1996_ML}) for effective data-adaptive prediction and inference (\cite{Chen_Ishwaran_2012_Genomics}). After estimating cFscans of all genomic intervals (human genome) that had at least 15 Nmaps aligned to them, we built a prediction model between sequence compositions and Fscans, using random forest. We used R-package ``randomForest'' (\cite{Liaw_Wiener_2002_R}) for these prediction models. 
+
+``Boosting'' methods were originally used for improving performance of ``weak learners'' in binary classification problems \cite{Efron_Hastie_2016}, by re-sampling training point, and giving more weight to the misclassified ones. Friedman in \cite{Friedman_2001_AnnStat} proposed ``gradient boosting machine'' for additive expansions based on several different fitting criteria. Boosting iteratively adds basis functions in a greedy fashion such that each additional basis function reduces the selected loss function. In the context of trees, boosting involved repeatedly growing shallow trees, each growing on the residuals of the previous tree and build up an additive model consisting of a sum of trees \cite{Efron_Hastie_2016}. We used stochastic gradient boosting (GB) assuming Gaussian distribution of minimizing squared-error loss in the R package ``gbm'' (\cite{Ridgeway_2006_R-gbm}). 
+
+\noindent
+{\bf{Data for prediction model}} \\
+There were 30,560 sub-intervals of human genome, each 10.3kb long, that had at least 15 Nmaps aligned to them. cFscans were estimated for all these sub-Intervals. For each sub-interval, a cFscan consisted of a sequence of 50 numbers, each corresponding to the expected fluorescence intensity measurements of 206bp of genomic sequence. We set up the counts of genomic elements in these 206bp sub-sequences as covariates and the cFscans as the responses to build prediction models. For example, the covariates were the counts of nucleotides G, C, A, T's, counts of 2-mers GG, GC, GA, ..., TT's, counts of all possible 3-mers, 4-mers and 5-mers in 206bp sequences. There are 16 ($4^2$) 2-mers, 64 ($4^3$) 3-mers, 256 ($4^4$) 4-mers and 1,024 ($4^5$) 5-mers. Including the counts of G, C, A, and T's this adds up to 1,364 covariates. Additionally, we assumed a Gaussian kernel along the backbone of a DNA molecule, to incorporate the effect of neighboring sub-sequences on the integrated fluorescence intensity measurements. We assumed that two more 206bp sub-sequences on each side, a total of five sub-sequences (i.e., a total of approximately kb) of genomic sequence contributed to the integrated fluorescence intensity measurement of one pixel. The Gaussian kernel was incorporated as additional columns in the design matrix. The total number of covariates was 6,820 (1,364 x 5). The length of the response vector was 1,528,000 (30,560 sub-intervals x 50). We estimated the following prediction function:
+\begin{equation}
+h \ :\ \Real ^d \rightarrow \ \Real, \ \ \text{where, } d = 6,820
+\label{eq:BigModel}
+\end{equation}
+based on the data $(X, Y)$, where $X$ is the d-dimensional predictor variable and $Y$ is univariate response of length ($N = 1,528,000$). 
+Below (\ref{Algo}) is the {\emph{Subagging}} algorithm we devised to fit the prediction function $h$. Subagging is a sobriquet for {\bf{sub}}sample {\bf{agg}}regating, where sub-samples of the data is used instead of bootstrap for aggregation. We used results derived in \cite{Buhlmann_Yu_2002_AnnStat} on subagging regression trees. Other references \cite{Gentle_etal_2012_Handbook}, \cite{Buhlmann_Yu_2003_JASA}. 
+
+\begin{algorithm}[H]
+\caption{SUBAGGING for Fscan prediction using RF and GB}
+Separate the data into training (90\%) $(X_{r}, Y_{r})$ and testing sets (10\%) $(X_{s}, Y_{s})$\\
+{\emph{Step 1:}} For $k = 1,\dots, M$ (e.g. $M = 2000$), do
+\begin{itemize}
+\item Generate a random sample $(X_r^{k}, Y_r^{k})$, by randomly drawing without replacement $m$ columns and $10m$ columns from $X_r$. $X_r^k: (m \times 10m)$,  $Y_r^k: (1 \times 10m)$
+\item Compute the sub-sampled estimator using random forest, on $(X_r^{k}, Y_r^{k})$
+\[ \hat{f}^k(\cdot) \ :\ \Real ^m \rightarrow \ \Real \]
+\item Compute the sub-sampled estimator using gradient boosting, $(X_r^{k}, Y_r^{k})$
+\[ \hat{g}^k(\cdot) \ :\ \Real ^m \rightarrow \ \Real \]
+\end{itemize}
+{\emph{Step 2:}} Average the sub-sampled estimators to approximate
+\[ \hat{h}(\cdot) \approx \frac{1}{M} \sum\limits_{k = 1}^{M} \frac{1}{2} \left ( \hat{f}^k(\cdot) + \hat{g}^k(\cdot) \right ) \]
+{\emph{Step 3:}} For prediction using sub-sampled estimators, for $j = 1, \dots, T, \ T < M$, do
+\begin{itemize}
+\item $\hat{Y}_{s,(f)}^j = \hat{f}^j(X_s)$ prediction using random forest only
+\item $\hat{Y}_{s,(g)}^j = \hat{g}^j(X_s)$ prediction using gradient boosting only
+\item $\hat{Y}_{s,(b)}^j = \frac{1}{2} \left( \hat{f}^j(X_s) + \hat{g}^j(X_s) \right)$ prediction using both
+\end{itemize}
+{\emph{Step 4:}} Average the sub-sampled predictions
+\begin{itemize}
+\item $\hat{Y}_{s,(f)} = \frac{1}{T} \sum\limits_{k = 1}^{T}\hat{f}^j(X_s)$ prediction using random forest only
+\item $\hat{Y}_{s,(g)} = \frac{1}{T} \sum\limits_{k = 1}^{T}\hat{g}^j(X_s)$ prediction using gradient boosting only
+\item $\hat{Y}_{s,(b)} = \frac{1}{T} \sum\limits_{k = 1}^{T} \frac{1}{2} \left( \hat{f}^j(X_s) + \hat{g}^j(X_s) \right)$ prediction using both
+\end{itemize}
+
+\label{Algo}
+\end{algorithm}
+
+
+

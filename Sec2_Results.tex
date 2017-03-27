@@ -1,0 +1,188 @@
+\section{Results} \label{Results}
+\subsection{Preliminary analysis of \mf Fscans} \label{Sec2_Mflorum}
+{\bf{Initial studies revealed that measured fluorescence intensity profiles reflected underlying sequence composition.}} Stretched DNA molecules, presented on charged surfaces had varied fluorescence, as measured along molecular ``backbones''. Such initial observation prompted us to investigate further - are these signals reproducible? What errors are associated with such measurements? We imaged molecules of {\emph{Mesoplasma Florum}} (\mf) and analyzed them. \mf are of interest because of their extremely small genome size. The \mf genome Nmap consists of 39 intervals. The whole genome is approximately 793 kb. The intervals are between 2.111 kb and 81.621 kb. Small genome allows facile acquisition of large data sets.  Nanocoded datasets and alignment allow unambiguous identification of random, genomic DNA molecules. The Nmap coverage of the intervals was high: there were between 66 and 1,200 Nmap intervals aligned to the intervals of \mf reference genome, with an average of 626 Nmaps per intervals. Coverage details are shown in section \ref{Sec7_MFData}. Figure \ref{fig:Sec2_Fscan} shows a few molecules that were aligned to \mf genome, presented on charged glass surfaces along with fluorescence intensity profiles (Fscans) of some of the molecules. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.25]{../Images/Fscan_Int30_Grp2427991_Mol141_MF.jpg}
+\caption{Image of stretched DNA molecules of \mf genome, presented on charged glass surfaces along with fluorescence intensity profiles (Fscans) of some of the molecules}
+\label{fig:Sec2_Fscan}
+\end{figure}
+
+Imaging stretched DNA molecules is not error free. Dye concentration, surface conditions, photo bleaching effects of labeled punctates, stretching of DNA molecules on charged surfaces, all produce in noisy fluorescence intensity measurements. On the glass surfaces sometimes DNA fragments overlap with stretched molecules. Some molecules fail to attach to the glass surfaces in straight lines. All these add to spurious fluorescence intensity measurements. The machine vision software INCA successfully detects some of these erroneous observations, but not all. We developed a comprehensive quality scoring mechanism that classified every molecule image in the dataset and estimated a score between $-1$ and $1$ ($1$ being the best quality). This is explained in details in \ref{Sec7_QualityScore}. 
+
+After removing the images of molecules that fell below the quality score threshold, the Fscans were further processed (explained in details in Methods - section \ref{Sec4_Smooth}): (1) Some surfaces are brighter than others. In order to reduce the surface ``effect'', each Fscans was divided by the median value of that interval. This normalization was done after truncating ten pixels from either end of the Fscan intervals, as those values could be dampened by the presence of the red punctates that separate the Nmap intervals. (2) Each Fscan interval was smoothed with appropriate roughness penalty to preserve maximum signal-to-noise information. (3) Images of molecules aligned to the same location on the \mf genome are of different lengths. In order to estimate the consensus Fscan of a genomic location, all Fscans from molecules aligned to that location need to be of the same length. Smoothing enables us to interpolate the functions and evaluate the smooth Fscans at same the same abscissa. Refer to \ref{fig:Smooth_d} for an illustration of the different preprocessing steps.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.49\linewidth}
+\includegraphics[scale=0.45]{../Images/FscanComparisonFTtypePvalues_Plot.png}
+\caption{FT-Test}
+\label{fig:FTTest}
+\end{subfigure}
+\begin{subfigure}{0.49\linewidth}
+\includegraphics[scale=0.45]{../Images/FscanComparisonFADPvalues_BF_Plot.png}
+\caption{FAD-Test}
+\label{fig:FADTest}
+\end{subfigure}
+\caption{Pairwise comparison of Fscans from 19 sub-intervals of \mf genome. The lower the p-value for a pairwise comparison, the more statistically significant difference the Fscans from these two sub-intervals exhibit.}
+\label{fig:PairwiseTest_MF}
+\end{figure}
+
+Next, all the Fscans from 19 sub-intervals (each 10.3kb long) were compared pairwise \footnote{Note, an interval is the region between two consecutive punctates. There were 19 intervals that were at least 10kb long. Only the first 10.3kb sub-interval from these intervals were considered for the pairwise comparison}, to determine if Fscans of one sub-interval exhibited similarity between themselves and discernible differences from Fscans of another sub-interval. Two separate statistical tests, one parametric, one non-parametric, were conducted on Fscans of all 19 sub-intervals. First, a non-parametric permutation t-type test (FT-Test) (explained in details in \ref{Sec7_FTTest}) was conducted pairwise, to test the null hypothesis that Fscans from two distinct genomic sub-intervals were from the ``same distribution''. Next, a functional Anderson-Darling test (FAD-Test) was conducted pairwise on the same sub intervals (explained in details in \ref{Sec7_FAD}). Figure \ref{fig:PairwiseTest_MF} illustrates the results of the two tests, in terms of p-value. The lower the p-value for a pairwise comparison, the more statistically significant difference the Fscans from these two intervals exhibit. 
+
+Notice in figure \ref{fig:PairwiseTest_MF} that sub-intervals 9, 24, 25, 31 and 32 exhibit discernible differences in their Fscans when compared with most of the other intervals, since the p-values of these comparisons are close to zero. This evidence sheds light on a link between sequence composition and measured fluorescence signal. While observation of this novel phenomenon was exciting, further careful analysis of Fscans was necessary before we could comment on uniqueness and reproducibility of these signals across the genome, or estimate consensus Fscans of genomic intervals. \\
+
+\subsection{Estimation of consensus Fscans}
+{\bf{Curve registration eliminated ``phase variability'' in Fscans and estimated more accurate consensus Fscans (cFscans).}} Due to differential stretching of the molecules and non-uniform dye concentrations Fscans had amplitude and phase variability. While amplitude variability can be attenuated by normalizing the Fscans with their median (or mean) values, phase variability remains unaddressed. Features of Fscans from molecules aligned to the same location of a genome are expected to be aligned to each other, along the abscissa (backbone of the DNA molecules). Otherwise, consensus estimates from these Fscans would not reflect the true underlying signal. Presence of phase variability resulted in Fscans of the same genomic intervals to have mis-aligned features. Hence, eliminating phase variability was essential before consensus estimation. 
+
+``Curve registration'' is a functional data analysis (FDA) technique that addresses phase variability. However, existing curve registration methods rely on an initial guess of the true signal, or the consensus signal before registering (or reducing phase variability) the curve samples to this mean. In our dataset, we do not have a true Fscan to register the other Fscans to. Due to the presence of different variability in the data, a cross-sectional average of the Fscans is not an appropriate measure of the consensus signal either. To improve on accuracy and statistical power, we proposed an ``iterated curve registration'' scheme to estimate the cFscans of genomic intervals, from Fscans of molecules aligned to the same genomic locations. Sections \ref{Sec4_Registration} and \ref{Sec7_Registration} elaborates on iterated curve registration. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=2, width=\textwidth]{../Plots/chr1_Interval512_registered.pdf}
+\caption{}
+\label{fig:cFscan_a}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=3, width=\textwidth]{../Plots/chr1_Interval512_registered.pdf} \\
+\caption{}
+\label{fig:cFscan_b}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=6, width=\textwidth]{../Plots/chr1_Interval512_registered.pdf}
+\caption{}
+\label{fig:cFscan_c}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=8, width=\textwidth]{../Plots/chr1_Interval512_registered.pdf}
+\caption{}
+\label{fig:cFscan_d}
+\end{subfigure}
+\caption{Estimation of cFscan using ``iterated registration''; an example from human genome, chromosome 1, interval 512, base pair from 4,156,362 to 4,172,711. (a) Normalized Fscans of Nmaps aligned to this location (b) Red curves are tagged as ``outliers'' before registration (c) After ``iterated registration'', with the blue curve the cFscan (d) The top panel denotes genomic composition (proportions of G,C,A,T in 206bp windows). The bottom panel is the cFscan estimated by ``iterated registration''. } 
+\label{fig:cFscan}
+\end{figure}
+
+Figure \ref{fig:cFscan} illustrates the estimation of cFscan. It is an example from human genome, chromosome 1, interval 512, base pair from 4,156,362 to 4,172,711. Figure \ref{fig:cFscan_a} shows the 22 Fscans from molecules aligned to this location on the genome. It shows the existence of phase and amplitude variability. Before registration, detection of functional outliers is important. The red curves in figure \ref{fig:cFscan_b} are tagged as functional outliers by the steps described in \ref{Sec7_Outliers}. After iterated registration, figure \ref{fig:cFscan_c} shows reduced phase variability with the blue curve being the cFscan. The bottom panel of figure \ref{fig:cFscan_d} shows the cFscan with standard errors. The top panel of figure \ref{fig:cFscan_d} denotes genomic composition (proportions of G,C,A,T in 206bp windows). Notice the association association between the total GC content in the top panel with the cFscan in the bottom panel. 
+
+\subsection{Reproducibility and uniqueness of cFscans}
+{\bf{Careful analysis and comparison of estimated cFscans and GC-profiles show that cFscans are unique and reproducible and contain genomic sequence information.}} ``GC-profile'' was defined as the total percentage of nucleotides G's and C's in 206bp windows, along the backbone of DNA molecules. For example, a line joining the G+C proportions of the top panel of figure \ref{fig:cFscan_d} would be the GC-profile of that genomic interval. We established that intervals with ``similar'' GC-profiles also had ``similar'' cFscans (hence reproducible) and intervals with ``dissimilar'' GC-profiles also had ``dissimilar'' cFscans (hence unique). The ``similarity'' between GC-profiles and between cFscans was estimating using the ``similarity index'' defined in section \ref{Sec7_Similarity}. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.33\linewidth}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr19_frag2481_1_registered.pdf}
+\caption{}
+\label{fig:cFscanGC_a}
+\end{subfigure}
+\begin{subfigure}{0.31\linewidth}
+\vspace{0.25cm}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr19_frag3756_1_registered.pdf} \\
+\caption{}
+\label{fig:cFscanGC_b}
+\end{subfigure}
+\begin{subfigure}{0.33\linewidth}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr19_frag5423_0_registered.pdf}
+\caption{}
+\label{fig:cFscanGC_c}
+\end{subfigure}
+\caption{GC-profiles and cFscans of three distinct genomic regions on chromosome 19: (a) A genomic interval in chr 19, between 29,280,391 and 29,290,690; (b) A genomic interval in chr 19, between 40,620,147 and 40,630,446; (c) A genomic interval in chr 19, between 55,953,560 and 55,963,859; The similarity between GC-profiles of (a) and (b) is $\rho(\text{gc}_a, \text{gc}_b) = 0.84$ and between their cFscans is $\rho(\text{\footnotesize{cFscan}}_a, \text{\footnotesize{cFscan}}_b) = 0.70$; The similarity between (a) and (c) are: $\rho(\text{gc}_a, \text{gc}_b) = -0.56$ and $\rho(\text{\footnotesize{cFscan}}_a, \text{\footnotesize{cFscan}}_b) = -0.21$} 
+\label{fig:cFscanGC}
+\end{figure}
+
+Figure \ref{fig:cFscanGC} illustrates three distinct genomic intervals of same lengths (10.3kb) on chromosome 19 of the human genome (build 37). Two of the intervals ((a) and (b)) that have very similar GC-profiles ($\rho(\text{gc}_a, \text{gc}_b) = 0.84$) also have similar cFscans ($\rho(\text{\footnotesize{cFscan}}_a, \text{\footnotesize{cFscan}}_b) = 0.70$). However, intervals (a) and (c) neither have similar GC-profiles ($\rho(\text{gc}_a, \text{gc}_b) = -0.56$), nor cFscans ($\rho(\text{\footnotesize{cFscan}}_a, \text{\footnotesize{cFscan}}_b) = -0.21$). An comprehensive pairwise comparison of genomic intervals was conducted. For example, in chromosome 19, there were 457 intervals that were 10.3 kb long, and had at least 15 Nmaps aligned to them. For each interval, cFscans were estimated. Then, 104,196 ($ \binom {457} {2} = 104,196 $) pairwise comparisons were made, between their GC-profiles and their cFscans. Mixed effects regression and rank based regressions (described in section \ref{Sec4_Uniqueness}) were conducted to estimate the association between GC-profile similarity and cFscan similarity. 
+
+In mixed effects regression, the estimate of the association between GC-profile similarity and cFscan similarity was $\hat{\beta} = 0.149, \text{p-value} = 0.0$ (likelihood-ratio test). In rank based regression $\hat{\beta}_{\varphi} = 0.156, \text{  p-value } = 0$ (Wald test). Refer to section \ref{Sec4_Uniqueness} for details of these methods. This is statistically significant evidence that genomic intervals with similar GC-profiles yield similar cFscans and vice-versa. 
+
+Not all genomic intervals have highly variable GC-profiles and consequently these intervals do not produce cFscans with a lot of features. We tested the top 20\% of most variable GC-profiles and tested the association between similarities. The mixed effects model yielded $\hat{\beta} = 0.261, \text{p-value} = 0.0$ and the rank based regression model estimated $\hat{\beta}_{\varphi} = 0.277, \text{  p-value } = 0$. We concluded that Fscans are indeed representative {\emph{signals}} of genomic sequence compositions.
+
+\subsection{Differential stretching of DNA molecules affects ``Signals''}
+Recall from section \ref{Sec2_Mflorum}, when DNA molecules are presented on a glass surface the extent of stretch in the molecules vary substantially. Intercalating of dye molecules into the nucleotides is also not uniform. The interplay between physical interaction of the DNA molecules with the glass surface and dye binding results in differentially stretched DNA molecules. As a results, images of molecules that align to the same locations on a genome are of different lengths. We analyzed the \mf molecules with different stretches to establish how stretch affected the signals. \mf dataset had sufficient depth for different stretches. The mm52 dataset was too shallow for this analysis. 
+
+Nmaps of each \mf interval were divided into five stretch groups, based on the lengths of the images (in pixels), groups 1 through 5, group 1 being the least amount of stretch and group 5 being the highest. Then, Fscans of each stretch group were smoothed and registered to estimate cFscans. Then the cFscans were compared with each other (pairwise) to test how stretch affected signals. This comparison was done using ``similarity index'' defined in section \ref{Sec7_Similarity}. For example, the five stretch groups of Nmaps aligned to interval 25 of the \mf genome, between base pairs 493,266 and 534,566, had the following depth: group1: 35 Nmaps, group2: 185 Nmaps, group3: 424 Nmaps, group4: 132 Nmaps and group5: 14 Nmaps. 
+
+Figure \ref{fig:Stretch} shows the estimated cFscans of the five different stretch groups and their pairwise similarities, for intervals 24 and 25 of the \mf genome. On the left, in figures \ref{fig:Stretch_a} and \ref{fig:Stretch_c} are the cFscans of the five stretch groups. On the right, in figures \ref{fig:Stretch_b} and \ref{fig:Stretch_d} are the pairwise comparison of the cFscans. cFscans in groups 2, 3 and 4 are more similar to each other. Whereas, the signals seem to fade away for under-stretched (groups 1) and over-stretched (groups 5) molecules. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.45\linewidth}
+%\includegraphics[scale=0.5, width=\textwidth]{../Plots/cFscans_Interval25.png}
+\includegraphics[scale=0.35]{../Plots/cFscans_Interval25.png}
+\caption{}
+\label{fig:Stretch_a}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\vspace{0.25cm}
+%\includegraphics[scale=0.5, width=\textwidth]{../Plots/Heatmap_Interval25.png} \\
+\includegraphics[scale=0.35]{../Plots/Heatmap_Interval25.png} \\
+\caption{}
+\label{fig:Stretch_b}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+%\includegraphics[scale=0.4, width=\textwidth]{../Plots/cFscans_Interval24.png}
+\includegraphics[scale=0.35]{../Plots/cFscans_Interval24.png}
+\caption{}
+\label{fig:Stretch_c}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+%\includegraphics[scale=0.4, width=\textwidth]{../Plots/Heatmap_Interval25.png}
+\includegraphics[scale=0.35]{../Plots/Heatmap_Interval24.png}
+\caption{}
+\label{fig:Stretch_d}
+\end{subfigure}
+\caption{(a) cFscans of stretch groups 1 through 5 of \mf interval 25 (b) pairwise comparison of similarity between cFscans of \mf interval 25 (c) cFscans of stretch groups 1 through 5 of \mf interval 24 (d) pairwise comparison of similarity between cFscans of \mf interval 24} 
+\label{fig:Stretch}
+\end{figure}
+
+\subsection{Fscans can be predicted from genomic sequence composition}
+There were 30,560 sub-intervals of human genome, each 10.3kb long, that had at least 15 Nmaps aligned to them. cFscans were estimated for all these sub-Intervals. For each sub-interval, a cFscan consisted of a sequence of 50 numbers, each corresponding to the expected fluorescence intensity measurements of 206bp of genomic sequence. We used the counts of genomic elements in these 206bp sub-sequences as covariates and the cFscans as the responses to estimate prediction functions, for predicting Fscan of any genomic location. For example, the covariates were the counts of nucleotides G, C, A, T's, counts of 2-mers GG, GC, GA, ..., TT's, counts of all possible 3-mers, 4-mers and 5-mers in 206bp sequences. There are 16 ($4^2$) 2-mers, 64 ($4^3$) 3-mers, 256 ($4^4$) 4-mers and 1,024 ($4^5$) 5-mers. Including the counts of G, C, A, and T's this adds up to 1,364 covariates. Additionally, we assumed a Gaussian kernel along the backbone of a DNA molecule, to incorporate the effect of neighboring sub-sequences on the integrated fluorescence intensity measurements. We assumed that two more 206bp sub-sequences on each side, a total of five sub-sequences (i.e., a total of approximately 1kb) of genomic sequence contributed to the integrated fluorescence intensity measurement of one pixel. We built the prediction functions using random forest and gradient boosting, the details of which are explained in section \ref{Sec4_ML}. 
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr20_4670_0_predictionPlots_RF_GBM.pdf}
+\caption{}
+\label{fig:PredictionExamples_a}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr22_4117_0_predictionPlots_RF_GBM.pdf} \\
+\caption{}
+\label{fig:PredictionExamples_c}
+\end{subfigure}
+
+\begin{subfigure}{0.45\linewidth}
+\vspace{0.25cm}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr20_frag4670_0_registered.pdf}
+\caption{}
+\label{fig:PredictionExamples_b}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+%\includegraphics[scale=0.4, width=\textwidth]{../Plots/Heatmap_Interval25.png}
+\includegraphics[page=7, width=\textwidth]{../Plots/chr22_frag4117_0_registered.pdf}
+\caption{}
+\label{fig:PredictionExamples_d}
+\end{subfigure}
+\caption{(a) \textcolor{red}{Computed cFscan} and \textcolor{blue}{predicted Fscan} of chr 20, interval 4867 of human genome (b) \textcolor{red}{Computed cFscan} and \textcolor{blue}{predicted Fscan} of chr 22 interval 4117 of human genome (c) GC composition plot and computed cFscan of chr 20, interval 4867 of human genome (d) GC composition plot and computed cFscan of chr 22, interval 4117 of human genome} 
+\label{fig:PredictionExamples}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.45\linewidth}
+\caption{Feature Importance GB}
+\includegraphics[width=\textwidth]{../Plots/FeatureImpPlot_GBM.pdf}
+\label{fig:FeatureImp_a}
+\end{subfigure}
+\begin{subfigure}{0.45\linewidth}
+\caption{Feature Importance RF}
+\includegraphics[width=\textwidth]{../Plots/NodeImpPlot_RF.pdf}
+\label{fig:FeatureImp_b}
+\end{subfigure}
+\label{fig:FeatureImp}
+\caption{(a) Relative importance \cite{Friedman_2001_AnnStat} of features of Gradient Boosting model (b) Relative importance of Random Forest model, using ``node impurity'' \cite{Hastie_etal_2009_Elements} }
+\end{figure}
+
+
+
+
