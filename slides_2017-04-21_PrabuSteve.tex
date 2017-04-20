@@ -368,10 +368,12 @@ Can we predict Fscans for any genomic interval, from sequence composition?
 %%%%%%%%%%%%%% Slide 3 %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Predicting Fscan from sequence features}
+\vspace{-0.5cm}
 \begin{figure}
 \centering
-\includegraphics[width=0.3\textwidth]{Plots/chr19_frag2481_pg8.png}
+\includegraphics[width=0.45\textwidth, page=7]{Plots/chr19_Interval2481_registered.pdf}
 \end{figure}
+\vspace{-0.5cm}
 \begin{enumerate}
 \item Used counts of g, c, a, t, 2-mers, 3-mers, 4-mers and 5-mers to fit consensus Fscans (cFscans)
 \item Used Gaussian kernel, to account for effect of 400bp on either side of a pixel in addition to the 200bp in the middle
@@ -426,11 +428,9 @@ Can we predict Fscans for any genomic interval, from sequence composition?
 \begin{frame}
 \frametitle{Predicting Fscan from Sequence - Set up}
 \begin{itemize}
-\item Total sample size: 3,860 sub-intervals from chromosomes 17, 18, 19, 20, 21.
-\item Each sub-interval: 10kb
+\item Total sample size: 21,972 intervals from 22 chromosomes
 \item Counts of 1 to 5-mers
 \item Training set: 90\%, Testing set: 10\%
-\pause
 \item $\rho_{c}:$ {\emph{Similarity}} between average training {\underline{c}}onsensus Fscan and testing sub-interval, $|\rho_{c}| \leq 1$
 \item $\rho_{p}:$ {\emph{Similarity}} between average {\underline{p}}redicted Fscan and testing sub-interval, $|\rho_{p}| \leq 1$
 \item $\gamma = \frac{\rho_{p} - \rho_{c}}{1 - \rho_{c}} $ {\emph{Similarity}} improvement or prediction improvement
@@ -443,13 +443,10 @@ Can we predict Fscans for any genomic interval, from sequence composition?
 \vspace{-0.5cm}
 \begin{figure}
 \includegraphics[scale=0.22, page=3]{Plots/chr17_8028_0_predictedBySeed.pdf}
-\pause
 \hspace{0.5cm}
 \includegraphics[scale=0.22, page=3]{Plots//chr17_3253_0_predictedBySeed.pdf} \\
-\pause
 \includegraphics[scale=0.22, page=3]{Plots/chr19_5558_1_predictedBySeed.pdf}
 \hspace{0.5cm}
-\pause
 \includegraphics[scale=0.22, page=3]{Plots/chr20_957_1_predictedBySeed.pdf}
 \end{figure}
 \end{frame}
@@ -474,24 +471,63 @@ Example: chr19, interval 961 \\
 \end{figure}
 \end{frame}
 
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Discretizing cFscans}
+\footnotesize
+\vspace{-0.5cm}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth, page=7]{Plots/chr19_Interval2481_registered.pdf}
+\end{figure}
+\vspace{-0.5cm}
+Consider a cFscan $f(x)$, where $x$ denotes pixels.
+\begin{itemize}
+\item At each pixel $x$, a discretized representation of $f(x)$ is $f(x) > 0, f'(x) > 0, f''(x) > 0$
+\item The discretized representation consisted of eight possible states $A: (1,1,1), B:(1,0,1), C:(1,1,0), D:(1,0,0), E:(0,1,1), F:(0,0,1), G:(0,1,0), H:(0,0,0)$
+\item 144-letter ``Sequence'': GHHFFFEEGGGGGEEEACCCCDDDBBFFEEGHFEEACCCCCCCDDDDBFF ...EECCCDDDBFEEACCDDBBFHHHHHFFFFEEEEGGCCDDBBHHFFEEEA
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Uniqueness of discretized cFscans}
+\begin{itemize}
+\item Randomly select 1,000 intervals from 21,972 intervals in the dataset
+\item Randomly choose 4kb (20 states), 5kb (25 states), ..., 8kb (40 states) and count the empirical frequency in the rest of the interval
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Uniqueness of cFscans segments} 
+\begin{tabular}{c|c|c}
+\hline
+\hline
+Length (states) & Length (kb) 	& Empirical frequency 	\\
+\hline
+20 		& 4.120		& 5.077 		\\
+25		& 5.150		& 0.194			\\
+30		& 6.180		& 0.005			\\
+35		& 7.210		& 0.000			\\
+40		& 8.240		& 0.000			\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%% SLIDE 9 %%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Ongoing work}
 \begin{itemize}
-\item Build the prediction model across the whole human genome (mm52-post data)
+\item Writing up manuscript
 \item Compare predictions with regions already identified with SVs like ``deletions''
-\item Generate Fscans from prediction models and align Fscans from mm52-post
-\item Finish the manuscript ASAP
+\item Using markov property, derive theoretical bounds for uniqueness lengths
+\item Derive error bound for Fscan uniqueness lengths
 \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Reference}
-{\footnotesize{
-    \bibliographystyle{apalike}
-    \bibliography{bibTex_Reference}
-}}
 \end{frame}
 
 \end{document}

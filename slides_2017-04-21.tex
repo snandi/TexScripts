@@ -76,18 +76,61 @@ How unique are short (4kb, 5kb, etc) cFscan segments across the whole genome?
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Discretizing cFscans}
-
+\footnotesize
+\vspace{-0.5cm}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth, page=7]{Plots/chr19_Interval2481_registered.pdf}
+\end{figure}
+\vspace{-0.5cm}
+Consider a cFscan $f(x)$, where $x$ denotes pixels.
+\begin{itemize}
+\item At each pixel $x$, a discretized representation of $f(x)$ is $f(x) > 0, f'(x) > 0, f''(x) > 0$
+\item The discretized representation consisted of eight possible states $A: (1,1,1), B:(1,0,1), C:(1,1,0), D:(1,0,0), E:(0,1,1), F:(0,0,1), G:(0,1,0), H:(0,0,0)$
+\item 144-letter ``Sequence'': GHHFFFEEGGGGGEEEACCCCDDDBBFFEEGHFEEACCCCCCCDDDDBFF ...EECCCDDDBFEEACCDDBBFHHHHHFFFFEEEEGGCCDDBBHHFFEEEA
+\end{itemize}
 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Reference}
-{\footnotesize{
-    \bibliographystyle{apalike}
-    \bibliography{bibTex_Reference}
-}}
+\frametitle{Uniqueness of discretized cFscans}
+METHOD
+\begin{itemize}
+\item Randomly select 1,000 intervals from 21,972 intervals in the dataset
+\item Randomly choose 4kb (20 states), 5kb (25 states), ..., 8kb (40 states) and count the empirical frequency in the rest of the interval
+\end{itemize}
+
+RESULTS
+\begin{table}[H]
+\centering
+\caption{Uniqueness of cFscans segments} 
+\begin{tabular}{c|c|c}
+\hline
+\hline
+Length (states) & Length (kb) 	& Empirical frequency 	\\
+\hline
+20 		& 4.120		& 5.077 		\\
+25		& 5.150		& 0.194			\\
+30		& 6.180		& 0.005			\\
+35		& 7.210		& 0.000			\\
+40		& 8.240		& 0.000			\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%% SLIDE 9 %%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Ongoing work}
+\begin{itemize}
+\item Writing up manuscript
+\item Using markov property, derive theoretical bounds for uniqueness lengths
+\item Derive error bound for Fscan uniqueness lengths
+\end{itemize}
 \end{frame}
 
 \end{document}
