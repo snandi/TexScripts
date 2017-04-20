@@ -1,0 +1,94 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\usetheme{CambridgeUS}
+%\setbeamertemplate{enumerate items}[default]
+\setbeamercolor{item projected}{fg=green,bg=red}
+%\setbeamercolor{itemize subitem}{fg=blue}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Fluoroscanning]{Fluoroscanning: {\emph{Next Generation Precision Genomics}}}
+\author[S. Nandi]{Subhrangshu Nandi}
+\institute[LMCG]{	Laboratory of Molecular and Computational Genomics \\
+ 			University of Wisconsin - Madison }
+\date{April 21, 2017}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\LARGE
+\begin{block}{Fluoroscanning}
+A system to extract the most necessary and informative components of genomic sequences from fluorescence intensity profiles (Fscans) of imaged DNA molecules. 
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\includegraphics[scale=0.45]{Images/FluoroscanningWorkflow_v3.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Fluoroscanning: Specific Aims}
+\begin{block}{Aim 1}
+Fluoroscanning signals (Fscans) of genomic intervals are unique and reproducible
+\end{block}
+\vspace{0.5in}
+\begin{block}{Aim 2}
+Predict Fscans from underlying sequence compositions of genomic intervals
+\end{block}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Uniqueness of cFscans}
+
+\begin{block}{Uniqueness}
+How unique are short (4kb, 5kb, etc) cFscan segments across the whole genome?
+\end{block}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Discretizing cFscans}
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Reference}
+{\footnotesize{
+    \bibliographystyle{apalike}
+    \bibliography{bibTex_Reference}
+}}
+\end{frame}
+
+\end{document}
+
