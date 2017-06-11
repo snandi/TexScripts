@@ -1,0 +1,53 @@
+# submitFile_iFscanGW.sub
+#
+#  Specify the HTCondor Universe (vanilla is the default and is used
+#  for almost all jobs), the desired name of the HTCondor log file,
+#  and the desired name of the standard error file.  
+#  Wherever you see $(Cluster), HTCondor will insert the queue number
+#  assigned to this set of jobs at the time of submission.
+universe                  = vanilla
+log                       = /home/snandi/ChtcRun/Project_CurveReg/iFscanGW/condorLogs/chr$INT(Chr)_segment$INT(segment).log
+error                     = /home/snandi/ChtcRun/Project_CurveReg/iFscanGW/condorLogs/chr$INT(Chr)_segment$INT(segment).err
+ 
+#  Specify your executable (single binary or a script that runs several
+#  commands), arguments, and a files for HTCondor to store standard
+#  output (or "screen output").
+#  $(Process) will be a integer number for each job, starting with 0
+#  and increasing for the relevant number of jobs.
+executable                = /home/snandi/ChtcRun/Project_CurveReg/iFscanGW/R_executable_iFscanGW.sh
+arguments                 = "$INT(Chr) $INT(nRandomSeeds) $INT(maxNmers) $INT(segment) $INT(bpLocStart) $INT(bpLocEnd) $INT(segmentLengthPx) $(fileNames)"
+output                    = /home/snandi/ChtcRun/Project_CurveReg/iFscanGW/condorLogs/chr$INT(Chr)_segment$INT(segment).out
+initialdir                = /home/snandi/ChtcRun/Project_CurveReg/iFscanGW
+ 
+#  Specify that HTCondor should transfer files to and from the
+#  computer where each job runs. The last of these lines *would* be
+#  used if there were any other files needed for the executable to run.
+ 
+should_transfer_files     = YES
+when_to_transfer_output   = ON_EXIT
+
+transfer_input_files      = $(fileNames), shared/chr$INT(Chr).fa, shared/Predict_GenomeWide_Comprehensive_chtc.R
+
+#
+# Tell HTCondor what amount of compute resources
+#  each job will need on the computer where it runs.
+ 
+request_cpus              = 1
+request_memory            = 4GB
+request_disk              = 4GB
+ 
++WantFlocking             = true
++WantGlideIn              = true
+ 
+## To release jobs that are on hold for more than 10 minutes (600 secs)
+periodic_release = ( JobStatus == 5 ) && ( ( CurrentTime - EnteredCurrentStatus) > 600 ) && ( JobRunCount < 3 ) && ( HoldReasonCode != 1 ) && ( HoldReasonCode != 6 ) && (HoldReasonCode != 14 ) && ( HoldReasonCode != 22 )
+ 
+## To hold jobs that are take more than 6 hrs (21600 secs)
+## periodic_hold = ( JobStatus == 2 ) && ( ( time() - JobStartDate) > 21600 ) 
+
+## The expression below will not let the job leave the queue if it exited by a signal and that signal number was 11 (representing segmentation fault). In any other case of the job exting, it will leave the queue.
+on_exit_remove = (ExitBySignal == FALSE) && (ExitCode == 0)
+
+# Tell HTCondor to run 1 instances of our job:
+Queue Chr,nRandomSeeds,maxNmers,segment,bpLocStart,bpLocEnd,segmentLengthPx,fileNames from shared/condorArgs_chr13.csv
+
