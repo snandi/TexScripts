@@ -1,0 +1,147 @@
+## Instructions for creating loc tracks of Germline Structural variations from Adi's data
+
+1. Copy the deletions from Pre, Post and Normal in Adi's folder /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/deletions/ to /home/nandi/Fluoroscanning/mm52_GermlineSV/deletions/
+
+################# INTERSECT DELETIONS #################
+#### POST ####
+2. To intersect deletions from OM & breakdancer, at least 100 bp long, do
+multi-intersection.pl --window 100 Post_OM_deletions_noComment.loc breakdancer_deletions.loc | cut -d',' -f2- | grep ",1,1" > OM_breakdancer_deletions_window100.loc
+## cut -d',' -f2- removes column 1 from the dataset, then grep ",1,1" selects the rows that intersect
+
+## To intersect deletions from OM & cnvnator, at least 100 bp long, do
+multi-intersection.pl --window 100 Post_OM_deletions_noComment.loc cnvnator_deletions.loc | cut -d',' -f2- | grep ",1,1" > temp.loc
+## There are some rows with 0,1. So sed them out:
+sed '/,0,1/d' temp.loc > OM_cnvnator_deletions_window100.loc; rm -f temp.loc
+
+## To intersect deletions from OM & pindel, at least 100 bp long, do
+multi-intersection.pl --window 100 Post_OM_deletions_noComment.loc pindel_deletions.loc | cut -d',' -f2- | grep ",1,1" > OM_pindel_deletions_window100.loc
+
+## Union of OM with all the above
+cat OM_breakdancer_deletions_window100.loc OM_cnvnator_deletions_window100.loc OM_pindel_deletions_window100.loc | sort -u > OM_union_deletions_window100.loc
+
+## To convert the union loc track file into BED format
+1. Remove the last two columns
+awk 'NF{NF-=2}1' FS=',' OFS=',' OM_union_deletions_window100.loc > temp1.loc
+2. Add 'chr' to first column 
+awk '{ print "chr"$0}' temp1.loc > temp2.loc
+3. Convert to bed file:
+tr ',' '\t' < temp2.loc > temp3.bed
+4. Add header to bed file:
+sed -i "1itrack name=deletions_OM_Seq description=\"Deletions OM and Sequencing\"" temp3.bed > OM_union_deletions_window100.bed
+#### PRE ####
+
+####################################################################
+# As per meeting on 2017-08-08, we need 9 separate tracks, all for
+# POST
+####################################################################
+
+####################################################################
+###### 1: MCs - OM - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/MCs_ECs_validation/Post/MCs/Round2/Post_MCs.bed MCs/Post/OM_Post_MCs.bed
+# add track name
+sed -i "1itrack name=OM_MCs description=\"Optical Mapping Missing Cuts\"" MCs/Post/OM_Post_MCs.bed
+
+####################################################################
+###### 2: ECs - OM - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/MCs_ECs_validation/Post/ECs/Post_ECs.bed ECs/Post/OM_Post_ECs.bed
+# add track name
+sed -i "1itrack name=OM_ECs description=\"Optical Mapping Extra Cuts\"" ECs/Post/OM_Post_ECs.bed
+
+####################################################################
+###### 3: Deletions - OM - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/deletions/Post/Post_OM_deletions_noComment.loc deletions/Post/OM_Post_deletions.loc
+cd deletions/Post/
+# extract 2nd, 3rd and 4th columns to prepare bed file
+awk -F',' '{print "chr"$2"\t"$3"\t"$4}' OM_Post_deletions.loc > OM_Post_deletions.bed
+# add track name
+sed -i "1itrack name=OM_DEL description=\"Optical Mapping Deletions\"" OM_Post_deletions.bed
+
+####################################################################
+###### 4: Insertions - OM - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/insertions/Post/Post_OM_INS_noComment.loc insertions/Post/OM_Post_insertions.loc
+# remove first row
+sed -i -e "1d" OM_Post_insertions.loc
+# extract 2nd, 3rd and 4th columns to prepare bed file
+awk -F',' '{print "chr"$2"\t"$3"\t"$4}' OM_Post_insertions.loc > OM_Post_insertions.bed
+# add track name
+sed -i "1itrack name=OM_INS description=\"Optical Mapping Insertions\"" OM_Post_insertions.bed
+
+####################################################################
+###### 5. Others - OM - Post 
+####################################################################
+(not found)
+
+####################################################################
+###### 6. All SV - pindel - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/insertions/Post/pindel_LI.loc insertions/Post/pindel_insertions.loc
+
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/deletions/Post/pindel_deletions.loc deletions/Post/pindel_deletions.loc
+
+# combine them:
+multi-intersection.pl --window 10 deletions/Post/pindel_deletions.loc insertions/Post/pindel_insertions.loc > pindel_Post_SV.loc
+
+# remove first row
+sed -i -e "1d" pindel_Post_SV.loc
+
+# extract 2nd, 3rd and 4th columns to prepare bed file
+awk -F',' '{print "chr"$2"\t"$3"\t"$4}' pindel_Post_SV.loc > pindel_Post_SV.bed
+
+sed -i "1itrack name=pindel_SV description=\"Pindel Structural Variations\"" pindel_Post_SV.bed
+
+####################################################################
+###### 7. All SV - breakdancer - Post
+####################################################################
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/deletions/Post/breakdancer_deletions.loc deletions/Post/breakdancer_deletions.loc
+
+# extract 2nd, 3rd and 4th columns to prepare bed file
+awk -F',' '{print "chr"$2"\t"$3"\t"$4}' deletions/Post/breakdancer_deletions.loc > breakdancer_Post_SV.bed
+
+sed -i "1itrack name=breakdancer_SV description=\"Breakdancer Structural Variations\"" breakdancer_Post_SV.bed
+
+####################################################################
+###### 8. All SV - cnvnator - Post
+####################################################################
+cat /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/insertions/Post/cnvnator_duplications_*.loc > insertions/Post/cnvnator_insertions.loc
+
+cp /home/aditya/Desktop/Multiple_Myeloma/manuscript_MM/deletions/Post/cnvnator_deletions.loc deletions/Post/cnvnator_deletions.loc
+
+# combine them:
+multi-intersection.pl --window 10 deletions/Post/cnvnator_deletions.loc insertions/Post/cnvnator_insertions.loc > cnvnator_Post_SV.loc
+
+# remove first row
+sed -i -e "1d" cnvnator_Post_SV.loc
+
+# extract 2nd, 3rd and 4th columns to prepare bed file
+awk -F',' '{print "chr"$2"\t"$3"\t"$4}' cnvnator_Post_SV.loc > cnvnator_Post_SV.bed
+
+sed -i "1itrack name=cnvnator_SV description=\"cnvnator Structural Variations\"" cnvnator_Post_SV.bed
+
+####################################################################
+###### 9. cFscan vs pFscan mismatch
+####################################################################
+awk -F',' '{print $1"\t"$3"\t"$4}' ~/newtongroup/mm52-all7341/SequencePrediction/condorGenomeWideRun04_Gaussian/PredictionTestSubIntervals/cFscan_iFscan_mismatch.csv > cFscan_iFscan_mismatch.bed
+
+# remove first row
+sed -i -e "1d" cFscan_iFscan_mismatch.bed
+sed -i "1itrack name=cF-vs-pF description=\"cFscan vs pFscan\"" cFscan_iFscan_mismatch.bed
+
+# to prepare the mismatch file for intersections
+./_prepMismatchFile.sh cFscan_iFscan_mismatch.csv > cFscan_iFscan_mismatch.loc
+
+####################################################################
+###### Intersect mismatch file with other SV files
+####################################################################
+# The code intersects the loc tracks and prints the rows with "1" and "1" in columns 5 and 6
+multi-intersection.pl --window 10 cFscan_iFscan_mismatch.loc insertions/Post/OM_Post_insertions.loc | awk -F',' '$5=="1" && $6=="1" {print "chr"$2":"$3"-"$4}' > intersection_mismatch_OM_insertions.loc
+
+multi-intersection.pl --window 10 cFscan_iFscan_mismatch.loc deletions/Post/OM_Post_deletions.loc | awk -F',' '$5=="1" && $6=="1" {print "chr"$2":"$3"-"$4}' > intersection_mismatch_OM_deletions.loc
+
+multi-intersection.pl --window 10 cFscan_iFscan_mismatch.loc pindel_Post_SV.loc | awk -F',' '$5=="1" && $6=="1" {print "chr"$2":"$3"-"$4}' > intersection_mismatch_pindel.loc
+
+
+
